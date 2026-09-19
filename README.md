@@ -19,32 +19,31 @@ connected to a repo afterwards without losing the URL.
 
 ## The repo
 
-`https://github.com/dgreg42/Marlow-pitch` — **public**, which matters, see the warning below.
+`https://github.com/dgreg42/Marlow-pitch` - **public**, which matters, see the warning below.
 
-`push.cmd` in this folder already points at it. Open a terminal here and run it:
+**The runner is not in this folder. It is at the kit root**, which is where every push runner lives:
 
 ```
-push.cmd
+Marlow Athletic Brand Kit\push.cmd
 ```
 
-It runs `git init`, commits `index.html`, `assets/`, `netlify.toml`, `robots.txt` and this README,
-sets `origin` and pushes `main`. It does not touch the brand kit repo, and it stays out of the
-kit's own history: this folder gets its own `.git`.
+Double click it, or pass a commit message: `push.cmd "fixed the ledger"`. It pushes `web\_live` only.
+`REPO` and `SRC` are the two editable lines at the top of the file.
 
-If you would rather run it by hand:
+By hand, if you would rather:
 
 ```bash
 cd "D:/00_WORK/00_Projects/00_Developer/Brand Kit/Marlow Athletic Brand Kit/web/_live"
 git init
-git add index.html assets netlify.toml robots.txt README.md
+git add -A
 git commit -m "marlow investor overview, first pass"
 git branch -M main
 git remote add origin https://github.com/dgreg42/Marlow-pitch.git
 git push -u origin main
 ```
 
-Then in Netlify: **Add new site, Import an existing project**, pick `Marlow-pitch`, leave the
-build command empty and the publish directory as `.`. Every push to `main` deploys.
+Then in Netlify: **Add new site, Import an existing project**, pick `Marlow-pitch`. Base directory
+empty, build command empty, publish directory `.`. Every push to `main` deploys.
 
 ### The repo is public
 
