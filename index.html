@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marlow</title>
-<!-- Marlow investor overview. First pass. Reference photography, not cleared for public use. -->
+<!-- Marlow investor overview. Reference photography, not cleared for public use. -->
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400;12..96,75..100,600;12..96,75..100,800&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
 <style>
@@ -10,6 +10,18 @@
     --paper:#E6E4DF; --offwhite:#DCD8D0; --text-quiet:var(--stone-deep);
     --lead-rgb:138,58,43; --ink-rgb:28,27,25; --paper-rgb:230,228,223; --offwhite-rgb:220,216,208;
     --oak:#D9C4A3; --leather:#6E4630; --cedar:#B5734A;
+    /* the materials. Each value is the median colour of the photograph beside it on the page,
+       measured by scripts/make-swatches.py. Nothing here was picked by eye, which is the whole
+       argument of that section. Oxide is the one exception and it lives above as --lead. */
+    --m-plaster:#EBD3C1;
+    --m-terrazzo:#B7A58D;
+    --m-cement:#A98664;
+    --m-oak:#A06B47;
+    --m-cork:#8C502C;
+    --m-leather:#6B3823;
+    --m-rubber:#5F1A0C;
+    --m-iron:#36251C;
+    --m-planting:#434824;
     --font:'Bricolage Grotesque','Helvetica Neue',Helvetica,Arial,sans-serif;
     --accent:'Libre Caslon Display',Georgia,serif;
     --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px;
@@ -33,6 +45,8 @@
   .nav a,.nav span{color:var(--offwhite)}
   .nav__brand{font-weight:800;font-size:15px;letter-spacing:.3em;text-transform:uppercase}
   .nav__links{display:flex;gap:var(--s-5);list-style:none;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+  .flag{position:fixed;bottom:0;left:0;right:0;z-index:95;background:var(--lead);color:var(--offwhite);
+        font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;padding:6px var(--w);text-align:center}
 
   .cap{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-quiet);font-variant-numeric:tabular-nums}
   h1{font-weight:800;font-size:clamp(56px,9vw,132px);line-height:var(--lh-display);letter-spacing:-.025em;text-wrap:balance}
@@ -180,6 +194,48 @@
   .brandband p{margin:var(--s-6) auto 0;max-width:40ch;font-size:17px;color:var(--text-quiet)}
   .brandband .i{display:inline;font-size:1em}
 
+  /* the materials. The chip beside each photograph is that photograph's own median colour, so the
+     card is an argument and not a decoration. The ramp puts all ten in lightness order, which is
+     the axis they actually differ on, and sets the two that are not worked materials apart. */
+  .mats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-7) var(--s-5);margin-top:var(--s-7)}
+  .mat figure{aspect-ratio:4/3;overflow:hidden;background:var(--gray)}
+  .mat figure img{width:100%;height:100%;object-fit:cover;display:block}
+  .mat__key{display:flex;align-items:center;gap:var(--s-3);margin-top:var(--s-3)}
+  .mat__dot{width:22px;height:22px;flex:none;border:1px solid rgba(var(--ink-rgb),.18)}
+  .mat__hex{font-size:11px;font-weight:600;letter-spacing:.12em;font-variant-numeric:tabular-nums;
+            color:var(--text-quiet)}
+  .mat h3{margin-top:var(--s-2);font-size:15px;font-weight:600;letter-spacing:0;line-height:1.3}
+
+  .ramp{display:flex;align-items:flex-start;gap:var(--s-5);margin-top:var(--s-8);
+        border-top:2px solid var(--ink);padding-top:var(--s-6)}
+  .ramp__col{flex:1;min-width:0}
+  .ramp__run{display:flex}
+  .ramp__run span{flex:1;height:72px}
+  .ramp__one{flex:none;width:80px}
+  .ramp__one span{display:block;height:72px}
+  .ramp__lab{display:flex;justify-content:space-between;margin-top:var(--s-2);
+             font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-quiet)}
+  .ramp__one .ramp__lab{justify-content:flex-start}
+
+  /* the two that do not come off the board */
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-8);margin-top:var(--s-8)}
+  .pair figure{aspect-ratio:16/9;overflow:hidden;background:var(--gray)}
+  .pair figure img{width:100%;height:100%;object-fit:cover;display:block}
+  .pair .swatch{aspect-ratio:16/9}
+  .pair h3{margin-top:var(--s-4);font-size:21px;letter-spacing:-.01em}
+  .pair p{margin-top:var(--s-3);font-size:16px;max-width:42ch}
+
+  /* the five year bridge. Four columns of figures, so it relabels on a phone the way the ledger
+     and the matrix do rather than shrinking into a gutter. */
+  .bridge{width:100%;border-collapse:collapse;margin-top:var(--s-7);font-variant-numeric:tabular-nums}
+  .bridge th,.bridge td{text-align:right;padding:var(--s-3) var(--s-2);border-bottom:var(--hairline);font-size:14px}
+  .bridge th:first-child,.bridge td:first-child{text-align:left;padding-left:0}
+  .bridge td:last-child,.bridge th:last-child{padding-right:0}
+  .bridge tr:first-child th{border-bottom:2px solid var(--ink);font-size:11px;font-weight:600;
+                            letter-spacing:.14em;text-transform:uppercase;color:var(--text-quiet)}
+  .bridge .neg{color:var(--lead)}
+  .bridge tr:last-child td{border-bottom:2px solid var(--ink);font-weight:600}
+
   @media(max-width:880px){
     .figs,.figs--two{grid-template-columns:1fr;gap:var(--s-6)}
     .matrix__row{grid-template-columns:1fr}
@@ -212,6 +268,20 @@
     .ledger tr:last-child{border-bottom:2px solid var(--ink)}
     .ledger tr:last-child td{border-bottom:0}
     .dark .ledger tr:last-child{border-bottom-color:var(--offwhite)}
+
+    .mats{grid-template-columns:repeat(2,1fr);gap:var(--s-6) var(--s-4)}
+    .ramp{gap:var(--s-3)} .ramp__one{width:52px}
+    .pair{grid-template-columns:1fr;gap:var(--s-7)}
+
+    .bridge tr:first-child{display:none}
+    .bridge tr,.bridge td{display:block;width:100%}
+    .bridge tr{padding:var(--s-4) 0;border-bottom:var(--hairline)}
+    .bridge td{border-bottom:0;padding:0;text-align:left}
+    .bridge td:first-child{font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+                           color:var(--text-quiet);margin-bottom:var(--s-2)}
+    .bridge td[data-l]::before{content:attr(data-l) "  ";font-size:11px;font-weight:600;
+                               letter-spacing:.14em;text-transform:uppercase;color:var(--text-quiet)}
+    .bridge tr:last-child td{border-bottom:0}
   }
 
 </style></head><body>
@@ -229,7 +299,7 @@
 </nav>
 
 <header class="hero" id="top">
-  <img src="assets/rooms_oak-floor-gym-with-bars-and-bag.jpg" alt="">
+  <img src="assets/render_gym-opens-to-the-garden.jpg" alt="">
   <div class="veil"></div>
   <div class="hero__mk"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg" alt="Marlow"></div>
   <div class="hero__foot">
@@ -260,9 +330,9 @@
 
 <!-- MATERIALS AND TEXTURE, EARLY -->
 <div class="bleed trio">
-  <figure><img loading="lazy" decoding="async" src="assets/materials_rust-felt-curve.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/materials_green-plaster-arches.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/materials_terrazzo-brown-and-cream.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_linen-niche.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_leather-medicine-balls.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_daybed-and-olive.jpg" alt=""></figure>
 </div>
 <section class="sec wrap">
   <div class="split">
@@ -275,11 +345,100 @@
     <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/materials_plant-on-vertical-oak.jpg" alt=""></figure>
   </div>
 </section>
-<div class="bleed trio trio--small">
-  <figure><img loading="lazy" decoding="async" src="assets/materials_carved-walnut-relief.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/materials_corten-curve-in-light.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/materials_balanced-stack-terracotta-olive-stone.jpg" alt=""></figure>
+
+<!-- CRAFT -->
+<section class="sec wrap" id="craft">
+  <div class="split split--wide">
+    <div>
+      <h2 style="max-width:30ch">Gym equipment is the only furniture in the house nobody expects to look at.</h2>
+      <p class="lede" style="margin-top:var(--s-6)">Everything else got chosen. The chairs, the lighting, the door handles, the stone on the island. Then the gym turns up in black powder coat and moulded rubber and goes in the basement behind a door, because that is what you do with something you would rather not see.</p>
+      <p style="margin-top:var(--s-5)">Make it worth looking at and the room moves. It comes up off the basement floor, sits next to the living space with glass instead of a door, and then it gets used differently, because you walk past it forty times a day instead of deciding to go down there. A room you would show somebody gets used. A room you apologise for does not.</p>
+      <p style="margin-top:var(--s-5)">So it gets drawn the way furniture gets drawn. A rack is a piece of furniture that happens to hold iron. Oak uprights sized to the wall it is going on rather than to a catalogue. Steel welded, ground and then blackened by hand, because powder coat chips and shows silver underneath and blackened steel just wears. Hardware countersunk so nothing catches a knuckle.</p>
+      <p style="margin-top:var(--s-5)">Most of the drawing time goes on transitions. Where the rubber platform meets the oak floor there is a brass strip set flush with both, instead of a moulding sitting proud of them. The floor vent is level with the boards. The plate post has a turned oak cap on it rather than a bare threaded rod. You are not supposed to notice any of that. You notice it by never catching your eye on anything.</p>
+      <p style="margin-top:var(--s-4)">It is also the part that cannot be ordered. Anything we can buy well we buy. The pieces that decide how the room feels, the rack, the bench, the wall the equipment hangs on, get drawn for the house and made for it.</p>
+    </div>
+    <figure><img loading="lazy" decoding="async" src="assets/render_kettlebells-on-oak-shelf.jpg" alt="Kettlebells on an oak shelf"></figure>
+  </div>
+</section>
+<div class="bleed trio">
+  <figure><img loading="lazy" decoding="async" src="assets/render_oak-joinery.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_floor-transition.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_leather-strap-and-ring.jpg" alt=""></figure>
 </div>
+
+<!-- THE COLOUR STORY -->
+<section class="sec wrap" id="board">
+  <h2 style="max-width:26ch">Nobody picked these colours. They are what the materials already are.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:52ch">The chip beside each photograph is that photograph's own colour. Dark to light, they are the whole range a room gets built from.</p>
+  <div class="mats">
+    <div class="mat">
+      <figure><img loading="lazy" decoding="async" src="assets/mat_plaster.jpg" alt="Lime plaster"></figure>
+      <div class="mat__key"><span class="mat__dot" style="background:var(--m-plaster)"></span><span class="mat__hex">#EBD3C1</span></div>
+      <h3>Lime plaster</h3>
+    </div>
+    <div class="mat">
+      <figure><img loading="lazy" decoding="async" src="assets/mat_terrazzo.jpg" alt="Terrazzo"></figure>
+      <div class="mat__key"><span class="mat__dot" style="background:var(--m-terrazzo)"></span><span class="mat__hex">#B7A58D</span></div>
+      <h3>Terrazzo</h3>
+    </div>
+    <div class="mat">
+      <figure><img loading="lazy" decoding="async" src="assets/mat_cement.jpg" alt="Cement"></figure>
+      <div class="mat__key"><span class="mat__dot" style="background:var(--m-cement)"></span><span class="mat__hex">#A98664</span></div>
+      <h3>Cement</h3>
+    </div>
+    <div class="mat">
+      <figure><img loading="lazy" decoding="async" src="assets/mat_oak.jpg" alt="White oak"></figure>
+      <div class="mat__key"><span class="mat__dot" style="background:var(--m-oak)"></span><span class="mat__hex">#A06B47</span></div>
+      <h3>White oak</h3>
+    </div>
+    <div class="mat">
+      <figure><img loading="lazy" decoding="async" src="assets/mat_cork.jpg" alt="Cork"></figure>
+      <div class="mat__key"><span class="mat__dot" style="background:var(--m-cork)"></span><span class="mat__hex">#8C502C</span></div>
+      <h3>Cork</h3>
+    </div>
+    <div class="mat">
+      <figure><img loading="lazy" decoding="async" src="assets/mat_leather.jpg" alt="Cognac leather"></figure>
+      <div class="mat__key"><span class="mat__dot" style="background:var(--m-leather)"></span><span class="mat__hex">#6B3823</span></div>
+      <h3>Cognac leather</h3>
+    </div>
+    <div class="mat">
+      <figure><img loading="lazy" decoding="async" src="assets/mat_rubber.jpg" alt="Clay rubber"></figure>
+      <div class="mat__key"><span class="mat__dot" style="background:var(--m-rubber)"></span><span class="mat__hex">#5F1A0C</span></div>
+      <h3>Clay rubber</h3>
+    </div>
+    <div class="mat">
+      <figure><img loading="lazy" decoding="async" src="assets/mat_iron.jpg" alt="Raw waxed iron"></figure>
+      <div class="mat__key"><span class="mat__dot" style="background:var(--m-iron)"></span><span class="mat__hex">#36251C</span></div>
+      <h3>Raw waxed iron</h3>
+    </div>
+  </div>
+  <div class="ramp">
+    <div class="ramp__col">
+      <div class="ramp__run"><span style="background:var(--m-iron)"></span><span style="background:var(--m-rubber)"></span><span style="background:var(--m-leather)"></span><span style="background:var(--m-cork)"></span><span style="background:var(--m-oak)"></span><span style="background:var(--m-cement)"></span><span style="background:var(--m-terrazzo)"></span><span style="background:var(--m-plaster)"></span></div>
+      <div class="ramp__lab"><span>Dark</span><span>Light</span></div>
+    </div>
+    <div class="ramp__one">
+      <span style="background:var(--m-planting)"></span>
+      <div class="ramp__lab"><span>Green</span></div>
+    </div>
+    <div class="ramp__one">
+      <span style="background:var(--lead)"></span>
+      <div class="ramp__lab"><span style="color:var(--lead)">Oxide</span></div>
+    </div>
+  </div>
+  <div class="pair">
+    <div>
+      <figure><img loading="lazy" decoding="async" src="assets/mat_planting.jpg" alt="Planting"></figure>
+      <h3>Green, and alive</h3>
+      <p>Something growing in every room. The only cool colour in the building, and the only one we do not specify.</p>
+    </div>
+    <div>
+      <figure><div class="swatch" style="background:var(--lead);width:100%;height:100%"></div></figure>
+      <h3>Oxide, and chosen</h3>
+      <p>The one colour we add rather than find. It goes in once, and almost always on iron.</p>
+    </div>
+  </div>
+</section>
 
 <!-- THE FEELING -->
 <section class="sec wrap">
@@ -402,6 +561,10 @@
   <p class="cap" style="margin-top:var(--s-3)">Snap One and Control4, and the pool service roll up trackers, read 2026-09-15</p>
 </section>
 
+<div class="bleed duo" style="margin-top:var(--s-2)">
+  <figure><img loading="lazy" decoding="async" src="assets/render_empty-room-one-bell.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg" alt=""></figure>
+</div>
 <section class="sec wrap">
   <h2 style="max-width:26ch">The white space is smaller than we assumed, and more specific.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">The pieces all exist. Nobody has put them in one place: both rooms, one studio, our own crew, several makers, a written reason for every piece, and a care plan that covers the sauna and the plunge and not just the treadmill. Selling through the trade rather than a showroom is the sixth, and it is the one our own research supports least.</p>
@@ -424,6 +587,13 @@
   <p style="margin-top:var(--s-5);max-width:58ch">It gives the care plan a fifth thing to service as well. Firmware, network, speakers and scenes get looked at on the same visit as the heater and the water chemistry.</p>
 </section>
 
+<div class="bleed solo" style="margin-top:var(--s-2)">
+  <img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg" alt="">
+  <div class="lay"><div>
+    <h2>The systems that need looking after are the ones nobody else will service.</h2>
+  </div></div>
+</div>
+
 <!-- THE BUSINESS -->
 <section class="sec dark" id="money">
   <div class="wrap">
@@ -431,41 +601,51 @@
     <p class="lede" style="margin-top:var(--s-6);max-width:54ch">The playbook is the high end audio visual integrator of twenty years ago. Sell to the trade, get written into the plans early, and look after the house for as long as the family owns it.</p>
     <table class="ledger">
       <tr><th>Where the money comes from</th><th>On a $120,000 room</th></tr>
-      <tr><td><strong>Design fee.</strong> Paid up front, credited against the project. Seven and a half to thirty five thousand depending on scope.</td><td>$18,000</td></tr>
-      <tr><td><strong>Supply.</strong> Several makers, at a dealer margin of 25 to 35 percent. This is the engine.</td><td>$72,000</td></tr>
-      <tr><td><strong>Install and project management.</strong> Our own crew, beside the builder.</td><td>$30,000</td></tr>
-      <tr><td><strong>Care plan.</strong> Two to eight thousand a year, attached at handover, running for the life of the room.</td><td>$2,000 a year</td></tr>
-      <tr><td>Gross profit on the project</td><td>About 39%</td></tr>
+      <tr><td><strong>Design fee.</strong> Paid up front and earned whether or not the room gets built. Seven and a half to thirty five thousand depending on scope.</td><td>$18,000</td></tr>
+      <tr><td><strong>Supply.</strong> Several makers, at a dealer margin of 25 to 35 percent. Twenty eight percent on this one. This is the engine.</td><td>$84,000</td></tr>
+      <tr><td><strong>Install and project management.</strong> Our own crew beside the builder, billed at fifteen percent of the room and carrying about thirty percent.</td><td>$18,000</td></tr>
+      <tr><td><strong>Care plan.</strong> Two to eight thousand a year depending on what is in the room, attached at handover, running for the life of it.</td><td>$5,200 a year</td></tr>
+      <tr><td>Gross profit on the build</td><td>$46,920, or 39%</td></tr>
     </table>
     <p style="margin-top:var(--s-6);max-width:54ch">That room runs a little above the 34 to 38 percent we hold the company to, and it should. A flagship with both rooms in it carries the design fee and the install better than a single gym or a design only job, and the blended number has to live with all three.</p>
   </div>
 </section>
 
+<div class="bleed duo" style="margin-top:var(--s-2)">
+  <figure><img loading="lazy" decoding="async" src="assets/render_red-light-room.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_the-long-room.jpg" alt=""></figure>
+</div>
+
 <!-- WHAT YOU ARE UNDERWRITING -->
 <section class="sec wrap">
-  <h2 style="max-width:16ch">The care plan is the valuation.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">Everything above is a good small business. Whether it is worth four times its earnings or seven comes down to one variable: how much of the revenue is recurring.</p>
-  <div class="figs figs--two">
+  <h2 style="max-width:24ch">The honest range is lower than the plan's, and here is the arithmetic.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">Everything above is a good small business. What it is worth turns on the multiple, and in this category the multiple moves on things that can be named and priced. Three of them we can reach. Two of them we cannot, and we would rather be the ones to say which.</p>
+  <table class="ledger" style="margin-top:var(--s-7)">
+    <tr><th>What moves the multiple</th><th>Worth</th></tr>
+    <tr><td>Home services at one to three million of EBITDA, which is the band this lands in</td><td>4 to 6&times;</td></tr>
+    <tr><td><strong>Reachable.</strong> Proven in more than one market rather than one</td><td>6.5 to 7.5&times; against 4.5 to 5.5&times;</td></tr>
+    <tr><td><strong>Reachable.</strong> A layer of management under the founders</td><td>6.5 to 7.5&times; against 4.5 to 5.5&times;</td></tr>
+    <tr><td><strong>Reachable.</strong> Customer retention above eighty percent</td><td>Adds 1 to 1.5&times;</td></tr>
+    <tr><td><strong>Not by Year 5.</strong> Recurring revenue above forty percent of the total</td><td>Adds 1.5 to 2.5&times;</td></tr>
+    <tr><td><strong>Not by Year 5.</strong> EBITDA margin above fifteen percent</td><td>Below it counts against</td></tr>
+  </table>
+  <p class="cap" style="margin-top:var(--s-3)">Multiples from CT Acquisitions, audio visual integration and home services guides, 2026, read 2026-09-15. An extract. The same guides also price a project only integrator at 3 to 5 times, which is nearer what this is today, and set 25 percent EBITDA margin as the bar for the top of a range. Which rows we can reach is our judgement, not theirs.</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">The two we miss are the same problem twice. At Year 5 there are about a hundred and forty seven room years of care plans running, which is seven hundred and sixty four thousand dollars, or seven point four percent of revenue. Getting to forty percent would take forty three thousand dollars a year per room and nobody pays that to have a sauna looked after. The Year 5 EBITDA margin is thirteen point eight percent against a fifteen percent bar. Both are held down by the same thing: sixty one thousand dollars of equipment moves through every room at a twenty eight percent margin, which inflates the revenue line and deflates every ratio measured against it.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">So this gets judged on the wrong denominator twice, and the answer is not to argue with the denominator. It is to say plainly where that leaves the number.</p>
+  <div class="figs figs--two" style="margin-top:var(--s-8)">
     <div class="fig fig--lg">
-      <div class="fig__k">Project revenue only</div>
-      <div class="fig__n">3 to 5&times;</div>
-      <p>What an integrator doing one off design and install work trades at.
-      <span class="src">CT Acquisitions, AV integration exit guide, 2026</span></p>
+      <div class="fig__k">What the arithmetic supports</div>
+      <div class="fig__n">$5.7 to 8.5M</div>
+      <p>Four to six times the $1.42M of Year 5 EBITDA. With the Northeast open and a layer of management under us, the upper half of it. Price the third install crew we have not yet priced and the same band is $4.5M to $6.7M.</p>
     </div>
     <div class="fig fig--lg">
-      <div class="fig__k">With a real recurring base</div>
-      <div class="fig__n">6 to 9&times;</div>
-      <p>The same business with service contracts underneath it. In home services, recurring above 40 percent of revenue adds 1.5 to 2.5 times on its own.
-      <span class="src">CT Acquisitions, home services EBITDA multiples, 2026</span></p>
+      <div class="fig__k">What the plan says</div>
+      <div class="fig__n">$7.8 to 9.9M</div>
+      <p>Five and a half to seven times. The bottom of it sits inside the band. The top does not, and we do not think the top is supported. We would rather correct our own plan in front of you than have you find it.</p>
     </div>
   </div>
-  <p style="margin-top:var(--s-8);max-width:58ch">Year 5 in the conservative case is $1.42M of EBITDA. That sits in the band that prices at four to six times, so $5.7M to $8.5M. The plan's conservative valuation of $7.8M to $9.9M is at the top of that band and above it, which works out at five and a half to seven times, and it is only reachable if three things are true.</p>
-  <ul class="rules">
-    <li>The care plan attaches at a high rate from the very first handover, so recurring revenue is a real share of the total.</li>
-    <li>The Northeast opens on schedule in Year 2, which the conservative case already assumes. A model proven in two markets prices around two points higher than one proven in a single market, so a slip there costs more than the revenue it delays.</li>
-    <li>There is a layer of people under the two of us by Year 4, because owner dependent businesses are discounted and everybody knows it.</li>
-  </ul>
-  <p style="margin-top:var(--s-7);max-width:58ch">That is the investment case stated honestly. The open question is not demand, which the figures earlier in this document already speak to, and the houses are drawn for the room whether or not we build it. It is whether this becomes a contract business or stays a project business, and every decision in the plan is aimed at that one question.</p>
+  <p style="margin-top:var(--s-8);max-width:58ch">What is left is the part that actually compounds. Every room handed over keeps paying while the family owns the house, and the installed base grows in a year when nothing new is sold. That is worth having. It is not worth two turns of multiple by Year 5, and anyone who tells you it is has not done the division.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">The open question is not demand. The houses are being drawn for the room whether or not we build it. It is whether this becomes a contract business or stays a project business, and every decision in the plan is aimed at that one question.</p>
 </section>
 
 <!-- THE NUMBERS -->
@@ -485,8 +665,38 @@
         <p>112 projects. EBITDA $2.04M. Raise of $900,000 to $1.1M.</p>
       </div>
     </div>
-    <p class="open-q">Open, and we would rather say so than paper over it. The use of funds, the runway in months, the structure and the terms are not settled, and they are the first three things anybody sensible asks. We would rather work them out in a conversation than put a number on a page we have not earned.</p>
   </div>
+</section>
+
+<!-- THE RAISE -->
+<section class="sec wrap" id="raise">
+  <h2 style="max-width:22ch">Six hundred thousand, and the two years it has to last.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">The Year 5 line is the easy part. The part worth reading is the two years before the business stops losing money, because that is the only stretch the money is actually needed.</p>
+  <table class="bridge">
+    <tr><th>Texas first</th><th>Projects</th><th>Project revenue</th><th>Care plans</th><th>Total</th><th>EBITDA</th></tr>
+      <tr><td>Year 1</td><td data-l="Projects">6</td><td data-l="Project revenue">$0.64M</td><td data-l="Care plans">$0.02M</td><td data-l="Total">$0.66M</td><td data-l="EBITDA" class="neg">($0.36M)</td></tr>
+      <tr><td>Year 2</td><td data-l="Projects">16</td><td data-l="Project revenue">$1.95M</td><td data-l="Care plans">$0.07M</td><td data-l="Total">$2.02M</td><td data-l="EBITDA" class="neg">($0.15M)</td></tr>
+      <tr><td>Year 3</td><td data-l="Projects">32</td><td data-l="Project revenue">$3.90M</td><td data-l="Care plans">$0.20M</td><td data-l="Total">$4.10M</td><td data-l="EBITDA">$0.22M</td></tr>
+      <tr><td>Year 4</td><td data-l="Projects">54</td><td data-l="Project revenue">$6.58M</td><td data-l="Care plans">$0.42M</td><td data-l="Total">$7.00M</td><td data-l="EBITDA">$0.87M</td></tr>
+      <tr><td>Year 5</td><td data-l="Projects">78</td><td data-l="Project revenue">$9.50M</td><td data-l="Care plans">$0.76M</td><td data-l="Total">$10.26M</td><td data-l="EBITDA">$1.42M</td></tr>
+  </table>
+  <p class="cap" style="margin-top:var(--s-3)">Projects, total revenue and EBITDA at Year 5 are the plan's conservative table. Everything else is ours: the $121,800 average, the split between build and care plans, 36 percent on the build and 60 percent on the care, the $5,200 care plan, and the cost base. Our Year 5 total lands $5,200 under the plan's $10.27M, which is one care plan. Year 1 bills the two flagship rooms at cost, so the $87,700 of margin given up is inside that line rather than added underneath it. The care column assumes every room attaches and none churns, which is the most optimistic assumption on this page: at eighty percent retention Year 5 care revenue is about $611,000 and EBITDA about $1.33M.</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">Losses run to five hundred and ten thousand dollars across the first two years and that is the deepest it gets. Year 3 stops burning. The hole itself is not paid back until about a third of the way into Year 4, call it month forty, and we would rather put that on the page than let somebody find it. The raise has to cover twenty four months of loss, not forty months of payback, because from Year 3 the work funds the work.</p>
+  <table class="ledger" style="margin-top:var(--s-7)">
+    <tr><th>Use of funds</th><th>Amount</th></tr>
+    <tr><td><strong>Founder pay, partial, through year two.</strong> Both of us full time from the start, well under market until Year 3.</td><td>$260,000</td></tr>
+    <tr><td><strong>The two flagship rooms, sold at cost.</strong> The margin given up to have something finished to stand in and to photograph.</td><td>$87,700</td></tr>
+    <tr><td><strong>The trade kit and the photography.</strong> Spec sheets, CAD blocks, renderings, and shooting the first two rooms to magazine standard.</td><td>$70,000</td></tr>
+    <tr><td><strong>Entity, insurance, legal, dealer agreements.</strong></td><td>$45,000</td></tr>
+    <tr><td><strong>Everything else across the two years.</strong> Tools, freight, travel, software, the rough in sheets.</td><td>$47,000</td></tr>
+    <tr><td><strong>Reserve, against a maker who will not open an account.</strong> Prepayment and freight on the first orders, which is the one thing that turns into cash on day one.</td><td>$60,000</td></tr>
+    <tr><td><strong>Contingency.</strong></td><td>$30,000</td></tr>
+    <tr><td>Twenty four months of loss, plus the balance sheet behind it</td><td>$600,000</td></tr>
+  </table>
+  <p class="cap" style="margin-top:var(--s-3)">Ours, not the plan's. The plan gives a range of $500,000 to $600,000 and no breakdown. The first five lines come to the $510,000 loss above. They are what the cash goes out on rather than the whole cost base, because most of the two year overhead is carried by gross profit on the work, which is the reason the raise is sized on the loss and not on the spend. The last two lines are balance sheet.</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">Working capital comes down to one line in the contract. On an average project the equipment costs us sixty one thousand four hundred dollars, and a fifty percent deposit on signature is sixty thousand nine hundred, which is five hundred dollars short of the order. So the deposit is fifty five percent, not fifty, and the equipment is paid for before it is ordered with five and a half thousand to spare. That holds only if a maker will open an account at all. Several will not for a dealer with no history, and prepayment plus freight ahead of the second draw is the one real exposure in the model. It is what the sixty thousand reserve is for. From Year 3 what the balance sheet carries is payroll across a two month build, not equipment.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">Whether this needs a second round: on these numbers, no. Year 3 pays for itself and Year 4 pays the hole back. A second round would mean the Northeast moving earlier than Year 2 or the install standard needing a third crew sooner than the table carries, and both of those are decisions we would bring to you rather than discover.</p>
+  <p class="open-q">Still ours to settle, and we would rather say so than put a number on a page we have not earned: the structure, the percentage, and what a return looks like. The amount and what it does are above. The terms are a conversation.</p>
 </section>
 
 <div class="bleed solo" style="margin-top:var(--s-2)">
@@ -531,14 +741,23 @@
   <p class="lede" style="margin-top:var(--s-6)">Anybody looking at this seriously is going to find the following, so here it is from us first.</p>
   <ul class="rules">
     <li><strong>Two people and nothing finished.</strong> Every claim here is a point of view until the first two rooms exist. That is the whole reason year one is built around getting them made and photographed.</li>
-    <li><strong>Those two rooms are priced to win.</strong> They will carry less margin than the model says and that cost is not in the Year 5 table. It is a marketing spend we have chosen to take as lower margin instead.</li>
-    <li><strong>The Year 5 numbers assume a third install crew we have not priced.</strong> The plan calls for it and the summary tables do not carry it, so treat the EBITDA line as the top of the range rather than the middle.</li>
-    <li><strong>The valuation depends on the care plan, not on the rooms.</strong> If the attach rate is poor this is a four times business and the plan's enterprise value is wrong by several million dollars.</li>
-    <li><strong>One metro and one cycle.</strong> Until the Northeast opens this is a bet on North Texas building and renovating. If that slows in 2028 the ramp slows with it.</li>
+    <li><strong>Those two rooms are sold at cost.</strong> Ninety seven thousand dollars of margin given up on purpose, and it is inside the Year 1 line above rather than hidden outside the table.</li>
+    <li><strong>The Year 5 numbers assume a third install crew we have not priced.</strong> Our own review of the plan flagged it and the tables do not carry it. Our own figure for a crew is two hundred and fifty to three hundred and fifty thousand a year, which would take Year 5 EBITDA nearer $1.1M and the valuation band down with it. Treat $1.42M as the top of the range.</li>
+    <li><strong>Nothing is signed with a maker yet.</strong> The whole model rests on a 25 to 35 percent dealer margin and we hold none of it today. Premium makers commonly want a showroom, a territory volume commitment or a dealer history before they grant it, and we have none of the three. If Year 1 lands at fifteen percent instead, this plan does not work at this raise.</li>
+    <li><strong>The multiple is bought by the Northeast and by hiring, not by the care plan.</strong> We used to say the care plan was the valuation. The arithmetic says it is seven point four percent of Year 5 revenue, so if either of the other two slips there is nothing underneath to catch it.</li>
+    <li><strong>Six projects in Year 1 means every client is seventeen percent of the year.</strong> Concentration above ten percent is on the same list that prices the multiple, and the trade channel concentrates it further, because two or three designers could be most of the book before the fourth arrives.</li>
+    <li><strong>The ramp already assumes the Northeast from Year 2, and our own stage list does not reach it until Year 3.</strong> That is a real disagreement inside our plan and we have not resolved it. Until the second market opens this is a bet on North Texas building and renovating, and if that slows in 2028 the ramp slows with it.</li>
     <li><strong>The install is the promise.</strong> The moment it is handed to whoever is free that week, the thing we are selling stops being true. Crews have to grow before markets do, which is the argument for Texas first.</li>
     <li><strong>Somebody assembles this before we do.</strong> The New York firm already has most of the gym side. If it added wellness and turned to the trade it would be in front of us, and it has four showrooms and we have none.</li>
   </ul>
 </section>
+
+<div class="bleed solo" style="margin-top:var(--s-2)">
+  <img loading="lazy" decoding="async" src="assets/render_pavilion-at-night.jpg" alt="">
+  <div class="lay"><div>
+    <h2>It is still on at ten at night, which is the whole point.</h2>
+  </div></div>
+</div>
 
 <!-- US -->
 <section class="sec wrap" id="us">
