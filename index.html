@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marlow</title>
-<!-- Marlow investor overview. Reference photography, not cleared for public use. -->
+<!-- Marlow investor overview. Generated from strategy/reference/SITE.html. Never hand edit. -->
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400;12..96,75..100,600;12..96,75..100,800&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
 <style>
@@ -79,7 +79,7 @@
   .shelf{display:flex;gap:var(--s-2);height:80vh}
   .shelf figure{flex:1;overflow:hidden}
   .shelf figure.tall{flex:1.55}
-  .solo{height:86vh;overflow:hidden;position:relative}
+  .solo{height:72vh;overflow:hidden;position:relative}
   .solo .lay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:var(--s-9) var(--w);
              background:linear-gradient(to top,rgba(var(--ink-rgb),.82) 0%,rgba(var(--ink-rgb),.34) 38%,rgba(var(--ink-rgb),.06) 68%,rgba(var(--ink-rgb),.30) 100%)}
   .solo h2{color:var(--offwhite);max-width:18ch;text-shadow:0 1px 4px rgba(var(--ink-rgb),.35)}
@@ -236,6 +236,28 @@
   .bridge .neg{color:var(--lead)}
   .bridge tr:last-child td{border-bottom:2px solid var(--ink);font-weight:600}
 
+  /* chapter breaks. Six of them, and they are the only eyebrows on the page: one per chapter
+     rather than a label on every section, which is what got them removed in pass 3. The number
+     takes oxide in its folio role, so the one oxide rule per page is still the brand band. */
+  .chap{border-top:2px solid var(--ink);margin-top:var(--s-9);padding-top:var(--s-5)}
+  .chap__k{display:flex;align-items:baseline;gap:var(--s-4);font-size:11px;font-weight:600;
+           letter-spacing:.2em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+  .chap__n{color:var(--lead)}
+  .chap__of{color:var(--text-quiet)}
+  .chap h2{margin-top:var(--s-4);font-size:clamp(30px,3.4vw,44px);letter-spacing:-.018em;max-width:18ch}
+  .chap p{margin-top:var(--s-4);font-size:17px;color:var(--text-quiet);max-width:50ch}
+
+  /* section marks. The chapter break is the loud device (full width rule, oxide number); this is its
+     quiet sibling, one per section, naming what that section is doing. Stone rather than oxide and an
+     18px tick rather than a full width rule, so the two read as a hierarchy and never compete. The
+     labels are the section names that were already in this file as HTML comments, which is the test
+     of whether a label is information rather than decoration: it existed before the design did. No
+     numbers here, because the chapter break already carries the count. */
+  .eyb{display:flex;align-items:center;gap:var(--s-3);margin-bottom:var(--s-4);font-size:11px;
+       font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-quiet)}
+  .eyb::before{content:"";width:18px;height:2px;background:currentColor;flex:none}
+  .dark .eyb{color:rgba(var(--offwhite-rgb),.72)}
+
   @media(max-width:880px){
     .figs,.figs--two{grid-template-columns:1fr;gap:var(--s-6)}
     .matrix__row{grid-template-columns:1fr}
@@ -289,11 +311,12 @@
 <nav class="nav">
   <a class="nav__brand" href="#top">Marlow</a>
   <ul class="nav__links">
-    <li><a href="#halves">Two halves</a></li>
-    <li><a href="#why">Why now</a></li>
-    <li><a href="#field">The field</a></li>
-    <li><a href="#money">The business</a></li>
-    <li><a href="#plan">The plan</a></li>
+    <li><a href="#ch1">The room</a></li>
+    <li><a href="#ch2">The market</a></li>
+    <li><a href="#ch3">The work</a></li>
+    <li><a href="#ch4">The field</a></li>
+    <li><a href="#ch5">The business</a></li>
+    <li><a href="#ch6">The plan</a></li>
   </ul>
   <span class="nav__brand" style="font-size:11px;letter-spacing:.18em">Investor overview</span>
 </nav>
@@ -308,8 +331,17 @@
   </div>
 </header>
 
+<section class="sec wrap" id="ch1" style="padding-bottom:0">
+  <div class="chap">
+    <div class="chap__k"><span class="chap__n">01</span><span class="chap__of">of six</span></div>
+    <h2>The room</h2>
+    <p>What we make, why it is built out of what it is built out of, and what it is supposed to feel like at six in the morning.</p>
+  </div>
+</section>
+
 <!-- WHY THIS EXISTS -->
 <section class="sec wrap">
+  <div class="eyb">The premise</div>
   <h2 style="max-width:20ch">I have never been in a home gym that felt good to be in.</h2>
   <p class="lede" style="margin-top:var(--s-6)">Not one. And I have been in a lot of them, in houses where every other room was thought about carefully by somebody who was paid well to think about it. Then you open one more door and it is a bench press, some weights and a kettlebell thrown in a room.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">Stripped down, industrial, metal and plastic, lit like a parking garage. In the most considered house on the street it is the one room nobody considered. You can feel it the second you walk in, and it is why the door usually stays shut.</p>
@@ -317,9 +349,9 @@
 </section>
 
 <div class="bleed trio" style="margin-top:var(--s-4)">
-  <figure><img loading="lazy" decoding="async" src="assets/offbrief_leaves.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/offbrief_terracotta-pots.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/equipment_mat-rolled-in-dappled-light.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_oak-meets-plaster.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_floor-brass-strip.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_floor-transition.jpg" alt=""></figure>
 </div>
 
 <!-- THE MARK, ONCE, EARLY -->
@@ -330,19 +362,20 @@
 
 <!-- MATERIALS AND TEXTURE, EARLY -->
 <div class="bleed trio">
-  <figure><img loading="lazy" decoding="async" src="assets/render_linen-niche.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_linen-niche-open.jpg" alt=""></figure>
   <figure><img loading="lazy" decoding="async" src="assets/render_leather-medicine-balls.jpg" alt=""></figure>
   <figure><img loading="lazy" decoding="async" src="assets/render_daybed-and-olive.jpg" alt=""></figure>
 </div>
 <section class="sec wrap">
   <div class="split">
     <div>
+      <div class="eyb">Materials</div>
       <h2 style="max-width:26ch">We build these out of natural materials so they do not feel like a gym.</h2>
       <p class="lede" style="margin-top:var(--s-6)">Limewash plaster on the walls, because it moves through the day instead of sitting flat. Rift sawn white oak on the floor so the grain stays quiet underfoot. Honed limestone and terrazzo in the wet rooms, never polished, because polished stone and wet feet are a bad idea somebody has every year.</p>
       <p style="margin-top:var(--s-5)">Leather, wool and linen where you sit down. Western red cedar in the sauna, for the smell and because it stays cool enough to lean on. Marble, iron, rubber, brushed stainless. Something green and alive in every room, which sounds like a small thing and is the difference between a space and a room.</p>
       <p style="margin-top:var(--s-4)">And a scent, because a room has one whether anybody chose it or not. Cedar, leather, bergamot, vetiver.</p>
     </div>
-    <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/materials_plant-on-vertical-oak.jpg" alt=""></figure>
+    <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/render_linen-niche.jpg" alt=""></figure>
   </div>
 </section>
 
@@ -350,6 +383,7 @@
 <section class="sec wrap" id="craft">
   <div class="split split--wide">
     <div>
+      <div class="eyb">Craft</div>
       <h2 style="max-width:30ch">Gym equipment is the only furniture in the house nobody expects to look at.</h2>
       <p class="lede" style="margin-top:var(--s-6)">Everything else got chosen. The chairs, the lighting, the door handles, the stone on the island. Then the gym turns up in black powder coat and moulded rubber and goes in the basement behind a door, because that is what you do with something you would rather not see.</p>
       <p style="margin-top:var(--s-5)">Make it worth looking at and the room moves. It comes up off the basement floor, sits next to the living space with glass instead of a door, and then it gets used differently, because you walk past it forty times a day instead of deciding to go down there. A room you would show somebody gets used. A room you apologise for does not.</p>
@@ -357,17 +391,18 @@
       <p style="margin-top:var(--s-5)">Most of the drawing time goes on transitions. Where the rubber platform meets the oak floor there is a brass strip set flush with both, instead of a moulding sitting proud of them. The floor vent is level with the boards. The plate post has a turned oak cap on it rather than a bare threaded rod. You are not supposed to notice any of that. You notice it by never catching your eye on anything.</p>
       <p style="margin-top:var(--s-4)">It is also the part that cannot be ordered. Anything we can buy well we buy. The pieces that decide how the room feels, the rack, the bench, the wall the equipment hangs on, get drawn for the house and made for it.</p>
     </div>
-    <figure><img loading="lazy" decoding="async" src="assets/render_kettlebells-on-oak-shelf.jpg" alt="Kettlebells on an oak shelf"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_leather-collar-on-column.jpg" alt="A leather collar going onto a turned column"></figure>
   </div>
 </section>
 <div class="bleed trio">
   <figure><img loading="lazy" decoding="async" src="assets/render_oak-joinery.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_floor-transition.jpg" alt=""></figure>
   <figure><img loading="lazy" decoding="async" src="assets/render_leather-strap-and-ring.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_bench-edge-stitched.jpg" alt=""></figure>
 </div>
 
 <!-- THE COLOUR STORY -->
 <section class="sec wrap" id="board">
+  <div class="eyb">Colour story</div>
   <h2 style="max-width:26ch">Nobody picked these colours. They are what the materials already are.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:52ch">The chip beside each photograph is that photograph's own colour. Dark to light, they are the whole range a room gets built from.</p>
   <div class="mats">
@@ -444,17 +479,19 @@
 <section class="sec wrap">
   <div class="split split--wide">
     <div>
+      <div class="eyb">The feeling</div>
       <h2>Training is hard. The room should be on your side.</h2>
       <p class="lede" style="margin-top:var(--s-6)">You are about to do something difficult, on purpose, at six in the morning, and you have every reason to go back to bed. A room that is cold and loud and grey does not help with that. A room you actually want to be in does.</p>
       <p style="margin-top:var(--s-5)">So the first hour is what we design for. Warm light on a plaster wall instead of a strip light overhead. Wood you can feel the grain of. Leather wrapped handles. Music where you want it and a screen that is part of the room rather than shouting at you the moment you open the door.</p>
       <p style="margin-top:var(--s-4)">Nothing loud. No neon. Nothing that looks like equipment pretending to be furniture. The test we hold everything to is whether you want to stay in there a few minutes longer than you meant to.</p>
     </div>
-    <figure><img loading="lazy" decoding="async" src="assets/water_sauna-interior-with-towel.jpg" alt=""></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_pommel-bench-and-towels.jpg" alt=""></figure>
   </div>
 </section>
 
 <!-- THE TECHNOLOGY IN THE ROOM -->
 <section class="sec wrap" id="av">
+  <div class="eyb">Technology</div>
   <h2 style="max-width:22ch">The screen disappears when it is off.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">On the training wall it is a mirror until you want it to be something else. In the corner where you sit afterward it holds a photograph. In the sauna, the steam room and over the plunge there is no screen at all, because no manufacturer will put a humidity rating on one and we would rather say so than find out.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">The speakers are behind the plaster. Invisible drivers finished over in the dry rooms, from the makers who will sign off on limewash going over them. Sealed units in the ceiling where it is wet. In the heat, transducers that turn the cedar wall itself into the speaker. The amplifiers live in a cool closet down the hall and only the wire goes into the hot room.</p>
@@ -472,7 +509,7 @@
 </section>
 
 <div class="bleed solo" style="margin-top:var(--s-2)">
-  <img loading="lazy" decoding="async" src="assets/water_shower-corridor.jpg" alt="">
+  <img loading="lazy" decoding="async" src="assets/render_sauna-and-steam-suite.jpg" alt="">
   <div class="lay"><div>
     <h2>The twenty minutes afterward are the part you miss when you travel.</h2>
   </div></div>
@@ -480,6 +517,7 @@
 
 <!-- TWO HALVES -->
 <section class="sec wrap" id="halves">
+  <div class="eyb">Two halves</div>
   <h2 style="max-width:20ch">There are two halves to this. The work, and everything after it.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">Health at home is not one room and the industry keeps selling it as one. There is the hour you put in, and there is the heat, the cold, the water and the sitting still that decides whether you can do it again on Thursday. Both of us have had a sauna and cold water within reach for years and it is the part we would not give up.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">So we draw both from the first meeting. It is also the commercially serious half: growing faster, skewing older, carrying the bigger budget, and it is the one that has to be settled before the walls close because it wants water, drainage and power the house was never drawn for.</p>
@@ -498,8 +536,17 @@
   <div class="spec" style="margin-top:var(--s-7)"><span>Target mix</span><span>55 performance</span><span>45 restoration</span><span>Flagships</span><span class="ox">Both</span></div>
 </section>
 
+<section class="sec wrap" id="ch2" style="padding-bottom:0">
+  <div class="chap">
+    <div class="chap__k"><span class="chap__n">02</span><span class="chap__of">of six</span></div>
+    <h2>The market</h2>
+    <p>Who is building right now, what they are already spending on the rest of the house, and why nobody is lined up to do this part of it.</p>
+  </div>
+</section>
+
 <!-- WHY NOW -->
 <section class="sec wrap" id="why">
+  <div class="eyb">Why now</div>
   <h2 style="max-width:18ch">The houses are being built right now.</h2>
   <p class="lede" style="margin-top:var(--s-6)">North Texas has more money in it than it has ever had, most of it recent, and the people holding it are building or renovating. The wellness floor is already on the drawings. Nobody is lined up who can build it well.</p>
   <div class="figs">
@@ -523,28 +570,58 @@
 </section>
 
 <div class="bleed duo">
-  <figure><img loading="lazy" decoding="async" src="assets/rooms_black-pegboard-equipment-wall.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/materials_stacked-plates-oxide.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_floor-going-in.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg" alt=""></figure>
 </div>
+
+<section class="sec wrap" id="ch3" style="padding-bottom:var(--s-7)">
+  <div class="chap">
+    <div class="chap__k"><span class="chap__n">03</span><span class="chap__of">of six</span></div>
+    <h2>The work</h2>
+    <p>How a room gets drawn, specified and installed, from the conversation that finds out what somebody actually does to the amperage the steam room needs.</p>
+  </div>
+</section>
 
 <!-- HOW A ROOM GETS MADE -->
 <section class="sec dark" style="padding-bottom:0">
   <div class="wrap">
+    <div class="eyb">The brief</div>
     <h2 style="max-width:22ch">Most people ask for a gym and then describe something else.</h2>
     <p class="lede" style="margin-top:var(--s-6);max-width:54ch">Somebody says they want the full setup. Two conversations later it turns out they ride for forty minutes most mornings, they have a shoulder that has not been right since 2019, and the person actually in there five days a week is their wife.</p>
     <p style="margin-top:var(--s-5);max-width:54ch">That second version is the room we draw, and getting to it is most of the work. Their height sets the bar height and the shelf height. A shoulder that no longer goes overhead changes what lives on the wall. Six foot four means the ceiling matters more than the square footage.</p>
     <p style="margin-top:var(--s-4);max-width:54ch">Then every piece comes with a page saying why it is that one. The rack is forty two inches instead of the usual forty eight, because the door swings left and the wider one would have cost them the corner. It is not the rack we sell the most of. We write that down because we earn a margin on what we supply, and it is how anyone can tell whether a thing is in the room for their sake or for ours.</p>
   </div>
   <div class="bleed gear" style="margin-top:var(--s-8)">
-    <figure><img loading="lazy" decoding="async" src="assets/equipment_leather-rope-brass-handles.jpg" alt="Leather rope with brass handles"></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/equipment_leather-and-wood-bench-on-terrazzo.jpg" alt="Leather and wood bench on terrazzo"></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/equipment_oxide-dumbbells-on-cork.jpg" alt="Oxide dumbbells on cork"></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/equipment_mat-and-wood-dumbbells.jpg" alt="Mat and turned wood dumbbells"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_leather-dumbbells.jpg" alt="Leather wrapped dumbbells"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_barbell-and-plates.jpg" alt="Barbell and leather faced plates"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_rings-and-plant.jpg" alt="Rings on leather straps"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_speed-rope-and-mat.jpg" alt="Speed rope and a rolled mat"></figure>
+  </div>
+</section>
+
+<!-- ELECTRICAL -->
+<section class="sec wrap" id="power">
+  <div class="eyb">Electrical</div>
+  <h2 style="max-width:26ch">A steam room requires 125 amps on its own.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">That is the big generator. The small one still wants 38. A traditional sauna heater wants 30 to 50 on a circuit of its own. A commercial treadmill needs one it does not share with anything, including its neutral. The plunge needs a GFCI line and no extension cord, ever. Our read is that a full suite adds up to its own subpanel, though no code sets that threshold and we would have the electrician confirm it on the house.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">Which means the electrical gets drawn before the framer arrives. Every room leaves the builder with a one page technology sheet: circuits and amperage, where the subpanel goes, floor boxes under the cardio so no cord crosses the floor, blocking in the wall for the display and the speakers, where the low voltage runs and where the rack lives. It goes in with the rest of the rough in. Anything missed at that moment costs far more after the drywall. Dallas has been on the 2023 electrical code since May 2025, and the park cities are a separate check every time.</p>
+  <div class="spec" style="margin-top:var(--s-7)"><span>Steam generator</span><span>38 to 125A</span><span>Sauna heater</span><span>30 to 50A</span><span>Plunge</span><span class="ox">GFCI, dedicated</span></div>
+  <p class="cap" style="margin-top:var(--s-3)">Manufacturer specifications, read 2026-09-16</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">That timing is why the audio visual integrator matters to us as a channel. We draw the technology and a CEDIA certified integrator installs it, because programming a house's control system is their trade. They are already sitting in these houses a long way before we would be, and they are the one trade our own research found nobody in this category courting.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">It gives the care plan a fifth thing to service as well. Firmware, network, speakers and scenes get looked at on the same visit as the heater and the water chemistry.</p>
+</section>
+
+<section class="sec wrap" id="ch4" style="padding-bottom:0">
+  <div class="chap">
+    <div class="chap__k"><span class="chap__n">04</span><span class="chap__of">of six</span></div>
+    <h2>The field</h2>
+    <p>Every firm in the country we could find doing this, what they leave alone, and the two assumptions of ours that turned out to be wrong.</p>
   </div>
 </section>
 
 <!-- THE FIELD -->
 <section class="sec wrap" id="field">
+  <div class="eyb">The field</div>
   <h2 style="max-width:26ch">We went looking for who already does this, and two of our assumptions were wrong.</h2>
   <p class="lede" style="margin-top:var(--s-6)">We read every firm in the country we could find doing high end home gyms and wellness rooms. Saying what we found is cheaper than having somebody find it for us.</p>
   <div class="matrix">
@@ -562,10 +639,11 @@
 </section>
 
 <div class="bleed duo" style="margin-top:var(--s-2)">
-  <figure><img loading="lazy" decoding="async" src="assets/render_empty-room-one-bell.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_bench-and-wood-dumbbells.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_jump-rope-on-travertine.jpg" alt=""></figure>
 </div>
 <section class="sec wrap">
+  <div class="eyb">White space</div>
   <h2 style="max-width:26ch">The white space is smaller than we assumed, and more specific.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">The pieces all exist. Nobody has put them in one place: both rooms, one studio, our own crew, several makers, a written reason for every piece, and a care plan that covers the sauna and the plunge and not just the treadmill. Selling through the trade rather than a showroom is the sixth, and it is the one our own research supports least.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">Every part of that exists somewhere, just never together. The two that matter most are the written reason and the care plan. One is a trust argument nobody else can make without changing their business. The other is the difference between what this company is worth at four times earnings and at seven.</p>
@@ -576,16 +654,6 @@
   </ul>
 </section>
 
-<!-- ELECTRICAL -->
-<section class="sec wrap" id="power">
-  <h2 style="max-width:26ch">A steam room requires 125 amps on its own.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">That is the big generator. The small one still wants 38. A traditional sauna heater wants 30 to 50 on a circuit of its own. A commercial treadmill needs one it does not share with anything, including its neutral. The plunge needs a GFCI line and no extension cord, ever. Our read is that a full suite adds up to its own subpanel, though no code sets that threshold and we would have the electrician confirm it on the house.</p>
-  <p style="margin-top:var(--s-5);max-width:58ch">Which means the electrical gets drawn before the framer arrives. Every room leaves the builder with a one page technology sheet: circuits and amperage, where the subpanel goes, floor boxes under the cardio so no cord crosses the floor, blocking in the wall for the display and the speakers, where the low voltage runs and where the rack lives. It goes in with the rest of the rough in. Anything missed at that moment costs far more after the drywall. Dallas has been on the 2023 electrical code since May 2025, and the park cities are a separate check every time.</p>
-  <div class="spec" style="margin-top:var(--s-7)"><span>Steam generator</span><span>38 to 125A</span><span>Sauna heater</span><span>30 to 50A</span><span>Plunge</span><span class="ox">GFCI, dedicated</span></div>
-  <p class="cap" style="margin-top:var(--s-3)">Manufacturer specifications, read 2026-09-16</p>
-  <p style="margin-top:var(--s-7);max-width:58ch">That timing is why the audio visual integrator matters to us as a channel. We draw the technology and a CEDIA certified integrator installs it, because programming a house's control system is their trade. They are already sitting in these houses a long way before we would be, and they are the one trade our own research found nobody in this category courting.</p>
-  <p style="margin-top:var(--s-5);max-width:58ch">It gives the care plan a fifth thing to service as well. Firmware, network, speakers and scenes get looked at on the same visit as the heater and the water chemistry.</p>
-</section>
 
 <div class="bleed solo" style="margin-top:var(--s-2)">
   <img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg" alt="">
@@ -594,9 +662,18 @@
   </div></div>
 </div>
 
+<section class="sec wrap" id="ch5" style="padding-bottom:var(--s-7)">
+  <div class="chap">
+    <div class="chap__k"><span class="chap__n">05</span><span class="chap__of">of six</span></div>
+    <h2>The business</h2>
+    <p>Where the money comes from on one room, what the whole thing is worth at Year 5, and what we are asking for.</p>
+  </div>
+</section>
+
 <!-- THE BUSINESS -->
 <section class="sec dark" id="money">
   <div class="wrap">
+    <div class="eyb">Revenue</div>
     <h2 style="max-width:20ch">Four ways one room pays, and the last one never stops.</h2>
     <p class="lede" style="margin-top:var(--s-6);max-width:54ch">The playbook is the high end audio visual integrator of twenty years ago. Sell to the trade, get written into the plans early, and look after the house for as long as the family owns it.</p>
     <table class="ledger">
@@ -618,6 +695,7 @@
 
 <!-- WHAT YOU ARE UNDERWRITING -->
 <section class="sec wrap">
+  <div class="eyb">Underwriting</div>
   <h2 style="max-width:24ch">The honest range is lower than the plan's, and here is the arithmetic.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">Everything above is a good small business. What it is worth turns on the multiple, and in this category the multiple moves on things that can be named and priced. Three of them we can reach. Two of them we cannot, and we would rather be the ones to say which.</p>
   <table class="ledger" style="margin-top:var(--s-7)">
@@ -651,6 +729,7 @@
 <!-- THE NUMBERS -->
 <section class="sec dark">
   <div class="wrap">
+    <div class="eyb">Two models</div>
     <h2 style="max-width:16ch">Two ways to run it.</h2>
     <p class="lede" style="margin-top:var(--s-6);max-width:54ch">Texas first is slower and cheaper to prove. Both markets from the start is faster, needs a bigger raise, and needs a second install standard sooner than we would like.</p>
     <div class="figs figs--two" style="border-top-color:var(--offwhite)">
@@ -670,6 +749,7 @@
 
 <!-- THE RAISE -->
 <section class="sec wrap" id="raise">
+  <div class="eyb">The raise</div>
   <h2 style="max-width:22ch">Six hundred thousand, and the two years it has to last.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">The Year 5 line is the easy part. The part worth reading is the two years before the business stops losing money, because that is the only stretch the money is actually needed.</p>
   <table class="bridge">
@@ -700,19 +780,24 @@
 </section>
 
 <div class="bleed solo" style="margin-top:var(--s-2)">
-  <img loading="lazy" decoding="async" src="assets/water_spa-bench-with-towels.jpg" alt="">
+  <img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg" alt="">
   <div class="mk-sm"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg" alt="Marlow"></div>
   <div class="lay"><div>
-    <h2>Heat and cold, thirty seconds from where you were lifting.</h2>
+    <h2>None of this is hard. It has just never been anybody&rsquo;s whole job.</h2>
   </div></div>
 </div>
-<div class="bleed duo" style="margin-top:var(--s-2)">
-  <figure><img loading="lazy" decoding="async" src="assets/water_cedar-cold-plunge.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/water_terracotta-tiled-shower.jpg" alt=""></figure>
-</div>
+
+<section class="sec wrap" id="ch6" style="padding-bottom:0">
+  <div class="chap">
+    <div class="chap__k"><span class="chap__n">06</span><span class="chap__of">of six</span></div>
+    <h2>The plan</h2>
+    <p>What year one is for, the questions we would ask us, and the two people doing it.</p>
+  </div>
+</section>
 
 <!-- THE PLAN -->
 <section class="sec wrap" id="plan">
+  <div class="eyb">The stages</div>
   <h2 style="max-width:20ch">The first job is to make something worth photographing.</h2>
   <p class="lede" style="margin-top:var(--s-6)">A designer writes a specialist into a plan set eighteen months before anybody moves in, and she does it because she has seen the work. We have taste and a point of view and nothing yet to point at, so everything in year one exists to fix that.</p>
   <ol class="stages">
@@ -737,6 +822,7 @@
 
 <!-- RISKS -->
 <section class="sec wrap">
+  <div class="eyb">Risks</div>
   <h2 style="max-width:16ch">What we would ask us about.</h2>
   <p class="lede" style="margin-top:var(--s-6)">Anybody looking at this seriously is going to find the following, so here it is from us first.</p>
   <ul class="rules">
@@ -762,8 +848,9 @@
 <!-- US -->
 <section class="sec wrap" id="us">
   <div class="split">
-    <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/materials_stacked-oak-beams.jpg" alt=""></figure>
+    <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/render_kettlebells-on-oak-shelf.jpg" alt=""></figure>
     <div>
+      <div class="eyb">Us</div>
       <h2 style="max-width:18ch">Dan draws it. Dave sells it and gets it built.</h2>
       <!-- FILL BEFORE THIS GOES OUT: name two clients and the Emmy category. This is the credential
            carrying the most weight in a pitch with no track record and the one a reader cannot check. -->
@@ -775,9 +862,9 @@
 </section>
 
 <div class="bleed trio">
-  <figure><img loading="lazy" decoding="async" src="assets/rooms_oak-shelving-wall.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/materials_sconce-on-oxide-wall.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/rooms_dark-wood-gym-with-pegboard.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_leather-bench-on-terrazzo.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_turned-oak-dumbbell-end.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_bench-corner-stitched.jpg" alt=""></figure>
 </div>
 
 <!-- CLOSE -->
@@ -793,7 +880,7 @@
           <a class="btn btn--ghost" href="#money">The numbers again</a>
         </div>
       </div>
-      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/offbrief_paper-lantern.jpg" alt=""></figure>
+      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_empty-room-one-bell.jpg" alt=""></figure>
     </div>
   </div>
 </section>
@@ -805,7 +892,7 @@
       <p class="cap" style="margin-top:var(--s-4)">Dallas &middot; New York</p>
       <p class="cap" style="margin-top:var(--s-1)">Investor overview &middot; 2026 &middot; Confidential</p>
     </div>
-    <p class="cap" style="text-align:right">Name and figures are working drafts.<br>Photography is reference only and is not our own work.</p>
+    <p class="cap" style="text-align:right">Name and figures are working drafts.<br>Every photograph here is our own render. The material swatches are crops of reference photography.</p>
   </div>
 </footer>
 
