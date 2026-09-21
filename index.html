@@ -138,7 +138,7 @@
   .pagefoot{border-top:var(--hairline);padding:var(--s-8) 0 var(--s-9)}
 
   @media(max-width:880px){
-    .wrap{padding:0 18px}
+    .wrap{padding-left:18px;padding-right:18px} /* sides only: a shorthand here zeroed every .sec wrap on phones */
     .nav{padding:var(--s-4) 18px} .nav__links{display:none}
     .duo,.trio,.split,.split--wide,.two,.planks{grid-template-columns:1fr}
     .stages li{grid-template-columns:34px 1fr;gap:var(--s-4)}
@@ -258,6 +258,37 @@
   .eyb::before{content:"";width:18px;height:2px;background:currentColor;flex:none}
   .dark .eyb{color:rgba(var(--offwhite-rgb),.72)}
 
+  /* a single wide frame. The long room is the one landscape render, so it gets the full width once. */
+  .wide{aspect-ratio:1376/768;max-height:88vh;overflow:hidden}
+
+  /* craft details. Each close up says what the decision is, because a detail without a reason
+     reads as styling. Square frames, one line of caption, the label in bold as the object named. */
+  .details{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-7) var(--s-5);margin-top:var(--s-8)}
+  .details figure{margin:0}
+  .details img{aspect-ratio:1/1;height:auto}
+  .details figcaption{margin-top:var(--s-3);font-size:15px;line-height:1.45;max-width:36ch}
+  .details b{font-weight:600}
+
+  /* the material board. One row, dark to light, the measured chip under each crop. It replaces the
+     card grid, the ramp and the green and oxide pair: the order is the ramp, so the ramp went. */
+  .board{display:grid;grid-template-columns:repeat(9,1fr);gap:var(--s-2);margin-top:var(--s-7)}
+  .board figure{margin:0;min-width:0}
+  .board img{aspect-ratio:1/2;height:auto}
+  .board figcaption{display:flex;flex-direction:column;gap:2px;margin-top:var(--s-3);font-size:13px;
+                    font-weight:600;line-height:1.25}
+  .board__chip{display:block;width:100%;height:10px;margin-bottom:var(--s-2)}
+  .board__hex{font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--text-quiet);font-variant-numeric:tabular-nums}
+
+  /* the pieces. Named objects with what they are made of, which is what a product page is for. */
+  .pieces{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-7) var(--s-5);margin-top:var(--s-8)}
+  .pieces figure{margin:0}
+  .pieces img{aspect-ratio:1/1;height:auto}
+  .pieces h3{margin-top:var(--s-4);font-size:19px}
+  .pieces p{margin-top:var(--s-2);font-size:15px;max-width:34ch;color:var(--text-quiet)}
+
+  .inset{margin-top:var(--s-7);aspect-ratio:16/9;overflow:hidden}
+  .solo--light .lay{background:linear-gradient(to top,rgba(var(--ink-rgb),.88) 0%,rgba(var(--ink-rgb),.6) 34%,rgba(var(--ink-rgb),.12) 66%,rgba(var(--ink-rgb),.24) 100%)}
+
   @media(max-width:880px){
     .figs,.figs--two{grid-template-columns:1fr;gap:var(--s-6)}
     .matrix__row{grid-template-columns:1fr}
@@ -306,6 +337,19 @@
     .bridge tr:last-child td{border-bottom:0}
   }
 
+
+  /* the new image components, last so they win */
+  @media(max-width:880px){
+    .details,.pieces{grid-template-columns:repeat(2,1fr);gap:var(--s-6) var(--s-4)}
+    .board{grid-template-columns:repeat(3,1fr);gap:var(--s-4) var(--s-2)}
+    .board img{aspect-ratio:3/5}
+    .wide{aspect-ratio:4/3}
+    .inset{aspect-ratio:4/3}
+    .sec{padding-top:var(--s-8);padding-bottom:var(--s-8)}
+  }
+  @media(max-width:420px){
+    .details figcaption,.pieces p{font-size:14px}
+  }
 </style></head><body>
 
 <nav class="nav">
@@ -348,11 +392,7 @@
   <p style="margin-top:var(--s-4);max-width:58ch">That is the whole idea. There is a room missing from these houses and we know how to make it.</p>
 </section>
 
-<div class="bleed trio" style="margin-top:var(--s-4)">
-  <figure><img loading="lazy" decoding="async" src="assets/render_oak-meets-plaster.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_floor-brass-strip.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_floor-transition.jpg" alt=""></figure>
-</div>
+<div class="bleed wide" style="margin-top:var(--s-4)"><img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg" alt=""></div>
 
 <!-- THE MARK, ONCE, EARLY -->
 <section class="wrap brandband">
@@ -360,12 +400,7 @@
   <p>Private gyms and wellness rooms, designed, supplied, installed and looked after. North Texas <span class="i">first</span>, then New York and New England.</p>
 </section>
 
-<!-- MATERIALS AND TEXTURE, EARLY -->
-<div class="bleed trio">
-  <figure><img loading="lazy" decoding="async" src="assets/render_linen-niche-open.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_leather-medicine-balls.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_daybed-and-olive.jpg" alt=""></figure>
-</div>
+<!-- MATERIALS -->
 <section class="sec wrap">
   <div class="split">
     <div>
@@ -375,7 +410,7 @@
       <p style="margin-top:var(--s-5)">Leather, wool and linen where you sit down. Western red cedar in the sauna, for the smell and because it stays cool enough to lean on. Marble, iron, rubber, brushed stainless. Something green and alive in every room, which sounds like a small thing and is the difference between a space and a room.</p>
       <p style="margin-top:var(--s-4)">And a scent, because a room has one whether anybody chose it or not. Cedar, leather, bergamot, vetiver.</p>
     </div>
-    <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/render_linen-niche.jpg" alt=""></figure>
+    <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/render_linen-niche-open.jpg" alt=""></figure>
   </div>
 </section>
 
@@ -393,85 +428,31 @@
     </div>
     <figure><img loading="lazy" decoding="async" src="assets/render_leather-collar-on-column.jpg" alt="A leather collar going onto a turned column"></figure>
   </div>
+  <div class="details">
+    <figure><img loading="lazy" decoding="async" src="assets/render_floor-brass-strip.jpg" alt=""><figcaption><b>Floor.</b> Where the rubber meets the oak, a brass strip set flush with both, so there is nothing to catch a toe on.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_oak-joinery.jpg" alt=""><figcaption><b>Rack.</b> A through tenon. Oak joined to oak, the way a table gets made.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_bench-edge-stitched.jpg" alt=""><figcaption><b>Bench.</b> Leather over a rounded oak edge, so nothing presses into the back of a leg.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_turned-oak-dumbbell-end.jpg" alt=""><figcaption><b>Handle.</b> Turned oak, a bronze ring, a leather inlay. It is the part you look at between sets.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_leather-strap-and-ring.jpg" alt=""><figcaption><b>Rings.</b> A blackened steel ring on a riveted leather strap. Both wear in, and neither chips.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_oak-meets-plaster.jpg" alt=""><figcaption><b>Wall.</b> Where the oak frame meets the plaster, a shadow gap in place of a trim piece.</figcaption></figure>
+  </div>
 </section>
-<div class="bleed trio">
-  <figure><img loading="lazy" decoding="async" src="assets/render_oak-joinery.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_leather-strap-and-ring.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_bench-edge-stitched.jpg" alt=""></figure>
-</div>
 
 <!-- THE COLOUR STORY -->
 <section class="sec wrap" id="board">
   <div class="eyb">Colour story</div>
   <h2 style="max-width:26ch">Nobody picked these colours. They are what the materials already are.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:52ch">The chip beside each photograph is that photograph's own colour. Dark to light, they are the whole range a room gets built from.</p>
-  <div class="mats">
-    <div class="mat">
-      <figure><img loading="lazy" decoding="async" src="assets/mat_plaster.jpg" alt="Lime plaster"></figure>
-      <div class="mat__key"><span class="mat__dot" style="background:var(--m-plaster)"></span><span class="mat__hex">#EBD3C1</span></div>
-      <h3>Lime plaster</h3>
-    </div>
-    <div class="mat">
-      <figure><img loading="lazy" decoding="async" src="assets/mat_terrazzo.jpg" alt="Terrazzo"></figure>
-      <div class="mat__key"><span class="mat__dot" style="background:var(--m-terrazzo)"></span><span class="mat__hex">#B7A58D</span></div>
-      <h3>Terrazzo</h3>
-    </div>
-    <div class="mat">
-      <figure><img loading="lazy" decoding="async" src="assets/mat_cement.jpg" alt="Cement"></figure>
-      <div class="mat__key"><span class="mat__dot" style="background:var(--m-cement)"></span><span class="mat__hex">#A98664</span></div>
-      <h3>Cement</h3>
-    </div>
-    <div class="mat">
-      <figure><img loading="lazy" decoding="async" src="assets/mat_oak.jpg" alt="White oak"></figure>
-      <div class="mat__key"><span class="mat__dot" style="background:var(--m-oak)"></span><span class="mat__hex">#A06B47</span></div>
-      <h3>White oak</h3>
-    </div>
-    <div class="mat">
-      <figure><img loading="lazy" decoding="async" src="assets/mat_cork.jpg" alt="Cork"></figure>
-      <div class="mat__key"><span class="mat__dot" style="background:var(--m-cork)"></span><span class="mat__hex">#8C502C</span></div>
-      <h3>Cork</h3>
-    </div>
-    <div class="mat">
-      <figure><img loading="lazy" decoding="async" src="assets/mat_leather.jpg" alt="Cognac leather"></figure>
-      <div class="mat__key"><span class="mat__dot" style="background:var(--m-leather)"></span><span class="mat__hex">#6B3823</span></div>
-      <h3>Cognac leather</h3>
-    </div>
-    <div class="mat">
-      <figure><img loading="lazy" decoding="async" src="assets/mat_rubber.jpg" alt="Clay rubber"></figure>
-      <div class="mat__key"><span class="mat__dot" style="background:var(--m-rubber)"></span><span class="mat__hex">#5F1A0C</span></div>
-      <h3>Clay rubber</h3>
-    </div>
-    <div class="mat">
-      <figure><img loading="lazy" decoding="async" src="assets/mat_iron.jpg" alt="Raw waxed iron"></figure>
-      <div class="mat__key"><span class="mat__dot" style="background:var(--m-iron)"></span><span class="mat__hex">#36251C</span></div>
-      <h3>Raw waxed iron</h3>
-    </div>
-  </div>
-  <div class="ramp">
-    <div class="ramp__col">
-      <div class="ramp__run"><span style="background:var(--m-iron)"></span><span style="background:var(--m-rubber)"></span><span style="background:var(--m-leather)"></span><span style="background:var(--m-cork)"></span><span style="background:var(--m-oak)"></span><span style="background:var(--m-cement)"></span><span style="background:var(--m-terrazzo)"></span><span style="background:var(--m-plaster)"></span></div>
-      <div class="ramp__lab"><span>Dark</span><span>Light</span></div>
-    </div>
-    <div class="ramp__one">
-      <span style="background:var(--m-planting)"></span>
-      <div class="ramp__lab"><span>Green</span></div>
-    </div>
-    <div class="ramp__one">
-      <span style="background:var(--lead)"></span>
-      <div class="ramp__lab"><span style="color:var(--lead)">Oxide</span></div>
-    </div>
-  </div>
-  <div class="pair">
-    <div>
-      <figure><img loading="lazy" decoding="async" src="assets/mat_planting.jpg" alt="Planting"></figure>
-      <h3>Green, and alive</h3>
-      <p>Something growing in every room. The only cool colour in the building, and the only one we do not specify.</p>
-    </div>
-    <div>
-      <figure><div class="swatch" style="background:var(--lead);width:100%;height:100%"></div></figure>
-      <h3>Oxide, and chosen</h3>
-      <p>The one colour we add rather than find. It goes in once, and almost always on iron.</p>
-    </div>
+  <p class="lede" style="margin-top:var(--s-6);max-width:52ch">Each colour is measured off the material itself. Dark to light, this is the whole range a room gets built from, with something green growing in the middle of it.</p>
+  <div class="board">
+    <figure><img loading="lazy" decoding="async" src="assets/mat_iron.jpg" alt="Raw waxed iron"><figcaption><span class="board__chip" style="background:var(--m-iron)"></span>Raw waxed iron<span class="board__hex">#36251C</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_rubber.jpg" alt="Clay rubber"><figcaption><span class="board__chip" style="background:var(--m-rubber)"></span>Clay rubber<span class="board__hex">#5F1A0C</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_planting.jpg" alt="Planting"><figcaption><span class="board__chip" style="background:var(--m-planting)"></span>Planting<span class="board__hex">#434824</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_leather.jpg" alt="Cognac leather"><figcaption><span class="board__chip" style="background:var(--m-leather)"></span>Cognac leather<span class="board__hex">#6B3823</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_cork.jpg" alt="Cork"><figcaption><span class="board__chip" style="background:var(--m-cork)"></span>Cork<span class="board__hex">#8C502C</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_oak.jpg" alt="White oak"><figcaption><span class="board__chip" style="background:var(--m-oak)"></span>White oak<span class="board__hex">#A06B47</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_cement.jpg" alt="Cement"><figcaption><span class="board__chip" style="background:var(--m-cement)"></span>Cement<span class="board__hex">#A98664</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_terrazzo.jpg" alt="Terrazzo"><figcaption><span class="board__chip" style="background:var(--m-terrazzo)"></span>Terrazzo<span class="board__hex">#B7A58D</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_plaster.jpg" alt="Lime plaster" style="object-position:100% 50%"><figcaption><span class="board__chip" style="background:var(--m-plaster)"></span>Lime plaster<span class="board__hex">#EBD3C1</span></figcaption></figure>
   </div>
 </section>
 
@@ -508,8 +489,8 @@
   <p style="margin-top:var(--s-7);max-width:58ch">One keypad by the door does both, and so does the phone in your hand, and your voice if you want it. It runs inside whatever system the house already has rather than asking anyone to learn another app. The third scene is Off, and off is off.</p>
 </section>
 
-<div class="bleed solo" style="margin-top:var(--s-2)">
-  <img loading="lazy" decoding="async" src="assets/render_sauna-and-steam-suite.jpg" alt="">
+<div class="bleed solo solo--light" style="margin-top:var(--s-2)">
+  <img loading="lazy" decoding="async" src="assets/render_rest-corner-by-the-sauna.jpg" alt="" style="object-position:50% 70%">
   <div class="lay"><div>
     <h2>The twenty minutes afterward are the part you miss when you travel.</h2>
   </div></div>
@@ -535,6 +516,11 @@
   </div>
   <div class="spec" style="margin-top:var(--s-7)"><span>Target mix</span><span>55 performance</span><span>45 restoration</span><span>Flagships</span><span class="ox">Both</span></div>
 </section>
+
+<div class="bleed duo" style="margin-top:var(--s-2)">
+  <figure><img loading="lazy" decoding="async" src="assets/render_sauna-cedar.jpg" alt="A cedar sauna with a stone heater and a bronze bucket"></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_red-light-room.jpg" alt=""></figure>
+</div>
 
 <section class="sec wrap" id="ch2" style="padding-bottom:0">
   <div class="chap">
@@ -571,7 +557,7 @@
 
 <div class="bleed duo">
   <figure><img loading="lazy" decoding="async" src="assets/render_floor-going-in.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_rubber-field-going-in.jpg" alt="A rubber training field being set flush into an oak floor"></figure>
 </div>
 
 <section class="sec wrap" id="ch3" style="padding-bottom:var(--s-7)">
@@ -583,7 +569,7 @@
 </section>
 
 <!-- HOW A ROOM GETS MADE -->
-<section class="sec dark" style="padding-bottom:0">
+<section class="sec dark">
   <div class="wrap">
     <div class="eyb">The brief</div>
     <h2 style="max-width:22ch">Most people ask for a gym and then describe something else.</h2>
@@ -591,11 +577,20 @@
     <p style="margin-top:var(--s-5);max-width:54ch">That second version is the room we draw, and getting to it is most of the work. Their height sets the bar height and the shelf height. A shoulder that no longer goes overhead changes what lives on the wall. Six foot four means the ceiling matters more than the square footage.</p>
     <p style="margin-top:var(--s-4);max-width:54ch">Then every piece comes with a page saying why it is that one. The rack is forty two inches instead of the usual forty eight, because the door swings left and the wider one would have cost them the corner. It is not the rack we sell the most of. We write that down because we earn a margin on what we supply, and it is how anyone can tell whether a thing is in the room for their sake or for ours.</p>
   </div>
-  <div class="bleed gear" style="margin-top:var(--s-8)">
-    <figure><img loading="lazy" decoding="async" src="assets/render_leather-dumbbells.jpg" alt="Leather wrapped dumbbells"></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_barbell-and-plates.jpg" alt="Barbell and leather faced plates"></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_rings-and-plant.jpg" alt="Rings on leather straps"></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_speed-rope-and-mat.jpg" alt="Speed rope and a rolled mat"></figure>
+</section>
+
+<!-- THE PIECES -->
+<section class="sec wrap" id="pieces">
+  <div class="eyb">The pieces</div>
+  <h2 style="max-width:22ch">Six of the first pieces, and what each one is made of.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:54ch">These are renders of what we are drawing now. Every piece comes out of the same short list of materials as the room it sits in, so the equipment reads as part of the room.</p>
+  <div class="pieces">
+    <figure><img loading="lazy" decoding="async" src="assets/render_leather-dumbbells.jpg" alt="Dumbbells"><figcaption><h3>Dumbbells</h3><p>Stitched cognac leather faces on a brass handle.</p></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_barbell-and-plates.jpg" alt="Rack and plates"><figcaption><h3>Rack and plates</h3><p>White oak uprights on blackened steel feet. Plates cast in a matte burnt umber.</p></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_kettlebells-on-oak-shelf.jpg" alt="Kettlebells"><figcaption><h3>Kettlebells</h3><p>Cast iron with leather wrapped handles, on an oak shelf set into the plaster.</p></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_leather-medicine-balls.jpg" alt="Medicine balls"><figcaption><h3>Medicine balls</h3><p>Stitched leather in oxblood, cognac and natural.</p></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_bench-and-wood-dumbbells.jpg" alt="Bench"><figcaption><h3>Bench</h3><p>Cognac leather on white oak, with oak dumbbells kept underneath.</p></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_jump-rope-on-travertine.jpg" alt="Rope"><figcaption><h3>Rope</h3><p>Braided leather, turned oak handles, bronze collars.</p></figcaption></figure>
   </div>
 </section>
 
@@ -604,6 +599,8 @@
   <div class="eyb">Electrical</div>
   <h2 style="max-width:26ch">A steam room requires 125 amps on its own.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">That is the big generator. The small one still wants 38. A traditional sauna heater wants 30 to 50 on a circuit of its own. A commercial treadmill needs one it does not share with anything, including its neutral. The plunge needs a GFCI line and no extension cord, ever. Our read is that a full suite adds up to its own subpanel, though no code sets that threshold and we would have the electrician confirm it on the house.</p>
+  <figure class="inset"><img loading="lazy" decoding="async" src="assets/render_sauna-and-steam-suite.jpg" alt="A sauna, a cold plunge and a red light room off one stone corridor"></figure>
+  <p class="cap" style="margin-top:var(--s-3)">Sauna, plunge and red light off one corridor. Each is its own line on the technology sheet.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">Which means the electrical gets drawn before the framer arrives. Every room leaves the builder with a one page technology sheet: circuits and amperage, where the subpanel goes, floor boxes under the cardio so no cord crosses the floor, blocking in the wall for the display and the speakers, where the low voltage runs and where the rack lives. It goes in with the rest of the rough in. Anything missed at that moment costs far more after the drywall. Dallas has been on the 2023 electrical code since May 2025, and the park cities are a separate check every time.</p>
   <div class="spec" style="margin-top:var(--s-7)"><span>Steam generator</span><span>38 to 125A</span><span>Sauna heater</span><span>30 to 50A</span><span>Plunge</span><span class="ox">GFCI, dedicated</span></div>
   <p class="cap" style="margin-top:var(--s-3)">Manufacturer specifications, read 2026-09-16</p>
@@ -638,10 +635,6 @@
   <p class="cap" style="margin-top:var(--s-3)">Snap One and Control4, and the pool service roll up trackers, read 2026-09-15</p>
 </section>
 
-<div class="bleed duo" style="margin-top:var(--s-2)">
-  <figure><img loading="lazy" decoding="async" src="assets/render_bench-and-wood-dumbbells.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_jump-rope-on-travertine.jpg" alt=""></figure>
-</div>
 <section class="sec wrap">
   <div class="eyb">White space</div>
   <h2 style="max-width:26ch">The white space is smaller than we assumed, and more specific.</h2>
@@ -688,10 +681,6 @@
   </div>
 </section>
 
-<div class="bleed duo" style="margin-top:var(--s-2)">
-  <figure><img loading="lazy" decoding="async" src="assets/render_red-light-room.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_the-long-room.jpg" alt=""></figure>
-</div>
 
 <!-- WHAT YOU ARE UNDERWRITING -->
 <section class="sec wrap">
@@ -779,9 +768,9 @@
   <p class="open-q">Still ours to settle, and we would rather say so than put a number on a page we have not earned: the structure, the percentage, and what a return looks like. The amount and what it does are above. The terms are a conversation.</p>
 </section>
 
+
 <div class="bleed solo" style="margin-top:var(--s-2)">
   <img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg" alt="">
-  <div class="mk-sm"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg" alt="Marlow"></div>
   <div class="lay"><div>
     <h2>None of this is hard. It has just never been anybody&rsquo;s whole job.</h2>
   </div></div>
@@ -848,7 +837,7 @@
 <!-- US -->
 <section class="sec wrap" id="us">
   <div class="split">
-    <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/render_kettlebells-on-oak-shelf.jpg" alt=""></figure>
+    <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/render_drawing-on-the-bench.jpg" alt="A pencil drawing of a gym wall with leather, oak and bronze samples beside it"></figure>
     <div>
       <div class="eyb">Us</div>
       <h2 style="max-width:18ch">Dan draws it. Dave sells it and gets it built.</h2>
@@ -861,11 +850,6 @@
   </div>
 </section>
 
-<div class="bleed trio">
-  <figure><img loading="lazy" decoding="async" src="assets/render_leather-bench-on-terrazzo.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_turned-oak-dumbbell-end.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_bench-corner-stitched.jpg" alt=""></figure>
-</div>
 
 <!-- CLOSE -->
 <section class="sec" style="background:var(--offwhite)">
@@ -880,7 +864,7 @@
           <a class="btn btn--ghost" href="#money">The numbers again</a>
         </div>
       </div>
-      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_empty-room-one-bell.jpg" alt=""></figure>
+      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_one-bell-close.jpg" alt=""></figure>
     </div>
   </div>
 </section>
