@@ -66,6 +66,11 @@
               align-items:flex-end;gap:var(--s-6);flex-wrap:wrap}
   .hero h1{color:var(--offwhite);max-width:11ch}
   .hero .cap{color:rgba(var(--offwhite-rgb),.78)}
+  .hero__deck{margin-top:var(--s-5);max-width:34ch;font-size:19px;line-height:1.45;
+              color:rgba(var(--offwhite-rgb),.92);text-shadow:0 1px 4px rgba(var(--ink-rgb),.35)}
+  /* The name is not settled. Every place it appears in copy is a .bn span and the mark appears in
+     four places: the hero, the brand band, two solos and the close. Settling the name is one pass. */
+  .close__mk{width:min(34vw,300px);height:auto;margin-bottom:var(--s-6);display:block}
 
   .sec{padding:var(--s-9) 0}
   .sec--tight{padding:var(--s-8) 0}
@@ -353,7 +358,7 @@
 </style></head><body>
 
 <nav class="nav">
-  <a class="nav__brand" href="#top">Marlow</a>
+  <a class="nav__brand" href="#top"><span class="bn">Marlow</span></a>
   <ul class="nav__links">
     <li><a href="#ch1">The room</a></li>
     <li><a href="#ch2">The market</a></li>
@@ -370,7 +375,10 @@
   <div class="veil"></div>
   <div class="hero__mk"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg" alt="Marlow"></div>
   <div class="hero__foot">
-    <h1>Part of<br>the house.</h1>
+    <div>
+      <h1>Part of<br>the house.</h1>
+      <p class="hero__deck"><span class="bn">Marlow</span> designs the gym and the wellness room, supplies everything in them, installs them, and looks after&nbsp;them.</p>
+    </div>
     <div class="cap">Investor overview &middot; 2026</div>
   </div>
 </header>
@@ -398,6 +406,19 @@
 <section class="wrap brandband">
   <img loading="lazy" decoding="async" src="assets/marlow-plate-name.svg" alt="Marlow">
   <p>Private gyms and wellness rooms, designed, supplied, installed and looked after. North Texas <span class="i">first</span>, then New York and New&nbsp;England.</p>
+</section>
+
+<!-- WHERE WE STAND -->
+<section class="sec wrap" id="stand">
+  <div class="eyb">Where we stand</div>
+  <h2 style="max-width:22ch">Five things we decided before we&nbsp;started.</h2>
+  <ul class="rules" style="margin-top:var(--s-6)">
+    <li><strong>Several brands, not&nbsp;one.</strong> We hold dealer agreements with a number of manufacturers, so the rack can come from one and the sauna from another. Nobody has to take a&nbsp;package.</li>
+    <li><strong>We make money on the equipment we&nbsp;sell.</strong> That goes in writing beside every piece, with the reason it is in the room, so an owner can tell whether it is there for them or for&nbsp;us.</li>
+    <li><strong>Both rooms, one&nbsp;studio.</strong> The gym and the wellness room, one crew, and one care plan covering&nbsp;both.</li>
+    <li><strong>We sell through designers and&nbsp;builders.</strong> They are drawing the house a year before anybody thinks about equipment, and that is when this gets&nbsp;decided.</li>
+    <li><strong>Lighter and warmer than most&nbsp;gyms.</strong> The room has to sit beside the interior designer's work without fighting&nbsp;it.</li>
+  </ul>
 </section>
 
 <!-- MATERIALS -->
@@ -603,7 +624,7 @@
   <p style="margin-top:var(--s-5);max-width:58ch">So the electrical gets drawn before the framer arrives. Every room leaves the builder with a one page technology sheet: circuits and amperage, where the subpanel goes, floor boxes under the cardio, blocking in the wall for the display and the speakers, where the low voltage runs. Anything missed at that moment costs far more after the drywall. Dallas has been on the 2023 electrical code since May 2025, and the park cities are a separate check every&nbsp;time.</p>
   <div class="spec" style="margin-top:var(--s-7)"><span>Steam generator</span><span>38 to 125A</span><span>Sauna heater</span><span>30 to 50A</span><span>Plunge</span><span class="ox">GFCI, dedicated</span></div>
   <p class="cap" style="margin-top:var(--s-3)">Manufacturer specifications, read&nbsp;2026-09-16</p>
-  <p style="margin-top:var(--s-7);max-width:58ch">That timing is why the audio visual integrator matters to us as a channel. We draw the technology and a CEDIA certified integrator installs it, because programming a house's control system is their trade. They are in these houses long before we would be, and nobody in this category is courting&nbsp;them.</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">That timing is why the audio visual companies matter to us. We draw the technology and one of their certified installers puts it in, because programming a house's control system is their trade. They are in these houses long before we would be, and nobody in this category is courting&nbsp;them.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">It gives the care plan a fifth thing to service. Firmware, network, speakers and scenes, on the same visit as the heater and the water&nbsp;chemistry.</p>
 </section>
 
@@ -611,7 +632,7 @@
   <div class="chap">
     <div class="chap__k"><span class="chap__n">04</span><span class="chap__of">of six</span></div>
     <h2>The field</h2>
-    <p>Every firm we could find doing this, and the two assumptions of ours that were&nbsp;wrong.</p>
+    <p>Every firm we could find doing this, the two assumptions of ours that were wrong, and what is left that we can&nbsp;own.</p>
   </div>
 </section>
 
@@ -624,19 +645,19 @@
     <div class="matrix__row matrix__head"><div>What we assumed was open</div><div>What we found</div><div>Verdict</div></div>
     <div class="matrix__row"><div>Design led, own crew, several makers</div><div class="taken" data-l="What we found">Gym Tech Fitness publishes exactly that in the New York tri-state, plus maintenance plans, across four showrooms</div><div class="taken" data-l="Verdict">Taken</div></div>
     <div class="matrix__row"><div>Gym and wellness as one offer</div><div class="taken" data-l="What we found">Home Gyms Design, Iron House, Territory Wellness and Biofit all bundle them</div><div class="taken" data-l="Verdict">Taken</div></div>
-    <div class="matrix__row"><div>Sold trade first</div><div data-l="What we found">Several name the trade as one audience among several. None claims it is the majority channel, and nobody names audio visual integrators at all</div><div class="open" data-l="Verdict">Open</div></div>
+    <div class="matrix__row"><div>Sold through designers first</div><div data-l="What we found">Several name the trade as one audience among several. None claims it is where most of their work comes from, and nobody names audio visual companies at all</div><div class="open" data-l="Verdict">Open</div></div>
     <div class="matrix__row"><div>A written reason per piece, and the margin disclosed</div><div data-l="What we found">Searched directly across the whole set. Nothing found. The nearest is a claim of being equipment independent</div><div class="open" data-l="Verdict">Open</div></div>
     <div class="matrix__row"><div>A real service contract on these rooms</div><div data-l="What we found">A national franchise already services gym equipment on contract, so the gym side is taken. Nothing found covers a sauna, a steam room or a plunge</div><div class="open" data-l="Verdict">Half open</div></div>
   </div>
   <p class="cap" style="margin-top:var(--s-3)">Public sources, read 2026-09-15. Full working in the&nbsp;appendix.</p>
-  <p style="margin-top:var(--s-7);max-width:58ch">There is no national platform in this category. A long tail of small regional firms, mostly owner operated, plus manufacturer run design programs that can only sell one brand. The only public financial data point we could find is a three year old firm in Connecticut with $1.28M of revenue asking $795,000 for the whole&nbsp;business.</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">There is no national company in this category. A lot of small regional firms, mostly owner operated, plus manufacturer run design programs that can only sell one brand. The only public financial data point we could find is a three year old firm in Connecticut with $1.28M of revenue asking $795,000 for the whole&nbsp;business.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">Private equity has consolidated audio visual integration and pool service in the last two years and has not touched&nbsp;this.</p>
-  <p class="cap" style="margin-top:var(--s-3)">Snap One and Control4, and the pool service roll up trackers, read&nbsp;2026-09-15</p>
+  <p class="cap" style="margin-top:var(--s-3)">Snap One and Control4, and the pool service acquisition trackers, read&nbsp;2026-09-15</p>
 </section>
 
 <section class="sec wrap">
-  <div class="eyb">White space</div>
-  <h2 style="max-width:26ch">The white space is smaller than we assumed, and more&nbsp;specific.</h2>
+  <div class="eyb">The gap</div>
+  <h2 style="max-width:26ch">The gap is smaller than we assumed, and more&nbsp;specific.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">The pieces all exist. Nobody has put them in one place: both rooms, one studio, our own crew, several makers, a written reason for every piece, and a care plan that covers the sauna and the plunge, not just the treadmill. Selling through the trade rather than a showroom is the sixth, and it is the one our own research supports&nbsp;least.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">The two that matter most are the written reason and the care plan. One is a trust argument nobody else can make without changing their business. The other is the difference between what this company is worth at four times earnings and at&nbsp;seven.</p>
   <ul class="rules">
@@ -667,7 +688,7 @@
   <div class="wrap">
     <div class="eyb">Revenue</div>
     <h2 style="max-width:20ch">Four ways one room pays, and the last one never&nbsp;stops.</h2>
-    <p class="lede" style="margin-top:var(--s-6);max-width:54ch">The playbook is the high end audio visual integrator of twenty years ago. Sell to the trade, get written into the plans early, and look after the house for as long as the family owns&nbsp;it.</p>
+    <p class="lede" style="margin-top:var(--s-6);max-width:54ch">We are copying what the good audio visual companies did twenty years ago. Sell to the designers and builders, get written into the plans early, and look after the house for as long as the family owns&nbsp;it.</p>
     <table class="ledger">
       <tr><th>Where the money comes from</th><th>On a $120,000 room</th></tr>
       <tr><td><strong>Design fee.</strong> Paid up front and earned whether or not the room gets built. Seven and a half to thirty five thousand depending on&nbsp;scope.</td><td>$18,000</td></tr>
@@ -676,7 +697,7 @@
       <tr><td><strong>Care plan.</strong> Two to eight thousand a year depending on what is in the room, attached at handover, running for the life of&nbsp;it.</td><td>$5,200 a&nbsp;year</td></tr>
       <tr><td>Gross profit on the&nbsp;build</td><td>$46,920, or&nbsp;39%</td></tr>
     </table>
-    <p style="margin-top:var(--s-6);max-width:54ch">That room runs above the 34 to 38 percent we hold the company to, and it should. A flagship with both rooms in it carries the design fee and the install better than a single gym, and the blended number has to live with all&nbsp;three.</p>
+    <p style="margin-top:var(--s-6);max-width:54ch">That room runs above the 34 to 38 percent we hold the company to, and it should. A project with both rooms in it carries the design fee and the install better than a single gym, and the blended number has to live with all&nbsp;three.</p>
   </div>
 </section>
 
@@ -709,7 +730,7 @@
       <p>Five and a half to seven times. The bottom of it sits inside the band. The top does not, and we do not think the top is supported. We would rather correct our own plan in front of you than have you find&nbsp;it.</p>
     </div>
   </div>
-  <p style="margin-top:var(--s-8);max-width:58ch">What is left is the part that compounds. Every room handed over keeps paying while the family owns the house, and the installed base grows in a year when nothing new is sold. That is worth having. It is not worth two turns of multiple by Year&nbsp;5.</p>
+  <p style="margin-top:var(--s-8);max-width:58ch">What is left is the part that compounds. Every room handed over keeps paying while the family owns the house, and the number of rooms we look after grows even in a year when we sell nothing new. That is worth having. It is not worth adding two to the multiple by Year&nbsp;5.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">The open question is not demand. The houses are being drawn for the room whether or not we build it. It is whether this becomes a contract business or stays a project business, and every decision in the plan is aimed at&nbsp;that.</p>
 </section>
 
@@ -788,10 +809,22 @@
   <h2 style="max-width:20ch">The first job is to make something worth photographing.</h2>
   <p class="lede" style="margin-top:var(--s-6)">A designer writes a specialist into a plan set eighteen months before anybody moves in, and she does it because she has seen the work. We have a point of view and nothing yet to point at, so year one exists to fix&nbsp;that.</p>
   <ol class="stages">
-    <li><h3>Now to spring&nbsp;2027</h3><p>Settle the name. Sign dealer agreements across strength, cardio, sauna and plunge, never one maker. Make the first piece of furniture, so a designer has something to put her hand on. Build the trade kit and the one page rough in sheet a builder drops straight into a plan set, which costs nothing and puts us in the drawings before anybody has hired&nbsp;us.</p></li>
-    <li><h3>2027</h3><p>Two flagship rooms through our own networks, one of each, priced to win, with the right to photograph them written into the contract. A staged show project with a spec builder, which stands in for the showroom we do not want yet. Photograph both to magazine standard and go at the design&nbsp;press.</p></li>
-    <li><h3>2028</h3><p>Grow the trade program toward twenty five active Texas accounts. Sign audio visual integrators on a referral, which puts us inside houses that are already being wired. Publish one finished room's full spec, every maker and the reason for each&nbsp;piece.</p></li>
-    <li><h3>Year 3 and&nbsp;after</h3><p>Turn the pieces we have made into a short catalogue. Open the commercial line into hotels, clubs and schools. Look again at the Northeast, either through a second crew or through the Connecticut firm currently for&nbsp;sale.</p></li>
+    <li><div>
+      <h3>Now to spring&nbsp;2027</h3>
+      <p>Settle the name. Sign dealer agreements across strength, cardio, sauna and plunge, never one maker. Make the first piece of furniture, so a designer has something to put her hand on. Build the trade kit and the one page rough in sheet a builder drops straight into a plan set, which costs nothing and puts us in the drawings before anybody has hired&nbsp;us.</p>
+    </div></li>
+    <li><div>
+      <h3>2027</h3>
+      <p>Two flagship rooms through our own networks, one of each, priced to win, with the right to photograph them written into the contract. A staged show project with a spec builder, which stands in for the showroom we do not want yet. Photograph both to magazine standard and go at the design&nbsp;press.</p>
+    </div></li>
+    <li><div>
+      <h3>2028</h3>
+      <p>Grow the trade program toward twenty five active Texas accounts. Sign audio visual integrators on a referral, which puts us inside houses that are already being wired. Publish everything that went into one finished room, every maker and the reason for each&nbsp;piece.</p>
+    </div></li>
+    <li><div>
+      <h3>Year 3 and&nbsp;after</h3>
+      <p>Turn the pieces we have made into a short catalogue. Open the commercial line into hotels, clubs and schools. Look again at the Northeast, either through a second crew or through the Connecticut firm currently for&nbsp;sale.</p>
+    </div></li>
   </ol>
 </section>
 
@@ -806,8 +839,8 @@
     <li><strong>The Year 5 numbers assume a third install crew we have not&nbsp;priced.</strong> Our own figure for a crew is two hundred and fifty to three hundred and fifty thousand a year, which would take Year 5 EBITDA nearer $1.1M and the valuation band down with it. Treat $1.42M as the top of the&nbsp;range.</li>
     <li><strong>Nothing is signed with a maker&nbsp;yet.</strong> The whole model rests on a 25 to 35 percent dealer margin and we hold none of it today. Makers commonly want a showroom, a territory commitment or a dealer history first, and we have none of the three. If Year 1 lands at fifteen percent instead, this plan does not work at this&nbsp;raise.</li>
     <li><strong>The multiple is bought by the Northeast and by hiring, not by the care&nbsp;plan.</strong> We used to say the care plan was the valuation. It is seven point four percent of Year 5 revenue, so if either of the other two slips there is nothing underneath to catch&nbsp;it.</li>
-    <li><strong>Six projects in Year 1 means every client is seventeen percent of the&nbsp;year.</strong> Concentration above ten percent is on the same list that prices the multiple, and the trade channel concentrates it&nbsp;further.</li>
-    <li><strong>The ramp assumes the Northeast from Year 2 and our own stage list does not reach it until Year&nbsp;3.</strong> That is a real disagreement inside our plan and we have not resolved it. Until the second market opens this is a bet on North Texas building, and if that slows in 2028 the ramp slows with&nbsp;it.</li>
+    <li><strong>Six projects in Year 1 means every client is seventeen percent of the&nbsp;year.</strong> Any one client above ten percent of revenue is on the same list that prices the multiple, and the selling through designers concentrates it&nbsp;further.</li>
+    <li><strong>The growth table assumes the Northeast from Year 2 and our own stage list does not reach it until Year&nbsp;3.</strong> That is a real disagreement inside our plan and we have not resolved it. Until the second market opens this is a bet on North Texas building, and if that slows in 2028 the plan slows with&nbsp;it.</li>
     <li><strong>The install is the&nbsp;promise.</strong> The moment it is handed to whoever is free that week, the thing we are selling stops being true. Crews have to grow before markets do, which is the argument for Texas&nbsp;first.</li>
     <li><strong>Somebody assembles this before we&nbsp;do.</strong> The New York firm already has most of the gym side. If it added wellness and turned to the trade it would be in front of us, and it has four showrooms and we have&nbsp;none.</li>
   </ul>
@@ -815,6 +848,7 @@
 
 <div class="bleed solo" style="margin-top:var(--s-2)">
   <img loading="lazy" decoding="async" src="assets/render_pavilion-at-night.jpg" alt="">
+  <div class="mk-sm"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg" alt="Marlow"></div>
   <div class="lay"><div>
     <h2>It is still on at ten at night, which is the whole&nbsp;point.</h2>
   </div></div>
@@ -829,6 +863,7 @@
       <h2 style="max-width:18ch">Dan draws it. Dave sells it and gets it&nbsp;built.</h2>
       <!-- FILL BEFORE THIS GOES OUT: name two clients and the Emmy category. This is the credential
            carrying the most weight in a pitch with no track record and the one a reader cannot check. -->
+      <p style="margin-top:var(--s-5)"><span class="bn">Marlow</span> is the two of&nbsp;them.</p>
       <p style="margin-top:var(--s-5)">Dan has spent twenty years as a creative director on brands you would recognise, with an Emmy from one of them. He does the drawings, the materials, the light and everything you can see. What he cares about is why some rooms feel good to stand in and most do&nbsp;not.</p>
       <p style="margin-top:var(--s-4)">Dave spent his in Texas law and wealth management, which means twenty years in rooms with the people who buy these houses. He does the makers, the trade, the crew and the&nbsp;money.</p>
       <p style="margin-top:var(--s-4)">They both train and have for a long time. Dave rides. Dan does CrossFit and is a purple belt in jiu-jitsu. Between them they have used a lot of rooms and never one like the room they are describing, which is most of why they are doing&nbsp;it.</p>
@@ -842,6 +877,7 @@
   <div class="wrap">
     <div class="two" style="align-items:center">
       <div>
+        <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg" alt="Marlow">
         <h2 style="max-width:14ch">Let us build the first one for&nbsp;you.</h2>
         <p style="margin-top:var(--s-6)">We would rather take money from somebody who would actually want one of these. The first room being yours is the cheapest proof either of us will ever&nbsp;get.</p>
         <p style="margin-top:var(--s-4)">So come and see it, tell us what you really do in a week, and let us draw it for you. That conversation works whichever way you decide to come&nbsp;in.</p>
@@ -858,7 +894,7 @@
 <footer class="pagefoot wrap">
   <div class="two" style="align-items:flex-end">
     <div>
-      <div style="font-weight:800;letter-spacing:.3em;text-transform:uppercase;font-size:15px">Marlow</div>
+      <div style="font-weight:800;letter-spacing:.3em;text-transform:uppercase;font-size:15px"><span class="bn">Marlow</span></div>
       <p class="cap" style="margin-top:var(--s-4)">Dallas &middot; New&nbsp;York</p>
       <p class="cap" style="margin-top:var(--s-1)">Investor overview &middot; 2026 &middot;&nbsp;Confidential</p>
     </div>
