@@ -36,15 +36,86 @@
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--w)}
   .bleed{width:100vw;margin-left:calc(50% - 50vw)}
 
-  /* ---- chrome ---- */
-  /* The nav rides the hero rather than following the scroll. A fixed bar needed either pure white
-     (refused by the anti-tell floor) or a scrim, and a scrim laid a grey band across the paper
-     sections. Over the hero the veil already carries it. */
-  .nav{position:absolute;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;justify-content:space-between;
-       gap:var(--s-5);padding:var(--s-5) var(--w)}
-  .nav a,.nav span{color:var(--offwhite)}
+  /* ---- chrome ----
+     The bar is fixed and travels with the reader, because a document this long loses its own
+     table of contents otherwise. Over the hero it is transparent and the veil carries it; the
+     moment the hero leaves it turns to paper with a hairline under it, which is the only way to
+     get a solid bar without the pure white the anti-tell floor refuses. It also carries the one
+     control on the page: the same company, read two ways. */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:90;padding:var(--s-4) var(--w);
+       transition:background .25s ease,border-color .25s ease;
+       background:linear-gradient(to bottom,rgba(var(--ink-rgb),.55),rgba(var(--ink-rgb),0))}
+  .nav__in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:var(--s-5);flex-wrap:wrap}
+  .nav a,.nav span,.nav button{color:var(--offwhite)}
   .nav__brand{font-weight:800;font-size:15px;letter-spacing:.3em;text-transform:uppercase}
-  .nav__links{display:flex;gap:var(--s-5);list-style:none;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+  .nav__links{display:flex;gap:var(--s-5);list-style:none;font-size:11px;font-weight:600;
+              letter-spacing:.18em;text-transform:uppercase;margin-left:var(--s-7)}
+  .nav__links a{opacity:.7;padding-bottom:2px;border-bottom:1px solid transparent}
+  .nav__links a:hover{opacity:1}
+  .nav__links a[aria-current="true"]{opacity:1;border-bottom-color:currentColor}
+  .nav__links[data-for]{display:none}
+  .nav__links.is-on{display:flex}
+
+  .switch{display:flex;margin-left:auto;border:1px solid rgba(var(--offwhite-rgb),.45);border-radius:2px;overflow:hidden}
+  .switch__b{appearance:none;background:none;border:0;cursor:pointer;font:inherit;
+             font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+             padding:6px var(--s-4);opacity:.75}
+  .switch__b[aria-selected="true"]{background:var(--lead);color:var(--offwhite);opacity:1}
+  .nav.is-stuck{background:var(--paper);border-bottom:var(--hairline)}
+  .nav.is-stuck a,.nav.is-stuck span,.nav.is-stuck button{color:var(--ink)}
+  .nav.is-stuck .switch{border-color:rgba(var(--ink-rgb),.3)}
+  .nav.is-stuck .switch__b[aria-selected="true"]{background:var(--lead);color:var(--offwhite)}
+
+  .view[data-v]{display:none}
+  #site[data-view="rooms"] .view[data-v="rooms"]{display:block}
+  #site[data-view="investor"] .view[data-v="investor"]{display:block}
+  section[id],header[id]{scroll-margin-top:96px}
+  .cited{font-style:italic}
+  .btn--ghost{background:none;color:var(--ink);border:1px solid var(--ink)}
+
+  /* the customer page reads as a site, so it gets the components a site has: a hero with two
+     buttons, a row of three plain cards, a question list and a contact block. */
+  .hero__cta{display:flex;gap:var(--s-4);flex-wrap:wrap;margin-top:var(--s-7)}
+  .btn--light{background:none;color:var(--offwhite);border:1px solid rgba(var(--offwhite-rgb),.6)}
+  .dark .btn--light{border-color:rgba(var(--offwhite-rgb),.6)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-7);margin-top:var(--s-8)}
+  .card{border-top:2px solid var(--ink);padding-top:var(--s-4)}
+  .card h3{font-size:21px}
+  .card p{margin-top:var(--s-3);font-size:16px;max-width:38ch}
+  .qa{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s-7) var(--s-8);margin-top:var(--s-8);
+      border-top:2px solid var(--ink);padding-top:var(--s-6)}
+  .q h3{font-size:18px;font-weight:600;letter-spacing:0;max-width:30ch}
+  .q p{margin-top:var(--s-3);font-size:15px;line-height:1.55;max-width:44ch;color:var(--text-quiet)}
+  .contact{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s-6);margin-top:var(--s-7);
+           border-top:2px solid var(--ink);padding-top:var(--s-5)}
+  .contact__l{display:block;margin-top:var(--s-2);font-size:19px;font-weight:600;border-bottom:1px solid var(--lead)}
+  .contact p{margin-top:var(--s-3);font-size:15px;color:var(--text-quiet);max-width:34ch}
+
+  /* product, given the room it deserves: one piece at full width, then the rest as tiles. */
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-6) var(--s-5)}
+  .tiles figure{margin:0}
+  .tiles img{aspect-ratio:1/1;height:auto}
+  .tiles figcaption{margin-top:var(--s-3);font-size:15px;font-weight:600;line-height:1.3}
+  .tiles figcaption span{display:block;margin-top:2px;font-size:13px;font-weight:400;
+                         color:rgba(var(--offwhite-rgb),.6)}
+  .strip{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s-6);
+         border-top:2px solid var(--ink);padding-top:var(--s-5);flex-wrap:wrap}
+
+  /* the opening is a story rather than a statement, so it is set as one: three lines at reading
+     size but with the air of display type, and a quiet fourth line that is the promise under it. */
+  .h1--long{font-size:clamp(30px,3.9vw,56px);max-width:22ch;letter-spacing:-.018em}
+
+  /* the opening story sits on ink beside a photograph, at the size of something read aloud. */
+  .morning{display:grid;grid-template-columns:1fr 1fr;background:var(--ink);color:var(--offwhite);min-height:78vh}
+  .morning__t{display:flex;flex-direction:column;justify-content:center;padding:var(--s-9) clamp(24px,5vw,80px)}
+  .morning__i{margin:0;overflow:hidden}
+  .morning__i img{width:100%;height:100%;object-fit:cover}
+  .story{font-size:clamp(21px,1.9vw,27px);line-height:1.38;max-width:30ch;margin-top:var(--s-6);
+         letter-spacing:-.012em;text-wrap:balance;color:rgba(var(--offwhite-rgb),.92)}
+  .story:first-child{margin-top:0}
+  .story--end{color:var(--cedar)}
+  .story__note{margin-top:var(--s-8);font-size:15px;color:rgba(var(--offwhite-rgb),.6);max-width:40ch}
+
   .flag{position:fixed;bottom:0;left:0;right:0;z-index:95;background:var(--lead);color:var(--offwhite);
         font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;padding:6px var(--w);text-align:center}
 
@@ -58,7 +129,7 @@
 
   /* ---- hero: the mark sits on the picture with no carrier ---- */
   .hero{position:relative;height:100vh;min-height:620px;overflow:hidden}
-  .hero .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(var(--ink-rgb),.62) 0%,rgba(var(--ink-rgb),.06) 46%,rgba(var(--ink-rgb),.44) 100%)}
+  .hero .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(var(--ink-rgb),.74) 0%,rgba(var(--ink-rgb),.34) 30%,rgba(var(--ink-rgb),.06) 58%,rgba(var(--ink-rgb),.40) 100%)}
   /* the mark sits top left, clear of the line. Type never sits on type (DESIGN_TOKENS 2.3). */
   .hero__mk{position:absolute;left:var(--w);top:calc(var(--s-9) + var(--s-5));width:min(15vw,168px)}
   .hero__mk img{width:100%;height:auto}
@@ -144,7 +215,14 @@
 
   @media(max-width:880px){
     .wrap{padding-left:18px;padding-right:18px} /* sides only: a shorthand here zeroed every .sec wrap on phones */
-    .nav{padding:var(--s-4) 18px} .nav__links{display:none}
+    .nav{padding:var(--s-3) 18px}
+    .nav__in{gap:var(--s-3)}
+    .nav__links{order:3;width:100%;margin-left:0;gap:var(--s-4);overflow-x:auto;
+                -webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+    .nav__links::-webkit-scrollbar{display:none}
+    .nav__links li{flex:none}
+    .switch{margin-left:auto}
+    section[id],header[id]{scroll-margin-top:120px}
     .duo,.trio,.split,.split--wide,.two,.planks{grid-template-columns:1fr}
     .stages li{grid-template-columns:34px 1fr;gap:var(--s-4)}
     .trio--small{grid-template-columns:repeat(3,1fr)} .trio--small figure{aspect-ratio:2/3}
@@ -185,6 +263,7 @@
              border-bottom:2px solid var(--ink)}
   .ledger td:last-child,.ledger th:last-child{text-align:right;padding-right:0;white-space:nowrap}
   .ledger tr:last-child td{border-bottom:2px solid var(--ink);font-weight:600}
+  .ledger tr[style*="400"] td{font-weight:400}
   .dark .ledger th{color:rgba(var(--offwhite-rgb),.6);border-bottom-color:var(--offwhite)}
   .dark .ledger td{border-bottom-color:rgba(var(--offwhite-rgb),.25)}
   .dark .ledger tr:last-child td{border-bottom-color:var(--offwhite)}
@@ -346,6 +425,10 @@
   /* the new image components, last so they win */
   @media(max-width:880px){
     .details,.pieces{grid-template-columns:repeat(2,1fr);gap:var(--s-6) var(--s-4)}
+    .cards,.qa,.contact{grid-template-columns:1fr;gap:var(--s-6)}
+    .morning{grid-template-columns:1fr}
+    .morning__i{aspect-ratio:4/3}
+    .tiles{grid-template-columns:repeat(2,1fr);gap:var(--s-5) var(--s-4)}
     .board{grid-template-columns:repeat(3,1fr);gap:var(--s-4) var(--s-2)}
     .board img{aspect-ratio:3/5}
     .wide{aspect-ratio:4/3}
@@ -355,23 +438,242 @@
   @media(max-width:420px){
     .details figcaption,.pieces p{font-size:14px}
   }
-</style></head><body>
+</style>
 
-<nav class="nav">
-  <a class="nav__brand" href="#top"><span class="bn">Marlow</span></a>
-  <ul class="nav__links">
-    <li><a href="#ch1">The room</a></li>
-    <li><a href="#ch2">The market</a></li>
-    <li><a href="#ch3">The work</a></li>
-    <li><a href="#ch4">The field</a></li>
-    <li><a href="#ch5">The business</a></li>
-    <li><a href="#ch6">The plan</a></li>
-  </ul>
-  <span class="nav__brand" style="font-size:11px;letter-spacing:.18em">Investor overview</span>
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <a class="nav__brand" href="#top"><span class="bn">Marlow</span></a>
+    <ul class="nav__links" data-for="rooms">
+      <li><a href="#rooms2">Two rooms</a></li>
+      <li><a href="#pieces">The pieces</a></li>
+      <li><a href="#materials">Materials</a></li>
+      <li><a href="#howitworks">How it works</a></li>
+      <li><a href="#costs">What it costs</a></li>
+      <li><a href="#care">Care</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <ul class="nav__links" data-for="investor">
+      <li><a href="#why">The market</a></li>
+      <li><a href="#field">The field</a></li>
+      <li><a href="#brandread">The brand read</a></li>
+      <li><a href="#money">The business</a></li>
+      <li><a href="#raise">The raise</a></li>
+      <li><a href="#plan">The plan</a></li>
+    </ul>
+    <div class="switch" role="tablist" aria-label="Which version of this page">
+      <button class="switch__b" type="button" role="tab" data-go="rooms" aria-selected="true">Customer</button>
+      <button class="switch__b" type="button" role="tab" data-go="investor" aria-selected="false">Investor</button>
+    </div>
+  </div>
 </nav>
+
+<div id="site" data-view="rooms">
+<div class="view" data-v="rooms">
 
 <header class="hero" id="top">
   <img src="assets/render_gym-opens-to-the-garden.jpg" alt="">
+  <div class="veil"></div>
+  <div class="hero__mk"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg" alt="Marlow"></div>
+  <div class="hero__foot">
+    <div>
+      <h1 class="h1--long" style="max-width:18ch">Somewhere you want to be at six in the&nbsp;morning.</h1>
+      <p class="hero__deck">Iron, heat and cold water thirty seconds apart, in a room as good as the rest of the&nbsp;house.</p>
+      <div class="hero__cta">
+        <a class="btn" href="#contact">Speak to someone</a>
+        <a class="btn btn--light" href="#costs">What a room costs</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="bleed wide"><img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg" alt=""></div>
+
+<!-- THE MORNING -->
+<section class="bleed morning" id="morning">
+  <div class="morning__t">
+    <p class="story">Six in the morning. You open the door and it smells of cedar, because the wall is cedar and nobody sprayed&nbsp;anything.</p>
+    <p class="story">An hour with the bar. Ten minutes in the sauna, thirty seconds in the cold water, then a chair by the window and a glass of&nbsp;water.</p>
+    <p class="story story--end">Upstairs by half past seven, and the room looks like nobody was&nbsp;in it.</p>
+    <p class="story__note">Every piece in here was chosen for this room, and we will tell you the&nbsp;reason&nbsp;for&nbsp;each&nbsp;one.</p>
+  </div>
+  <figure class="morning__i"><img loading="lazy" decoding="async" src="assets/render_pommel-bench-and-towels.jpg" alt=""></figure>
+</section>
+
+
+<!-- THE TWO ROOMS -->
+<section class="sec wrap" id="rooms2">
+  <div class="eyb">Two rooms</div>
+  <h2 style="max-width:20ch">Two rooms, thirty seconds&nbsp;apart.</h2>
+  <div class="two" style="margin-top:var(--s-8)">
+    <div>
+      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_the-long-room.jpg" alt=""></figure>
+      <h3 style="margin-top:var(--s-5)">Performance</h3>
+      <p style="margin-top:var(--s-3);max-width:40ch">A platform that takes a dropped bar quietly. Oak and blackened steel in place of powder coat. Whatever cardio you will actually&nbsp;use.</p>
+      <p class="cap" style="margin-top:var(--s-4)">$60,000 to&nbsp;$250,000</p>
+    </div>
+    <div>
+      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_sauna-cedar.jpg" alt=""></figure>
+      <h3 style="margin-top:var(--s-5)">Restoration</h3>
+      <p style="margin-top:var(--s-3);max-width:40ch">Sauna, cold plunge and steam where the house will carry them. Cedar, honed limestone, linen, and somewhere to sit&nbsp;afterwards.</p>
+      <p class="cap" style="margin-top:var(--s-4)">$40,000 to&nbsp;$200,000</p>
+    </div>
+  </div>
+</section>
+
+
+<div class="bleed solo solo--light" style="margin-top:var(--s-2)">
+  <img loading="lazy" decoding="async" src="assets/render_rest-corner-by-the-sauna.jpg" alt="" style="object-position:50% 70%">
+  <div class="lay"><div>
+    <h2>Heat, then cold, then twenty minutes of sitting&nbsp;still.</h2>
+  </div></div>
+</div>
+
+
+<!-- THE PIECES -->
+<section class="sec dark" id="pieces" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="eyb">The pieces</div>
+    <h2 style="max-width:18ch">Made for the&nbsp;room.</h2>
+    <p class="lede" style="margin-top:var(--s-6);max-width:46ch">The rack, the bench and the wall the equipment hangs on are drawn for your house. Everything else we buy from people who already make it&nbsp;well.</p>
+  </div>
+  <div class="bleed" style="margin-top:var(--s-8)"><img loading="lazy" decoding="async" src="assets/render_leather-dumbbells.jpg" alt="" style="width:100%;height:min(74vh,720px);object-fit:cover"></div>
+  <div class="wrap" style="padding-top:var(--s-7);padding-bottom:var(--s-9)">
+    <div class="tiles">
+      <figure><img loading="lazy" decoding="async" src="assets/render_barbell-and-plates.jpg" alt=""><figcaption>Rack and plates<span>White oak, blackened steel</span></figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="assets/render_kettlebells-on-oak-shelf.jpg" alt=""><figcaption>Kettlebells<span>Cast iron, leather handles</span></figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="assets/render_leather-medicine-balls.jpg" alt=""><figcaption>Medicine balls<span>Stitched leather</span></figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="assets/render_bench-and-wood-dumbbells.jpg" alt=""><figcaption>Bench<span>Cognac leather on oak</span></figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="assets/render_jump-rope-on-travertine.jpg" alt=""><figcaption>Rope<span>Braided leather, turned oak</span></figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg" alt=""><figcaption>Rings<span>Ash, leather, blackened steel</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+
+<!-- MATERIALS -->
+<section class="sec wrap" id="materials">
+  <div class="eyb">Materials</div>
+  <h2 style="max-width:22ch">Every material in here ages&nbsp;well.</h2>
+  <div class="split split--wide" style="margin-top:var(--s-6)">
+    <div>
+      <p class="lede">Limewash plaster, rift sawn white oak, honed limestone, western red cedar, wool, linen, leather, waxed&nbsp;iron.</p>
+      <p style="margin-top:var(--s-5)">No powder coat, no vinyl, no moulded plastic. Filtered water in the room, and something green and alive in every&nbsp;one.</p>
+      <p style="margin-top:var(--s-5)">It smells of cedar, leather, bergamot and vetiver, because a room has a smell whether anybody chose it or not. Eucalyptus in the steam. Hinoki on the sauna bench if you want&nbsp;it.</p>
+    </div>
+    <div></div>
+  </div>
+<div class="details">
+    <figure><img loading="lazy" decoding="async" src="assets/render_floor-brass-strip.jpg" alt=""><figcaption><b>Floor.</b> Where the rubber meets the oak, a brass strip set flush with both, so there is nothing to catch a toe&nbsp;on.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_oak-joinery.jpg" alt=""><figcaption><b>Rack.</b> A through tenon. Oak joined to oak, the way a table gets&nbsp;made.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_bench-edge-stitched.jpg" alt=""><figcaption><b>Bench.</b> Leather over a rounded oak edge, so nothing presses into the back of a&nbsp;leg.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_turned-oak-dumbbell-end.jpg" alt=""><figcaption><b>Handle.</b> Turned oak, a bronze ring, a leather inlay. It is the part you look at between&nbsp;sets.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_leather-strap-and-ring.jpg" alt=""><figcaption><b>Rings.</b> A blackened steel ring on a riveted leather strap. Both wear in, and neither&nbsp;chips.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_oak-meets-plaster.jpg" alt=""><figcaption><b>Wall.</b> Where the oak frame meets the plaster, a shadow gap in place of a trim&nbsp;piece.</figcaption></figure>
+  </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="sec wrap" id="howitworks">
+  <div class="eyb">How it works</div>
+  <h2 style="max-width:20ch">Four steps, two of them&nbsp;yours.</h2>
+  <ol class="stages">
+    <li><div><h3>An hour with&nbsp;you</h3><p>What you actually do in a week, and who else in the house will&nbsp;use&nbsp;the&nbsp;room.</p></div></li>
+    <li><div><h3>A drawing and one&nbsp;price</h3><p>Plans, elevations, a render, and a written reason for every&nbsp;piece.</p></div></li>
+    <li><div><h3>The page your builder&nbsp;needs</h3><p>Circuits, amperage, blocking and floor boxes, in with the rough&nbsp;in.</p></div></li>
+    <li><div><h3>Our crew, then a&nbsp;morning</h3><p>Installed into a finished house, walked through with you, finished inside forty eight&nbsp;hours.</p></div></li>
+  </ol>
+</section>
+
+
+<!-- WHAT IT COSTS -->
+<section class="sec wrap" id="costs">
+  <div class="eyb">What it costs</div>
+  <h2 style="max-width:20ch">Where the money&nbsp;goes.</h2>
+  <table class="ledger">
+    <tr><th>What you are paying for</th><th>Range</th></tr>
+    <tr><td><strong>The design.</strong> Paid first, earned whether or not the room gets&nbsp;built.</td><td>$7,500 to&nbsp;$35,000</td></tr>
+    <tr><td><strong>The gym.</strong> Platform, rack, bench, the made pieces and the&nbsp;cardio.</td><td>$60,000 to&nbsp;$250,000</td></tr>
+    <tr><td><strong>The wellness room.</strong> Sauna, plunge and steam, where the house will carry&nbsp;them.</td><td>$40,000 to&nbsp;$200,000</td></tr>
+    <tr style="font-weight:400"><td><strong>The care plan.</strong> From handover, for as long as&nbsp;you&nbsp;own&nbsp;the&nbsp;room.</td><td>$2,000 to $8,000 a&nbsp;year</td></tr>
+  </table>
+  <ul class="rules" style="margin-top:var(--s-7)">
+    <li><strong>What the house can&nbsp;carry.</strong> Water, drainage and power decide the wet side before taste&nbsp;does.</li>
+    <li><strong>How much is made rather than&nbsp;bought.</strong> The rack and the bench are drawn for the&nbsp;wall.</li>
+    <li><strong>Whether the house is finished&nbsp;already.</strong> Protection, smaller deliveries, and more days spent on&nbsp;site.</li>
+  </ul>
+  <p style="margin-top:var(--s-6);max-width:50ch">One number before anything is ordered, and it does not move unless you move&nbsp;something.</p>
+</section>
+
+
+<!-- CARE -->
+<section class="sec wrap" id="care">
+  <div class="split split--wide">
+    <div>
+      <div class="eyb">Care</div>
+      <h2 style="max-width:20ch">Somebody has to look after the&nbsp;water.</h2>
+      <p class="lede" style="margin-top:var(--s-6)">Sauna heater and stones, steam seals, plunge chemistry and filters, the equipment, and the technology. On a schedule, for as long as&nbsp;you&nbsp;own&nbsp;the&nbsp;room.</p>
+      <p style="margin-top:var(--s-5)">Second homes are opened and closed for the season. No owner is named, and nothing is published without your permission in&nbsp;writing.</p>
+    </div>
+    <figure><img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg" alt=""></figure>
+  </div>
+</section>
+
+
+<!-- TRADE STRIP -->
+<section class="sec--tight wrap" id="trade">
+  <div class="strip">
+    <div>
+      <div class="eyb">Designers and builders</div>
+      <p style="margin-top:var(--s-3);max-width:48ch">Spec sheets, CAD blocks and renders in your format inside two days, and a one page rough in sheet your builder drops into the plan&nbsp;set.</p>
+    </div>
+    <a class="btn btn--ghost" href="#contact">Ask for the trade pack</a>
+  </div>
+</section>
+
+
+<!-- QUESTIONS -->
+<section class="sec wrap" id="questions">
+  <div class="eyb">Questions</div>
+  <h2 style="max-width:18ch">The ones we get&nbsp;asked.</h2>
+  <div class="qa">
+    <div class="q"><h3>Do you work with my builder and my&nbsp;designer?</h3>
+      <p>Yes, and it is the easier way to do it. We work to the builder's site rules and give the designer documents she can put in her own&nbsp;presentation.</p></div>
+    <div class="q"><h3>Do you make money on the&nbsp;equipment?</h3>
+      <p>Yes. The rack can come from one company and the sauna from another, and we make a margin on what we supply. Every piece comes with the reason we chose it over the&nbsp;others.</p></div>
+    <div class="q"><h3>Can my house take a sauna and a&nbsp;plunge?</h3>
+      <p>Sometimes, and it is the first thing we check. A steam generator can want 125 amps on its own, so this is settled before anything is&nbsp;drawn.</p></div>
+    <div class="q"><h3>Will anybody know it is my&nbsp;house?</h3>
+      <p>No. No owner is named, and nothing is photographed or published without your permission in&nbsp;writing.</p></div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section class="sec" id="contact" style="background:var(--offwhite)">
+  <div class="wrap">
+    <div class="split split--wide">
+      <div>
+        <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg" alt="Marlow">
+        <h2 style="max-width:16ch">Tell us what you actually do in a&nbsp;week.</h2>
+        <p style="margin-top:var(--s-6);max-width:46ch">Not equipment, not square footage. We will tell you what the house can carry and roughly what it would cost before anybody draws&nbsp;anything.</p>
+        <!-- FILL BEFORE THIS GOES OUT: the real addresses, and whether a phone number is published. -->
+        <div class="contact">
+          <div><div class="cap">Owners</div><a class="contact__l" href="mailto:hello@marlow.studio">hello@marlow.studio</a></div>
+          <div><div class="cap">Designers and builders</div><a class="contact__l" href="mailto:trade@marlow.studio">trade@marlow.studio</a></div>
+        </div>
+        <p class="cap" style="margin-top:var(--s-6)">Dallas &middot; First rooms 2027 &middot; Every picture here is a&nbsp;drawing</p>
+      </div>
+      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_one-bell-close.jpg" alt=""></figure>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="view" data-v="investor">
+
+<header class="hero" id="topi">
+  <img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg" alt="">
   <div class="veil"></div>
   <div class="hero__mk"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg" alt="Marlow"></div>
   <div class="hero__foot">
@@ -383,29 +685,103 @@
   </div>
 </header>
 
-<section class="sec wrap" id="ch1" style="padding-bottom:0">
+
+<section class="sec wrap" id="i1" style="padding-bottom:0">
   <div class="chap">
-    <div class="chap__k"><span class="chap__n">01</span><span class="chap__of">of six</span></div>
-    <h2>The room</h2>
-    <p>What we make, what it is made of, and what it should feel like at six in the&nbsp;morning.</p>
+    <div class="chap__k"><span class="chap__n">01</span><span class="chap__of">of 4</span></div>
+    <h2>The market</h2>
+    <p>Who is building right now, and why nobody is lined up to do this part of&nbsp;it.</p>
   </div>
 </section>
 
-<!-- WHY THIS EXISTS -->
-<section class="sec wrap">
-  <div class="eyb">The premise</div>
-  <h2 style="max-width:20ch">I have never been in a home gym that felt good to be&nbsp;in.</h2>
-  <p class="lede" style="margin-top:var(--s-6)">Not one. I have been in a lot of them, in houses where every other room was thought about carefully by somebody paid well to think about it. Then you open one more door and it is a bench press, some weights and a kettlebell thrown in a&nbsp;room.</p>
-  <p style="margin-top:var(--s-5);max-width:58ch">Lit like a parking garage. In the most considered house on the street it is the one room nobody considered, and that is why the door stays&nbsp;shut.</p>
-  <p style="margin-top:var(--s-4);max-width:58ch">There is a room missing from these houses. We know how to make&nbsp;it.</p>
+<!-- WHY NOW -->
+<section class="sec wrap" id="why">
+  <div class="eyb">Why now</div>
+  <h2 style="max-width:18ch">The houses are being built right&nbsp;now.</h2>
+  <p class="lede" style="margin-top:var(--s-6)">North Texas has more money in it than it has ever had, most of it recent, and the people holding it are building. The wellness floor is already on the&nbsp;drawings.</p>
+  <div class="figs">
+    <div class="fig">
+      <div class="fig__n">85%</div>
+      <p>Growth in Dallas resident millionaires between 2014 and 2024, one of the fastest climbs in the country.
+      <span class="src">Henley &amp; Partners, USA Wealth Report 2025</span></p>
+    </div>
+    <div class="fig">
+      <div class="fig__n">10 to 25%</div>
+      <p>The premium a wellness oriented home carries over a comparable one. Demand has more than doubled in five years.
+      <span class="src">Sotheby's International Realty, 2026 Mid Year Luxury Outlook</span></p>
+    </div>
+    <div class="fig">
+      <div class="fig__n">$25M</div>
+      <p>A spec house going up on Strait Lane in Dallas lists a dedicated wellness area as part of the standard program.
+      <span class="src">Listing and local press, read 2026-09-15</span></p>
+    </div>
+  </div>
+  <p style="margin-top:var(--s-8);max-width:58ch">Nobody has to be convinced the room belongs in the house. The open question is who builds&nbsp;it.</p>
+</section>
+<div class="bleed duo">
+  <figure><img loading="lazy" decoding="async" src="assets/render_floor-going-in.jpg" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_rubber-field-going-in.jpg" alt="A rubber training field being set flush into an oak floor"></figure>
+</div>
+
+
+<section class="sec wrap" id="i2" style="padding-bottom:0">
+  <div class="chap">
+    <div class="chap__k"><span class="chap__n">02</span><span class="chap__of">of 4</span></div>
+    <h2>The field</h2>
+    <p>Every firm we could find doing this, how they all sound, and what is left that we can&nbsp;own.</p>
+  </div>
 </section>
 
-<div class="bleed wide" style="margin-top:var(--s-4)"><img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg" alt=""></div>
+<!-- THE FIELD -->
+<section class="sec wrap" id="field">
+  <div class="eyb">The field</div>
+  <h2 style="max-width:26ch">Two of our assumptions were&nbsp;wrong.</h2>
+  <p class="lede" style="margin-top:var(--s-6)">We read every firm in the country we could find doing high end home gyms and wellness rooms. Saying what we found is cheaper than having somebody find it for&nbsp;us.</p>
+  <div class="matrix">
+    <div class="matrix__row matrix__head"><div>What we assumed was open</div><div>What we found</div><div>Verdict</div></div>
+    <div class="matrix__row"><div>Design led, own crew, more than one maker</div><div class="taken" data-l="What we found">Gym Tech Fitness publishes exactly that in the New York tri-state, plus maintenance plans, across four showrooms</div><div class="taken" data-l="Verdict">Taken</div></div>
+    <div class="matrix__row"><div>Gym and wellness as one offer</div><div class="taken" data-l="What we found">Home Gyms Design, Iron House, Territory Wellness and Biofit all bundle them</div><div class="taken" data-l="Verdict">Taken</div></div>
+    <div class="matrix__row"><div>Sold through designers first</div><div data-l="What we found">Several name the trade as one audience among several. None claims it is where most of their work comes from, and nobody names audio visual companies at all</div><div class="open" data-l="Verdict">Open</div></div>
+    <div class="matrix__row"><div>A written reason per piece, and the margin disclosed</div><div data-l="What we found">Searched directly across the whole set. Nothing found. The nearest is a claim of being equipment independent</div><div class="open" data-l="Verdict">Open</div></div>
+    <div class="matrix__row"><div>A real service contract on these rooms</div><div data-l="What we found">A national franchise already services gym equipment on contract, so the gym side is taken. Nothing found covers a sauna, a steam room or a plunge</div><div class="open" data-l="Verdict">Half open</div></div>
+  </div>
+  <p class="cap" style="margin-top:var(--s-3)">Public sources, read 2026-09-15. Full working in the&nbsp;appendix.</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">There is no national company in this category. A lot of small regional firms, mostly owner operated, plus manufacturer run design programs that can only sell one brand. The only public financial data point we could find is a three year old firm in Connecticut with $1.28M of revenue asking $795,000 for the whole&nbsp;business.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">Private equity has consolidated audio visual integration and pool service in the last two years and has not touched&nbsp;this.</p>
+  <p class="cap" style="margin-top:var(--s-3)">Snap One and Control4, and the pool service acquisition trackers, read&nbsp;2026-09-15</p>
+</section>
+<section class="sec wrap">
+  <div class="eyb">The gap</div>
+  <h2 style="max-width:26ch">Nobody has put the pieces in one&nbsp;place.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">The pieces all exist. Nobody has put them in one place: both rooms, one studio, our own crew, a rack from one company and a sauna from another, a written reason for every piece, and a care plan that covers the sauna and the plunge, not just the treadmill. Selling through the trade rather than a showroom is the sixth, and it is the one our own research supports&nbsp;least.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">The two that matter most are the written reason and the care plan. One is a trust argument nobody else can make without changing their business. The other is the difference between what this company is worth at four times earnings and at&nbsp;seven.</p>
+  <ul class="rules">
+    <li><strong>Every firm in the category writes the same&nbsp;way.</strong> Sanctuary, bespoke, elevate, elegance, one roof, world class. We wrote our refusal list before this research and it turned out to be an accurate map of the category's&nbsp;vocabulary.</li>
+    <li><strong>Nobody services the sauna or the&nbsp;plunge.</strong> Water chemistry, heaters, seals, drainage, cedar. Those systems degrade and the owner cannot fix them. That is exactly where the repeat revenue&nbsp;sits.</li>
+    <li><strong>Nobody has said out loud that they earn on what they&nbsp;specify.</strong> Every buyer in this market is quietly wondering, and nobody has&nbsp;answered.</li>
+  </ul>
+</section>
+<div class="bleed solo" style="margin-top:var(--s-2)">
+  <img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg" alt="">
+  <div class="lay"><div>
+    <h2>The systems that need looking after are the ones nobody else will&nbsp;service.</h2>
+  </div></div>
+</div>
 
-<!-- THE MARK, ONCE, EARLY -->
-<section class="wrap brandband">
-  <img loading="lazy" decoding="async" src="assets/marlow-plate-name.svg" alt="Marlow">
-  <p>Private gyms and wellness rooms, designed, supplied, installed and looked after. North Texas <span class="i">first</span>, then New York and New&nbsp;England.</p>
+
+<!-- WHAT WE SELL, AND HOW IT IS MADE -->
+<!-- ELECTRICAL -->
+<section class="sec wrap" id="power">
+  <div class="eyb">Electrical</div>
+  <h2 style="max-width:26ch">A steam room requires 125 amps on its&nbsp;own.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">That is the big generator. The small one still wants 38. A traditional sauna heater wants 30 to 50 on a circuit of its own. A commercial treadmill needs one it does not share with anything, including its neutral. The plunge needs a GFCI line and no extension cord, ever. Our read is that a full suite adds up to its own subpanel, though no code sets that threshold and we would have the electrician confirm it on the&nbsp;house.</p>
+  <figure class="inset"><img loading="lazy" decoding="async" src="assets/render_sauna-and-steam-suite.jpg" alt="A sauna, a cold plunge and a red light room off one stone corridor"></figure>
+  <p class="cap" style="margin-top:var(--s-3)">Sauna, plunge and red light off one corridor. Each is its own line on the technology&nbsp;sheet.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">So the electrical gets drawn before the framer arrives. Every room leaves the builder with a one page technology sheet: circuits and amperage, where the subpanel goes, floor boxes under the cardio, blocking in the wall for the display and the speakers, where the low voltage runs. Anything missed at that moment costs far more after the drywall. Dallas has been on the 2023 electrical code since May 2025, and the park cities are a separate check every&nbsp;time.</p>
+  <div class="spec" style="margin-top:var(--s-7)"><span>Steam generator</span><span>38 to 125A</span><span>Sauna heater</span><span>30 to 50A</span><span>Plunge</span><span class="ox">GFCI, dedicated</span></div>
+  <p class="cap" style="margin-top:var(--s-3)">Manufacturer specifications, read&nbsp;2026-09-16</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">That timing is why the audio visual companies matter to us. We draw the technology and one of their certified installers puts it in, because programming a house's control system is their trade. They are in these houses long before we would be, and nobody in this category is courting&nbsp;them.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">It gives the care plan a fifth thing to service. Firmware, network, speakers and scenes, on the same visit as the heater and the water&nbsp;chemistry.</p>
 </section>
 
 <!-- WHERE WE STAND -->
@@ -419,20 +795,6 @@
     <li><strong>We sell through designers and&nbsp;builders.</strong> They are drawing the house a year before anybody thinks about equipment, and that is when this gets&nbsp;decided.</li>
     <li><strong>Lighter and warmer than most&nbsp;gyms.</strong> The room has to sit beside the interior designer's work without fighting&nbsp;it.</li>
   </ul>
-</section>
-
-<!-- MATERIALS -->
-<section class="sec wrap">
-  <div class="split">
-    <div>
-      <div class="eyb">Materials</div>
-      <h2 style="max-width:26ch">We build these out of natural materials so they do not feel like a&nbsp;gym.</h2>
-      <p class="lede" style="margin-top:var(--s-6)">Limewash plaster on the walls, because it moves through the day instead of sitting flat. Rift sawn white oak on the floor. Honed limestone and terrazzo in the wet rooms, never polished, because polished stone and wet feet are a bad idea somebody has every&nbsp;year.</p>
-      <p style="margin-top:var(--s-5)">Leather, wool and linen where you sit down. Western red cedar in the sauna, for the smell and because it stays cool enough to lean on. Something green and alive in every&nbsp;room.</p>
-      <p style="margin-top:var(--s-4)">And a scent, because a room has one whether anybody chose it or not. Cedar, leather, bergamot,&nbsp;vetiver.</p>
-    </div>
-    <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/render_linen-niche-open.jpg" alt=""></figure>
-  </div>
 </section>
 
 <!-- CRAFT -->
@@ -477,207 +839,34 @@
   </div>
 </section>
 
-<!-- THE FEELING -->
-<section class="sec wrap">
-  <div class="split split--wide">
-    <div>
-      <div class="eyb">The feeling</div>
-      <h2>Training is hard. The room should be on your&nbsp;side.</h2>
-      <p style="margin-top:var(--s-5)">You have every reason to go back to bed, so we design for that first hour. Warm light on plaster instead of a strip light overhead. Wood you can feel the grain of. Leather wrapped handles. Music where you want&nbsp;it.</p>
-      <p style="margin-top:var(--s-4)">The test we hold everything to is whether you stay in there a few minutes longer than you meant&nbsp;to.</p>
-    </div>
-    <figure><img loading="lazy" decoding="async" src="assets/render_pommel-bench-and-towels.jpg" alt=""></figure>
-  </div>
-</section>
-
-<!-- THE TECHNOLOGY IN THE ROOM -->
-<section class="sec wrap" id="av">
-  <div class="eyb">Technology</div>
-  <h2 style="max-width:22ch">The screen disappears when it is&nbsp;off.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">On the training wall it is a mirror until you want it to be something else. In the corner where you sit afterward it holds a photograph. In the sauna, the steam room and over the plunge there is no screen at all, because no manufacturer will put a humidity rating on&nbsp;one.</p>
-  <p style="margin-top:var(--s-5);max-width:58ch">The speakers are behind the plaster, from the makers who will sign off on limewash going over them. Sealed units in the ceiling where it is wet. In the heat, transducers that turn the cedar wall itself into the speaker. The amplifiers live in a cool closet down the&nbsp;hall.</p>
-  <div class="two" style="margin-top:var(--s-8)">
-    <div class="plank">
-      <h3>Train</h3>
-      <p style="margin-top:var(--s-3)">Brighter and cooler, the light your body reads as morning. Music up. The wall becomes a screen if you want one&nbsp;there.</p>
-    </div>
-    <div class="plank">
-      <h3>Recover</h3>
-      <p style="margin-top:var(--s-3)">Warm and low, closer to an hour after sunset. Music quiet, no screen, and the keypad showing where the sauna and the plunge have got to. Nothing else asks you for&nbsp;anything.</p>
-    </div>
-  </div>
-  <p style="margin-top:var(--s-7);max-width:58ch">One keypad by the door does both, and so does the phone in your hand. It runs inside whatever system the house already has. The third scene is Off, and off is&nbsp;off.</p>
-</section>
-
-<div class="bleed solo solo--light" style="margin-top:var(--s-2)">
-  <img loading="lazy" decoding="async" src="assets/render_rest-corner-by-the-sauna.jpg" alt="" style="object-position:50% 70%">
-  <div class="lay"><div>
-    <h2>The twenty minutes afterward are the part you miss when you&nbsp;travel.</h2>
-  </div></div>
-</div>
-
-<!-- TWO HALVES -->
-<section class="sec wrap" id="halves">
-  <div class="eyb">Two halves</div>
-  <h2 style="max-width:20ch">There are two halves to this. The work, and everything after&nbsp;it.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">Health at home is not one room. There is the hour you put in, and there is the heat, the cold, the water and the sitting still that decides whether you can do it again on Thursday. Both of us have had a sauna and cold water within reach for&nbsp;years.</p>
-  <p style="margin-top:var(--s-5);max-width:58ch">So we draw both from the first meeting. The second half is the commercially serious one: growing faster, skewing older, bigger budget, and it has to be settled before the walls close, because it wants water, drainage and power the house was never drawn&nbsp;for.</p>
-  <div class="two" style="margin-top:var(--s-8)">
-    <div class="plank">
-      <h3>Performance</h3>
-      <p style="margin-top:var(--s-3)">A platform that takes a dropped bar without the whole house hearing it. A rack in white oak and brushed steel. Leather wrapped handles. Whatever cardio somebody will really get on, and none of the&nbsp;rest.</p>
-      <p style="margin-top:var(--s-4)"><strong>Sixty to two hundred and fifty thousand&nbsp;dollars.</strong></p>
-    </div>
-    <div class="plank">
-      <h3>Restoration</h3>
-      <p style="margin-top:var(--s-3)">Sauna, cold plunge and steam where the house will carry them. Cedar, honed limestone, linen, and a shower big enough to stand in without touching anything. Somewhere to sit afterward that is better than the bench you came&nbsp;off.</p>
-      <p style="margin-top:var(--s-4)"><strong>Forty to two hundred&nbsp;thousand.</strong></p>
-    </div>
-  </div>
-  <div class="spec" style="margin-top:var(--s-7)"><span>Target mix</span><span>55 performance</span><span>45 restoration</span><span>Flagships</span><span class="ox">Both</span></div>
-</section>
-
-<div class="bleed duo" style="margin-top:var(--s-2)">
-  <figure><img loading="lazy" decoding="async" src="assets/render_sauna-cedar.jpg" alt="A cedar sauna with a stone heater and a bronze bucket"></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_red-light-room.jpg" alt=""></figure>
-</div>
-
-<section class="sec wrap" id="ch2" style="padding-bottom:0">
-  <div class="chap">
-    <div class="chap__k"><span class="chap__n">02</span><span class="chap__of">of six</span></div>
-    <h2>The market</h2>
-    <p>Who is building right now, and why nobody is lined up to do this part of&nbsp;it.</p>
-  </div>
-</section>
-
-<!-- WHY NOW -->
-<section class="sec wrap" id="why">
-  <div class="eyb">Why now</div>
-  <h2 style="max-width:18ch">The houses are being built right&nbsp;now.</h2>
-  <p class="lede" style="margin-top:var(--s-6)">North Texas has more money in it than it has ever had, most of it recent, and the people holding it are building. The wellness floor is already on the&nbsp;drawings.</p>
-  <div class="figs">
-    <div class="fig">
-      <div class="fig__n">85%</div>
-      <p>Growth in Dallas resident millionaires between 2014 and 2024, one of the fastest climbs in the country.
-      <span class="src">Henley &amp; Partners, USA Wealth Report 2025</span></p>
-    </div>
-    <div class="fig">
-      <div class="fig__n">10 to 25%</div>
-      <p>The premium a wellness oriented home carries over a comparable one. Demand has more than doubled in five years.
-      <span class="src">Sotheby's International Realty, 2026 Mid Year Luxury Outlook</span></p>
-    </div>
-    <div class="fig">
-      <div class="fig__n">$25M</div>
-      <p>A spec house going up on Strait Lane in Dallas lists a dedicated wellness area as part of the standard program.
-      <span class="src">Listing and local press, read 2026-09-15</span></p>
-    </div>
-  </div>
-  <p style="margin-top:var(--s-8);max-width:58ch">Nobody has to be convinced the room belongs in the house. The open question is who builds&nbsp;it.</p>
-</section>
-
-<div class="bleed duo">
-  <figure><img loading="lazy" decoding="async" src="assets/render_floor-going-in.jpg" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_rubber-field-going-in.jpg" alt="A rubber training field being set flush into an oak floor"></figure>
-</div>
-
-<section class="sec wrap" id="ch3" style="padding-bottom:var(--s-7)">
-  <div class="chap">
-    <div class="chap__k"><span class="chap__n">03</span><span class="chap__of">of six</span></div>
-    <h2>The work</h2>
-    <p>How a room gets drawn, specified and installed, down to the&nbsp;amperage.</p>
-  </div>
-</section>
-
-<!-- HOW A ROOM GETS MADE -->
-<section class="sec dark">
-  <div class="wrap">
-    <div class="eyb">The brief</div>
-    <h2 style="max-width:22ch">Most people ask for a gym and then describe something&nbsp;else.</h2>
-    <p class="lede" style="margin-top:var(--s-6);max-width:54ch">Somebody says they want the full setup. Two conversations later it turns out they ride for forty minutes most mornings, they have a shoulder that has not been right since 2019, and the person actually in there five days a week is their&nbsp;wife.</p>
-    <p style="margin-top:var(--s-5);max-width:54ch">That second version is the room we draw. Their height sets the bar height and the shelf height. A shoulder that no longer goes overhead changes what lives on the&nbsp;wall.</p>
-    <p style="margin-top:var(--s-4);max-width:54ch">Then every piece comes with a page saying why it is that one. The rack is forty two inches instead of the usual forty eight, because the door swings left. It is not the rack we sell the most of. We write that down because we earn a margin on what we supply, and it is how anyone can tell whether a thing is in the room for their sake or for&nbsp;ours.</p>
-  </div>
-</section>
-
-<!-- THE PIECES -->
-<section class="sec wrap" id="pieces">
-  <div class="eyb">The pieces</div>
-  <h2 style="max-width:22ch">What the first six pieces are made&nbsp;of.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:54ch">Renders of what we are drawing now. Every piece uses the same short list of materials as the room it sits in, so the equipment belongs to the&nbsp;room.</p>
-  <div class="pieces">
-    <figure><img loading="lazy" decoding="async" src="assets/render_leather-dumbbells.jpg" alt="Dumbbells"><figcaption><h3>Dumbbells</h3><p>Stitched cognac leather faces on a brass&nbsp;handle.</p></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_barbell-and-plates.jpg" alt="Rack and plates"><figcaption><h3>Rack and&nbsp;plates</h3><p>White oak uprights on blackened steel feet. Plates cast in a matte burnt&nbsp;umber.</p></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_kettlebells-on-oak-shelf.jpg" alt="Kettlebells"><figcaption><h3>Kettlebells</h3><p>Cast iron with leather wrapped handles, on an oak shelf set into the&nbsp;plaster.</p></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_leather-medicine-balls.jpg" alt="Medicine balls"><figcaption><h3>Medicine balls</h3><p>Stitched leather in oxblood, cognac and&nbsp;natural.</p></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_bench-and-wood-dumbbells.jpg" alt="Bench"><figcaption><h3>Bench</h3><p>Cognac leather on white oak, with oak dumbbells kept&nbsp;underneath.</p></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_jump-rope-on-travertine.jpg" alt="Rope"><figcaption><h3>Rope</h3><p>Braided leather, turned oak handles, bronze&nbsp;collars.</p></figcaption></figure>
-  </div>
-</section>
-
-<!-- ELECTRICAL -->
-<section class="sec wrap" id="power">
-  <div class="eyb">Electrical</div>
-  <h2 style="max-width:26ch">A steam room requires 125 amps on its&nbsp;own.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">That is the big generator. The small one still wants 38. A traditional sauna heater wants 30 to 50 on a circuit of its own. A commercial treadmill needs one it does not share with anything, including its neutral. The plunge needs a GFCI line and no extension cord, ever. Our read is that a full suite adds up to its own subpanel, though no code sets that threshold and we would have the electrician confirm it on the&nbsp;house.</p>
-  <figure class="inset"><img loading="lazy" decoding="async" src="assets/render_sauna-and-steam-suite.jpg" alt="A sauna, a cold plunge and a red light room off one stone corridor"></figure>
-  <p class="cap" style="margin-top:var(--s-3)">Sauna, plunge and red light off one corridor. Each is its own line on the technology&nbsp;sheet.</p>
-  <p style="margin-top:var(--s-5);max-width:58ch">So the electrical gets drawn before the framer arrives. Every room leaves the builder with a one page technology sheet: circuits and amperage, where the subpanel goes, floor boxes under the cardio, blocking in the wall for the display and the speakers, where the low voltage runs. Anything missed at that moment costs far more after the drywall. Dallas has been on the 2023 electrical code since May 2025, and the park cities are a separate check every&nbsp;time.</p>
-  <div class="spec" style="margin-top:var(--s-7)"><span>Steam generator</span><span>38 to 125A</span><span>Sauna heater</span><span>30 to 50A</span><span>Plunge</span><span class="ox">GFCI, dedicated</span></div>
-  <p class="cap" style="margin-top:var(--s-3)">Manufacturer specifications, read&nbsp;2026-09-16</p>
-  <p style="margin-top:var(--s-7);max-width:58ch">That timing is why the audio visual companies matter to us. We draw the technology and one of their certified installers puts it in, because programming a house's control system is their trade. They are in these houses long before we would be, and nobody in this category is courting&nbsp;them.</p>
-  <p style="margin-top:var(--s-5);max-width:58ch">It gives the care plan a fifth thing to service. Firmware, network, speakers and scenes, on the same visit as the heater and the water&nbsp;chemistry.</p>
-</section>
-
-<section class="sec wrap" id="ch4" style="padding-bottom:0">
-  <div class="chap">
-    <div class="chap__k"><span class="chap__n">04</span><span class="chap__of">of six</span></div>
-    <h2>The field</h2>
-    <p>Every firm we could find doing this, the two assumptions of ours that were wrong, and what is left that we can&nbsp;own.</p>
-  </div>
-</section>
-
-<!-- THE FIELD -->
-<section class="sec wrap" id="field">
-  <div class="eyb">The field</div>
-  <h2 style="max-width:26ch">We went looking for who already does this, and two of our assumptions were&nbsp;wrong.</h2>
-  <p class="lede" style="margin-top:var(--s-6)">We read every firm in the country we could find doing high end home gyms and wellness rooms. Saying what we found is cheaper than having somebody find it for&nbsp;us.</p>
+<!-- THE BRAND READ -->
+<section class="sec wrap" id="brandread">
+  <div class="eyb">The brand read</div>
+  <h2 style="max-width:26ch">Everybody in this category writes the same&nbsp;sentence.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">We read every rival's site and social the same week we read their business models. The field splits into four looks, and the one we would land in by default is the crowded&nbsp;one.</p>
   <div class="matrix">
-    <div class="matrix__row matrix__head"><div>What we assumed was open</div><div>What we found</div><div>Verdict</div></div>
-    <div class="matrix__row"><div>Design led, own crew, several makers</div><div class="taken" data-l="What we found">Gym Tech Fitness publishes exactly that in the New York tri-state, plus maintenance plans, across four showrooms</div><div class="taken" data-l="Verdict">Taken</div></div>
-    <div class="matrix__row"><div>Gym and wellness as one offer</div><div class="taken" data-l="What we found">Home Gyms Design, Iron House, Territory Wellness and Biofit all bundle them</div><div class="taken" data-l="Verdict">Taken</div></div>
-    <div class="matrix__row"><div>Sold through designers first</div><div data-l="What we found">Several name the trade as one audience among several. None claims it is where most of their work comes from, and nobody names audio visual companies at all</div><div class="open" data-l="Verdict">Open</div></div>
-    <div class="matrix__row"><div>A written reason per piece, and the margin disclosed</div><div data-l="What we found">Searched directly across the whole set. Nothing found. The nearest is a claim of being equipment independent</div><div class="open" data-l="Verdict">Open</div></div>
-    <div class="matrix__row"><div>A real service contract on these rooms</div><div data-l="What we found">A national franchise already services gym equipment on contract, so the gym side is taken. Nothing found covers a sauna, a steam room or a plunge</div><div class="open" data-l="Verdict">Half open</div></div>
+    <div class="matrix__row matrix__head"><div>The look</div><div>Who</div><div>What it gets them</div></div>
+    <div class="matrix__row"><div>Retail</div><div data-l="Who">Gym Tech Fitness, Ardent. Navy and white, product grids, a sale&nbsp;on.</div><div data-l="What it gets them" class="taken">Volume and a showroom&nbsp;address</div></div>
+    <div class="matrix__row"><div>Consultancy</div><div data-l="Who">Fitness Design Group, Fitness Visio. White, credentials, client&nbsp;logos.</div><div data-l="What it gets them" class="taken">Institutional&nbsp;authority</div></div>
+    <div class="matrix__row"><div>Family</div><div data-l="Who">Territory Wellness, in Dallas. Warm, homey, kids in the&nbsp;copy.</div><div data-l="What it gets them" class="taken">The whole household, sold direct</div></div>
+    <div class="matrix__row"><div>Editorial craft</div><div data-l="Who">Home Gyms Design, Sportova, Iron House, and the makers&nbsp;themselves.</div><div data-l="What it gets them" class="open">Where we would sit by&nbsp;default</div></div>
   </div>
-  <p class="cap" style="margin-top:var(--s-3)">Public sources, read 2026-09-15. Full working in the&nbsp;appendix.</p>
-  <p style="margin-top:var(--s-7);max-width:58ch">There is no national company in this category. A lot of small regional firms, mostly owner operated, plus manufacturer run design programs that can only sell one brand. The only public financial data point we could find is a three year old firm in Connecticut with $1.28M of revenue asking $795,000 for the whole&nbsp;business.</p>
-  <p style="margin-top:var(--s-5);max-width:58ch">Private equity has consolidated audio visual integration and pool service in the last two years and has not touched&nbsp;this.</p>
-  <p class="cap" style="margin-top:var(--s-3)">Snap One and Control4, and the pool service acquisition trackers, read&nbsp;2026-09-15</p>
-</section>
-
-<section class="sec wrap">
-  <div class="eyb">The gap</div>
-  <h2 style="max-width:26ch">The gap is smaller than we assumed, and more&nbsp;specific.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">The pieces all exist. Nobody has put them in one place: both rooms, one studio, our own crew, several makers, a written reason for every piece, and a care plan that covers the sauna and the plunge, not just the treadmill. Selling through the trade rather than a showroom is the sixth, and it is the one our own research supports&nbsp;least.</p>
-  <p style="margin-top:var(--s-5);max-width:58ch">The two that matter most are the written reason and the care plan. One is a trust argument nobody else can make without changing their business. The other is the difference between what this company is worth at four times earnings and at&nbsp;seven.</p>
+  <p class="cap" style="margin-top:var(--s-3)">Company sites and social accounts, read&nbsp;2026-09-21</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">Two of them are already close to what we want to say. Sportova writes that a fitness space should be <span class="cited">&ldquo;as considered and beautiful as every other part of your home&rdquo;</span>. Territory Wellness writes about fitting <span class="cited">&ldquo;your space, your family, and the way you actually move&rdquo;</span>. Nobody has proved either sentence in detail, which is the only way this idea belongs to&nbsp;anybody.</p>
   <ul class="rules">
-    <li><strong>Every firm in the category writes the same&nbsp;way.</strong> Sanctuary, bespoke, elevate, elegance, one roof, world class. We wrote our refusal list before this research and it turned out to be an accurate map of the category's&nbsp;vocabulary.</li>
-    <li><strong>Nobody services the sauna or the&nbsp;plunge.</strong> Water chemistry, heaters, seals, drainage, cedar. Those systems degrade and the owner cannot fix them. That is exactly where the repeat revenue&nbsp;sits.</li>
-    <li><strong>Nobody has said out loud that they earn on what they&nbsp;specify.</strong> Every buyer in this market is quietly wondering, and nobody has&nbsp;answered.</li>
+    <li><strong>Show the room in&nbsp;use.</strong> The editorial firms photograph empty rooms and the retail firms photograph people mid set. Nobody shows the traces: the towel on the bench, the cup by the chair, the plunge lid open at six in the&nbsp;morning.</li>
+    <li><strong>Both halves in one&nbsp;frame.</strong> Nobody photographs the gym and the sauna as one room, or the walk between&nbsp;them.</li>
+    <li><strong>Oxide, not pale&nbsp;wood.</strong> Every rival in our group leans on the same bleached oak. Our iron and oxide are rare in the field, which is a reason to keep&nbsp;them.</li>
+    <li><strong>The equipment is not the&nbsp;hero.</strong> Rivals put a machine in the first picture. We put the room, the light, and the leather on a&nbsp;handle.</li>
+    <li><strong>Say the business out&nbsp;loud.</strong> Not one firm in the set discloses that it earns on the equipment it recommends. We&nbsp;do.</li>
   </ul>
+  <p class="cap" style="margin-top:var(--s-3)">Full audit in the appendix. Follower counts could not be read for any account and are not claimed&nbsp;here.</p>
 </section>
 
 
-<div class="bleed solo" style="margin-top:var(--s-2)">
-  <img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg" alt="">
-  <div class="lay"><div>
-    <h2>The systems that need looking after are the ones nobody else will&nbsp;service.</h2>
-  </div></div>
-</div>
-
-<section class="sec wrap" id="ch5" style="padding-bottom:var(--s-7)">
+<section class="sec wrap" id="i3" style="padding-bottom:0">
   <div class="chap">
-    <div class="chap__k"><span class="chap__n">05</span><span class="chap__of">of six</span></div>
+    <div class="chap__k"><span class="chap__n">03</span><span class="chap__of">of 4</span></div>
     <h2>The business</h2>
     <p>Where the money comes from, what it is worth at Year 5, and what we are asking&nbsp;for.</p>
   </div>
@@ -687,7 +876,7 @@
 <section class="sec dark" id="money">
   <div class="wrap">
     <div class="eyb">Revenue</div>
-    <h2 style="max-width:20ch">Four ways one room pays, and the last one never&nbsp;stops.</h2>
+    <h2 style="max-width:20ch">Four ways one room&nbsp;pays.</h2>
     <p class="lede" style="margin-top:var(--s-6);max-width:54ch">We are copying what the good audio visual companies did twenty years ago. Sell to the designers and builders, get written into the plans early, and look after the house for as long as the family owns&nbsp;it.</p>
     <table class="ledger">
       <tr><th>Where the money comes from</th><th>On a $120,000 room</th></tr>
@@ -700,12 +889,10 @@
     <p style="margin-top:var(--s-6);max-width:54ch">That room runs above the 34 to 38 percent we hold the company to, and it should. A project with both rooms in it carries the design fee and the install better than a single gym, and the blended number has to live with all&nbsp;three.</p>
   </div>
 </section>
-
-
 <!-- WHAT YOU ARE UNDERWRITING -->
 <section class="sec wrap">
   <div class="eyb">Underwriting</div>
-  <h2 style="max-width:24ch">The honest range is lower than the plan's, and here is the&nbsp;arithmetic.</h2>
+  <h2 style="max-width:24ch">The honest range is lower than the&nbsp;plan's.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">Everything above is a good small business. What it is worth turns on the multiple, and the multiple moves on things that can be named and priced. Three of them we can reach. Two we cannot, and we would rather be the ones to say&nbsp;which.</p>
   <table class="ledger" style="margin-top:var(--s-7)">
     <tr><th>What moves the multiple</th><th>Worth</th></tr>
@@ -733,7 +920,6 @@
   <p style="margin-top:var(--s-8);max-width:58ch">What is left is the part that compounds. Every room handed over keeps paying while the family owns the house, and the number of rooms we look after grows even in a year when we sell nothing new. That is worth having. It is not worth adding two to the multiple by Year&nbsp;5.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">The open question is not demand. The houses are being drawn for the room whether or not we build it. It is whether this becomes a contract business or stays a project business, and every decision in the plan is aimed at&nbsp;that.</p>
 </section>
-
 <!-- THE NUMBERS -->
 <section class="sec dark">
   <div class="wrap">
@@ -754,11 +940,10 @@
     </div>
   </div>
 </section>
-
 <!-- THE RAISE -->
 <section class="sec wrap" id="raise">
   <div class="eyb">The raise</div>
-  <h2 style="max-width:22ch">Six hundred thousand, and the two years it has to&nbsp;last.</h2>
+  <h2 style="max-width:22ch">Six hundred thousand for the two years before&nbsp;breakeven.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">The Year 5 line is the easy part. What is worth reading is the two years before the business stops losing money, because that is the only stretch the money is&nbsp;needed.</p>
   <table class="bridge">
     <tr><th>Texas first</th><th>Projects</th><th>Project revenue</th><th>Care plans</th><th>Total</th><th>EBITDA</th></tr>
@@ -786,8 +971,6 @@
   <p style="margin-top:var(--s-5);max-width:58ch">Whether this needs a second round: on these numbers, no. Year 3 pays for itself and Year 4 pays the hole back. A second round would mean the Northeast moving earlier than Year 2 or a third crew sooner than the table carries, and both are decisions we would bring to you rather than&nbsp;discover.</p>
   <p class="open-q">Still ours to settle, and we would rather say so than put a number on a page we have not earned: the structure, the percentage, and what a return looks like. The amount and what it does are above. The terms are a&nbsp;conversation.</p>
 </section>
-
-
 <div class="bleed solo" style="margin-top:var(--s-2)">
   <img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg" alt="">
   <div class="lay"><div>
@@ -795,9 +978,10 @@
   </div></div>
 </div>
 
-<section class="sec wrap" id="ch6" style="padding-bottom:0">
+
+<section class="sec wrap" id="i4" style="padding-bottom:0">
   <div class="chap">
-    <div class="chap__k"><span class="chap__n">06</span><span class="chap__of">of six</span></div>
+    <div class="chap__k"><span class="chap__n">04</span><span class="chap__of">of 4</span></div>
     <h2>The plan</h2>
     <p>What year one is for, what we would ask about it, and the two people doing&nbsp;it.</p>
   </div>
@@ -827,7 +1011,6 @@
     </div></li>
   </ol>
 </section>
-
 <!-- RISKS -->
 <section class="sec wrap">
   <div class="eyb">Risks</div>
@@ -845,15 +1028,13 @@
     <li><strong>Somebody assembles this before we&nbsp;do.</strong> The New York firm already has most of the gym side. If it added wellness and turned to the trade it would be in front of us, and it has four showrooms and we have&nbsp;none.</li>
   </ul>
 </section>
-
 <div class="bleed solo" style="margin-top:var(--s-2)">
   <img loading="lazy" decoding="async" src="assets/render_pavilion-at-night.jpg" alt="">
   <div class="mk-sm"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg" alt="Marlow"></div>
   <div class="lay"><div>
-    <h2>It is still on at ten at night, which is the whole&nbsp;point.</h2>
+    <h2>It is still on at ten at&nbsp;night.</h2>
   </div></div>
 </div>
-
 <!-- US -->
 <section class="sec wrap" id="us">
   <div class="split">
@@ -870,8 +1051,6 @@
     </div>
   </div>
 </section>
-
-
 <!-- CLOSE -->
 <section class="sec" style="background:var(--offwhite)">
   <div class="wrap">
@@ -891,6 +1070,8 @@
   </div>
 </section>
 
+</div>
+</div>
 <footer class="pagefoot wrap">
   <div class="two" style="align-items:flex-end">
     <div>
@@ -901,5 +1082,67 @@
     <p class="cap" style="text-align:right">Name and figures are working drafts. No owner named. No room published without written&nbsp;permission.</p>
   </div>
 </footer>
+
+
+<script>
+(function(){
+  var site=document.getElementById('site'), nav=document.getElementById('nav');
+  var lists=[].slice.call(nav.querySelectorAll('.nav__links'));
+  var btns=[].slice.call(nav.querySelectorAll('.switch__b'));
+  var marks=[], links={}, ticking=false;
+
+  /* The bar is a table of contents, so the lit link is the section you are reading: the last one
+     whose top has passed the bar. An IntersectionObserver was tried first and lit the wrong link,
+     because it compares how much of each section is on screen and a short section always beats a
+     long one. */
+  function index(){
+    var view=site.dataset.view;
+    links={}; marks=[];
+    lists.forEach(function(l){
+      if(l.dataset.for!==view) return;
+      [].slice.call(l.querySelectorAll('a')).forEach(function(a){
+        var id=a.getAttribute('href').slice(1), el=document.getElementById(id);
+        if(!el) return;
+        links[id]=a; marks.push({id:id, el:el, y:el.getBoundingClientRect().top+window.scrollY});
+      });
+    });
+    marks.sort(function(x,y){return x.y-y.y;});   // document order, whatever order the bar lists
+    lit();
+  }
+  function lit(){
+    if(!marks.length) return;
+    var line=window.scrollY+nav.offsetHeight+44, cur=null;  // clears the sections own scroll-margin
+    marks.forEach(function(m){ if(m.el.getBoundingClientRect().top+window.scrollY<=line) cur=m.id; });
+    Object.keys(links).forEach(function(k){ links[k].setAttribute('aria-current', k===cur?'true':'false'); });
+  }
+  function stick(){
+    var hero=site.querySelector('.view[data-v="'+site.dataset.view+'"] .hero');
+    var h=hero?hero.getBoundingClientRect().height-nav.offsetHeight:0;
+    nav.classList.toggle('is-stuck', window.scrollY>Math.max(h,40));
+  }
+  function frame(){ if(ticking) return; ticking=true;
+    requestAnimationFrame(function(){ stick(); lit(); ticking=false; }); }
+
+  function show(view, reset){
+    site.dataset.view=view;
+    btns.forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.go===view)); });
+    lists.forEach(function(l){ l.classList.toggle('is-on', l.dataset.for===view); });
+    if(reset){ history.replaceState(null,'', view==='investor'?'#investors':'#rooms'); window.scrollTo(0,0); }
+    index(); stick();
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.go, true); }); });
+  window.addEventListener('scroll', frame, {passive:true});
+  window.addEventListener('resize', function(){ index(); stick(); });
+
+  document.addEventListener('click', function(e){
+    var a=e.target.closest && e.target.closest('a[href^="#"]'); if(!a) return;
+    var id=a.getAttribute('href').slice(1); if(!id) return;
+    var t=document.getElementById(id); if(!t) return;
+    var v=t.closest('.view'); if(v && v.dataset.v!==site.dataset.view){ show(v.dataset.v,false); }
+  });
+
+  show((location.hash==='#investors'||location.hash==='#investor')?'investor':'rooms', false);
+})();
+</script>
 
 </body></html>
