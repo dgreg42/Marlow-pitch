@@ -1,5 +1,10 @@
 # Marlow investor overview, deployable
 
+**Live at https://marlowathletic.netlify.app/** (repo `dgreg42/Marlow-pitch`, branch `main`, publish directory a single dot).
+Double click `ship.cmd` at the kit root to tidy the assets and push; Netlify rebuilds itself.
+`robots.txt` disallows crawlers, so automated fetchers cannot read the page. Open it in a
+browser to check a deploy.
+
 A static page. No build step, nothing to install. `index.html` plus `assets/`.
 
 Built from `strategy/reference/SITE.html` in this kit. **Edit the source there, not here**, then
