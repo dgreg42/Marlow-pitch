@@ -103,7 +103,7 @@
 
   /* the opening is a story rather than a statement, so it is set as one: three lines at reading
      size but with the air of display type, and a quiet fourth line that is the promise under it. */
-  .h1--long{font-size:clamp(30px,3.9vw,56px);max-width:22ch;letter-spacing:-.018em}
+  .h1--long{font-size:clamp(34px,5.4vw,78px);max-width:21ch;letter-spacing:-.026em;line-height:1.04}
 
   /* the opening story sits on ink beside a photograph, at the size of something read aloud. */
   .morning{display:grid;grid-template-columns:1fr 1fr;background:var(--ink);color:var(--offwhite);min-height:78vh}
@@ -129,13 +129,21 @@
 
   /* ---- hero: the mark sits on the picture with no carrier ---- */
   .hero{position:relative;height:100vh;min-height:620px;overflow:hidden}
-  .hero .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(var(--ink-rgb),.74) 0%,rgba(var(--ink-rgb),.34) 30%,rgba(var(--ink-rgb),.06) 58%,rgba(var(--ink-rgb),.40) 100%)}
+  .hero .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(var(--ink-rgb),.84) 0%,rgba(var(--ink-rgb),.66) 26%,rgba(var(--ink-rgb),.28) 52%,rgba(var(--ink-rgb),.04) 74%,rgba(var(--ink-rgb),.46) 100%)}
   /* the mark sits top left, clear of the line. Type never sits on type (DESIGN_TOKENS 2.3). */
-  .hero__mk{position:absolute;left:var(--w);top:calc(var(--s-9) + var(--s-5));width:min(15vw,168px)}
+  .hero__mk{position:absolute;right:var(--w);bottom:var(--s-8);width:min(9vw,104px);opacity:.92}
   .hero__mk img{width:100%;height:auto}
   .hero__foot{position:absolute;left:var(--w);right:var(--w);bottom:var(--s-8);display:flex;justify-content:space-between;
               align-items:flex-end;gap:var(--s-6);flex-wrap:wrap}
-  .hero h1{color:var(--offwhite);max-width:11ch}
+  .hero h1{color:var(--offwhite);max-width:11ch;text-shadow:0 2px 18px rgba(var(--ink-rgb),.28)}
+  /* The cover used to carry the mark at the top and the message at the bottom, and the two never
+     met. This line is the lockup: who we are and what we make, on the same optical group as the
+     headline, so a first time reader is not left guessing at the business. */
+  .hero__tag{display:flex;align-items:center;gap:var(--s-4);margin-bottom:var(--s-6);
+             font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+             color:rgba(var(--offwhite-rgb),.92);text-shadow:0 1px 6px rgba(var(--ink-rgb),.55)}
+  .hero__tag::before{content:"";display:block;width:48px;height:2px;background:var(--lead);flex:none}
+  .hero__tag .bn{font-weight:800;letter-spacing:.24em;color:var(--offwhite)}
   .hero .cap{color:rgba(var(--offwhite-rgb),.78)}
   .hero__deck{margin-top:var(--s-5);max-width:34ch;font-size:19px;line-height:1.45;
               color:rgba(var(--offwhite-rgb),.92);text-shadow:0 1px 4px rgba(var(--ink-rgb),.35)}
@@ -228,7 +236,10 @@
     .trio--small{grid-template-columns:repeat(3,1fr)} .trio--small figure{aspect-ratio:2/3}
     .gear{grid-template-columns:repeat(2,1fr)}
     .shelf{flex-direction:column;height:auto} .shelf figure{aspect-ratio:3/4;flex:none}
-    .hero{height:88vh} .hero__mk{width:104px;left:18px;top:var(--s-8)} .hero__foot{left:18px;right:18px}
+    .hero{height:92vh} .hero__mk{width:58px;right:18px;bottom:var(--s-6)} .hero__foot{left:18px;right:18px}
+    .hero__tag{flex-direction:column;align-items:flex-start;gap:var(--s-3);
+               font-size:10px;letter-spacing:.14em;line-height:1.5;max-width:30ch;margin-bottom:var(--s-5)}
+    .hero__tag::before{width:32px}
     .solo{height:70vh} .solo .lay{padding:var(--s-6) 18px}
   }
 
@@ -475,7 +486,8 @@
   <div class="hero__mk"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg" alt="Marlow"></div>
   <div class="hero__foot">
     <div>
-      <h1 class="h1--long" style="max-width:19ch">The day asks a lot of you. This room asks you to come&nbsp;in.</h1>
+      <div class="hero__tag"><span class="bn">Marlow</span> Private gyms and wellness rooms &middot; North&nbsp;Texas</div>
+      <h1 class="h1--long">Somewhere you want to be at six in the&nbsp;morning.</h1>
       <p class="hero__deck">Some mornings you train hard. Some evenings you sit in the heat until you stop planning the next hour. Forty minutes or ten, it is ready when you&nbsp;are.</p>
       <div class="hero__cta">
         <a class="btn" href="#contact">Speak to someone</a>
@@ -490,10 +502,10 @@
 <!-- 1. DESIRE -->
 <section class="bleed morning" id="morning">
   <div class="morning__t">
-    <p class="story">The door is heavy, and on the other side of it the house stops&nbsp;asking.</p>
-    <p class="story">Forty minutes with the bar. Then heat, then thirty seconds of cold water you will dread and do anyway. Then a chair, and nothing asked of&nbsp;you.</p>
+    <p class="story">The door is heavy. Behind it the house is quieter than it is anywhere&nbsp;else.</p>
+    <p class="story">Forty minutes with the bar. Then heat, then thirty seconds of cold water you will dread and do anyway. Then twenty minutes in a&nbsp;chair.</p>
     <p class="story story--end">Then you go back up, and the rest of the house wakes&nbsp;up.</p>
-    <p class="story__note">That is one morning, in one room, for one person. Yours will look like&nbsp;you.</p>
+    <p class="story__note">That is one morning, in one room, for one person. We start with&nbsp;yours.</p>
   </div>
   <figure class="morning__i"><img loading="lazy" decoding="async" src="assets/render_pommel-bench-and-towels.jpg" alt=""></figure>
 </section>
@@ -507,13 +519,12 @@
       <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_sauna-and-steam-suite.jpg" alt=""></figure>
       <p style="margin-top:var(--s-5);max-width:40ch">You have been available to somebody since seven this morning and there is still&nbsp;dinner.</p>
       <p style="margin-top:var(--s-4);max-width:40ch">So you do not train. You sit in the heat until you stop rehearsing the conversation you had at four. Ten minutes, maybe twenty. Then cold water, and then&nbsp;a&nbsp;shower.</p>
-      <p style="margin-top:var(--s-4);max-width:40ch">You go back up, and nobody can tell you were&nbsp;gone.</p>
+      <p style="margin-top:var(--s-4);max-width:40ch">At dinner you hear the whole story about the science project, twice, and you do not look&nbsp;at&nbsp;your&nbsp;phone.</p>
     </div>
     <div>
       <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_pavilion-at-night.jpg" alt=""></figure>
       <p style="margin-top:var(--s-5);max-width:40ch">One of you is on the mat at the far end. One of you is under the bar. Nobody has said anything in twenty minutes and nobody&nbsp;minds.</p>
       <p style="margin-top:var(--s-4);max-width:40ch">Later one of you sits in the sauna and the other does not, with the door between the two halves&nbsp;shut.</p>
-      <p style="margin-top:var(--s-4);max-width:40ch">Two zones, one room. Neither of you is waiting for the other to&nbsp;finish.</p>
     </div>
   </div>
 </section>
@@ -523,25 +534,34 @@
 <section class="sec wrap" id="who">
   <div class="eyb">Who it is for</div>
   <h2 style="max-width:22ch">Nobody is only one kind of person in a&nbsp;room.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:48ch">Whoever is disciplined about the bar on Tuesday also wants to do absolutely nothing on Sunday. You are allowed to be both, and we ask about&nbsp;both.</p>
+  <p class="lede" style="margin-top:var(--s-6);max-width:48ch">Whoever is disciplined about the bar on Tuesday also wants to do absolutely nothing on Sunday. We ask about&nbsp;both.</p>
   <div class="planks">
-    <div class="plank"><h3>You lift, four days a&nbsp;week</h3>
+    <div class="plank"><h3>The hard&nbsp;hour</h3>
       <p>The bar is the point and everything else gets out of the way. What usually goes missing is anywhere to sit afterwards, so that goes in&nbsp;first.</p></div>
-    <div class="plank"><h3>You run, and pay for it the next&nbsp;day</h3>
-      <p>What you want is to go out again tomorrow, so heat and cold earn their place ahead of another machine. The bench is mostly for sitting&nbsp;on.</p></div>
-    <div class="plank"><h3>You want twenty minutes nobody can reach&nbsp;you</h3>
-      <p>Wanting that is not a smaller reason to build a room. A chair, a window, a warm floor, and a door that closes&nbsp;properly.</p></div>
-    <div class="plank"><h3>Two of you, and one of you does not&nbsp;lift</h3>
-      <p>Neither practice should feel like it is borrowing the room from the other. Usually that is two zones and one door rather than two&nbsp;rooms.</p></div>
+    <div class="plank"><h3>The hour&nbsp;after</h3>
+      <p>You went out this morning and you want to go out again tomorrow. Heat and cold earn their place ahead of another machine, and the bench is mostly&nbsp;for&nbsp;sitting&nbsp;on.</p></div>
+    <div class="plank"><h3>The hour&nbsp;alone</h3>
+      <p>A chair, a window, a warm floor, and a door that closes properly. Some weeks that is the whole&nbsp;room.</p></div>
+    <div class="plank"><h3>The hour&nbsp;together</h3>
+      <p>Neither practice should feel like it is borrowing the room from the other, and neither of you should be waiting for the other to&nbsp;finish.</p></div>
   </div>
 </section>
 
+
+
+<div class="bleed solo solo--light">
+  <img loading="lazy" decoding="async" src="assets/render_rest-corner-by-the-sauna.jpg" alt="" style="object-position:50% 70%">
+  <div class="lay"><div>
+    <h2>You pass the door twenty times a day. Some days you go in for ten&nbsp;minutes.</h2>
+  </div></div>
+</div>
 
 <!-- 3. POSSIBILITY -->
 <section class="sec wrap" id="rooms2">
   <div class="eyb">The room</div>
   <h2 style="max-width:20ch">One room, two rooms, or a&nbsp;floor.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:48ch">What the house will carry decides more than taste does, and we tell you which it is before anything is drawn. On the wet side, water and power are the whole&nbsp;conversation.</p>
+  <p style="margin-top:var(--s-5);max-width:48ch">Two people with different practices almost always means two zones and one door rather than two&nbsp;rooms.</p>
   <div class="two" style="margin-top:var(--s-8)">
     <div>
       <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_the-long-room.jpg" alt=""></figure>
@@ -557,13 +577,6 @@
 </section>
 
 
-<div class="bleed solo solo--light" style="margin-top:var(--s-2)">
-  <img loading="lazy" decoding="async" src="assets/render_rest-corner-by-the-sauna.jpg" alt="" style="object-position:50% 70%">
-  <div class="lay"><div>
-    <h2>A chair, a window, and a towel that was warm when you got to&nbsp;it.</h2>
-  </div></div>
-</div>
-
 
 <!-- 4. INTELLIGENCE -->
 <section class="sec dark" id="pieces" style="padding-bottom:0">
@@ -571,7 +584,7 @@
     <div class="eyb">The pieces</div>
     <h2 style="max-width:18ch">Everything in here has a&nbsp;reason.</h2>
     <p class="lede" style="margin-top:var(--s-6);max-width:48ch">The rack, the bench and the wall the equipment hangs on are drawn for your house. Everything else we buy from people who already make it&nbsp;well.</p>
-    <p style="margin-top:var(--s-5);max-width:48ch">You never have to take our word for any of it. On handover you get a page that says why each piece is the one we picked, and what we turned&nbsp;down.</p>
+    <p style="margin-top:var(--s-5);max-width:48ch">On handover you get a page that says why each piece is the one we picked, and what we turned&nbsp;down.</p>
   </div>
   <div class="bleed" style="margin-top:var(--s-8)"><img loading="lazy" decoding="async" src="assets/render_leather-dumbbells.jpg" alt="" style="width:100%;height:min(74vh,720px);object-fit:cover"></div>
   <div class="wrap" style="padding-top:var(--s-7);padding-bottom:var(--s-9)">
@@ -631,7 +644,7 @@
       <div class="eyb">Care</div>
       <h2 style="max-width:20ch">Somebody has to look after the&nbsp;water.</h2>
       <p class="lede" style="margin-top:var(--s-6)">Sauna heater and stones, steam seals, plunge chemistry and filters, the equipment, and the technology. On a schedule, for as long as&nbsp;you&nbsp;own&nbsp;the&nbsp;room.</p>
-      <p style="margin-top:var(--s-5)">In five years it should still be the room you want to walk into. That is the part nobody thinks about on the first day, so we&nbsp;do.</p>
+      <p style="margin-top:var(--s-5)">In five years it should still be the room you want to walk into. That does not happen on its&nbsp;own.</p>
       <p style="margin-top:var(--s-5)">Second homes are opened and closed for the season. No owner is named, and nothing is published without your permission in&nbsp;writing.</p>
     </div>
     <figure><img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg" alt=""></figure>
@@ -698,7 +711,7 @@
       <div>
         <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg" alt="Marlow">
         <h2 style="max-width:16ch">Tell us what you actually do in a&nbsp;week.</h2>
-        <p style="margin-top:var(--s-6);max-width:46ch">Not equipment, not square footage. What you do in a week, what you wish you did more often, and what the house might be able to give it. Then we make a room you wantThen we make a room you want to come back&nbsp;to.nbsp;toThen we make a room you want to come back&nbsp;to.nbsp;comeThen we make a room you want to come back&nbsp;to.nbsp;backThen we make a room you want to come back&nbsp;to.nbsp;to.</p>
+        <p style="margin-top:var(--s-6);max-width:46ch">Not equipment, not square footage. What you do in a week, what you wish you did more often, and what the house might be able to give it. Then we make a room you want&nbsp;to&nbsp;come&nbsp;back&nbsp;to.</p>
         <!-- FILL BEFORE THIS GOES OUT: the real addresses, and whether a phone number is published. -->
         <div class="contact">
           <div><div class="cap">Owners</div><a class="contact__l" href="mailto:hello@marlow.studio">hello@marlow.studio</a></div>
