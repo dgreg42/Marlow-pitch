@@ -7,7 +7,7 @@
 <style>
   :root{
     --lead:#8A3A2B; --ink:#1C1B19; --gray:#D3D0C9; --gray-mid:#A39B8B; --stone-deep:#686359;
-    --paper:#E6E4DF; --offwhite:#DCD8D0; --text-quiet:var(--stone-deep);
+    --paper:#E6E4DF; --offwhite:#DCD8D0; --text-quiet:#5C574E;  /* stone, darkened to clear 4.5:1 on offwhite */
     --lead-rgb:138,58,43; --ink-rgb:28,27,25; --paper-rgb:230,228,223; --offwhite-rgb:220,216,208;
     --oak:#D9C4A3; --leather:#6E4630; --cedar:#B5734A;
     /* the materials. Each value is the median colour of the photograph beside it on the page,
@@ -29,6 +29,16 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+                         transition-duration:.01ms!important}
+  }
+  :focus-visible{outline:3px solid var(--lead);outline-offset:3px}
+  .dark :focus-visible,.hero :focus-visible,.solo :focus-visible{outline-color:var(--offwhite)}
+  .skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--ink);color:var(--offwhite);
+        padding:var(--s-4) var(--s-5);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+  .skip:focus{left:var(--s-4);top:var(--s-4)}
   body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.5;
        -webkit-font-smoothing:antialiased;overflow-x:hidden}
   img{display:block;width:100%;height:100%;object-fit:cover}
@@ -129,9 +139,17 @@
 
   /* ---- hero: the mark sits on the picture with no carrier ---- */
   .hero{position:relative;height:100vh;min-height:620px;overflow:hidden}
-  .hero .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(var(--ink-rgb),.84) 0%,rgba(var(--ink-rgb),.66) 26%,rgba(var(--ink-rgb),.28) 52%,rgba(var(--ink-rgb),.04) 74%,rgba(var(--ink-rgb),.46) 100%)}
+  /* Two scrims, not one. The bottom-up gradient alone left the headline sitting on whatever the
+     picture happened to be doing at that height, which on a sunlit plaster wall was around 2:1.
+     The second layer darkens the left column, where the copy always sits, so the contrast is a
+     property of the page rather than of the photograph. Measured at 8:1 and up across the block. */
+  .hero .veil{position:absolute;inset:0;background:
+    linear-gradient(to right,rgba(var(--ink-rgb),.90) 0%,rgba(var(--ink-rgb),.86) 24%,rgba(var(--ink-rgb),.64) 44%,rgba(var(--ink-rgb),.20) 63%,rgba(var(--ink-rgb),0) 78%),
+    linear-gradient(to top,rgba(var(--ink-rgb),.72) 0%,rgba(var(--ink-rgb),.46) 30%,rgba(var(--ink-rgb),.18) 56%,rgba(var(--ink-rgb),.02) 76%,rgba(var(--ink-rgb),.44) 100%)}
   /* the mark sits top left, clear of the line. Type never sits on type (DESIGN_TOKENS 2.3). */
   .hero__mk{position:absolute;right:var(--w);bottom:var(--s-8);width:min(9vw,104px);opacity:.92}
+  /* the investor cover already has a line in that corner, so the mark sits above it */
+  #topi .hero__mk{bottom:calc(var(--s-8) + 42px)}
   .hero__mk img{width:100%;height:auto}
   .hero__foot{position:absolute;left:var(--w);right:var(--w);bottom:var(--s-8);display:flex;justify-content:space-between;
               align-items:flex-end;gap:var(--s-6);flex-wrap:wrap}
@@ -236,7 +254,8 @@
     .trio--small{grid-template-columns:repeat(3,1fr)} .trio--small figure{aspect-ratio:2/3}
     .gear{grid-template-columns:repeat(2,1fr)}
     .shelf{flex-direction:column;height:auto} .shelf figure{aspect-ratio:3/4;flex:none}
-    .hero{height:92vh} .hero__mk{width:58px;right:18px;bottom:var(--s-6)} .hero__foot{left:18px;right:18px}
+    .hero{height:92vh} .hero__mk{width:58px;right:18px;bottom:var(--s-6)} #topi .hero__mk{bottom:calc(var(--s-6) + 34px)} .hero__foot{left:18px;right:18px}
+    .hero .veil{background:linear-gradient(to top,rgba(var(--ink-rgb),.90) 0%,rgba(var(--ink-rgb),.88) 52%,rgba(var(--ink-rgb),.82) 74%,rgba(var(--ink-rgb),.66) 90%,rgba(var(--ink-rgb),.58) 100%)}
     .hero__tag{flex-direction:column;align-items:flex-start;gap:var(--s-3);
                font-size:10px;letter-spacing:.14em;line-height:1.5;max-width:30ch;margin-bottom:var(--s-5)}
     .hero__tag::before{width:32px}
@@ -395,6 +414,11 @@
   /* Phones. The two data components are the ones that break: a stacked grid loses its column
      headers, and a two column table squeezes the prose into a gutter. Both are relabelled rather
      than shrunk. Verified at 320, 375, 390, 430, 768 and 1024. */
+  /* Below ~360 a 36px heading cannot fit two long words on a line, so a word like
+     "photographing" is always left alone. Binding it overflows the column, so the size gives way
+     instead of the line. */
+  @media(max-width:370px){ h2{font-size:27px} .h1--long{font-size:29px} }
+
   @media(max-width:700px){
     .matrix__head{display:none}
     .matrix{border-left:0}
@@ -451,9 +475,10 @@
   }
 </style>
 
+<a class="skip" href="#site">Skip to the page</a>
 <nav class="nav" id="nav">
   <div class="nav__in">
-    <a class="nav__brand" href="#top"><span class="bn">Marlow</span></a>
+    <a class="nav__brand" href="#top" id="navbrand"><span class="bn">Marlow</span></a>
     <ul class="nav__links" data-for="rooms">
       <li><a href="#rooms2">The room</a></li>
       <li><a href="#pieces">The pieces</a></li>
@@ -472,14 +497,14 @@
       <li><a href="#plan">The plan</a></li>
     </ul>
     <div class="switch" role="tablist" aria-label="Which version of this page">
-      <button class="switch__b" type="button" role="tab" data-go="rooms" aria-selected="true">Customer</button>
-      <button class="switch__b" type="button" role="tab" data-go="investor" aria-selected="false">Investor</button>
+      <button class="switch__b" type="button" role="tab" id="tab-rooms" aria-controls="view-rooms" data-go="rooms" aria-selected="true">Customer</button>
+      <button class="switch__b" type="button" role="tab" id="tab-investor" aria-controls="view-investor" data-go="investor" aria-selected="false">Investor</button>
     </div>
   </div>
 </nav>
 
 <div id="site" data-view="rooms">
-<div class="view" data-v="rooms">
+<div class="view" data-v="rooms" id="view-rooms" role="tabpanel" aria-labelledby="tab-rooms" tabindex="0">
 <header class="hero" id="top">
   <img src="assets/render_gym-opens-to-the-garden.jpg" alt="">
   <div class="veil"></div>
@@ -725,7 +750,7 @@
 </section>
 
 </div>
-<div class="view" data-v="investor">
+<div class="view" data-v="investor" id="view-investor" role="tabpanel" aria-labelledby="tab-investor" tabindex="0">
 
 <header class="hero" id="topi">
   <img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg" alt="">
@@ -735,11 +760,22 @@
     <div>
       <h1>Part of<br>the house.</h1>
       <p class="hero__deck"><span class="bn">Marlow</span> designs the gym and the wellness room, supplies everything in them, installs them, and looks after&nbsp;them.</p>
+      <p class="hero__deck" style="margin-top:var(--s-4)">What the owner is buying is an hour a day in their own&nbsp;house.</p>
     </div>
     <div class="cap">Investor overview &middot; 2026</div>
   </div>
 </header>
 
+
+<!-- THE BUYER, BEFORE THE NUMBERS -->
+<section class="sec dark" id="buyer">
+  <div class="wrap">
+    <p class="story" style="max-width:38ch">Somebody in Westlake is drawing a wellness floor this&nbsp;month.</p>
+    <p class="story" style="max-width:38ch">What they want out of it is forty minutes with the bar, then heat, then cold, then twenty minutes in a chair, in a room that looks like the rest of the&nbsp;house.</p>
+    <p class="story story--end" style="max-width:38ch">What they get quoted is&nbsp;equipment.</p>
+    <p class="story__note">Everything after this page is about who ends up selling them the&nbsp;room.</p>
+  </div>
+</section>
 
 <section class="sec wrap" id="i1" style="padding-bottom:0">
   <div class="chap">
@@ -768,7 +804,7 @@
     <div class="fig">
       <div class="fig__n">$25M</div>
       <p>A spec house going up on Strait Lane in Dallas lists a dedicated wellness area as part of the standard program.
-      <span class="src">Listing and local press, read 2026-09-15</span></p>
+      <span class="src">Listing and local press,&nbsp;<span style="white-space:nowrap">read 2026-09-15</span></span></p>
     </div>
   </div>
   <p style="margin-top:var(--s-8);max-width:58ch">Nobody has to be convinced the room belongs in the house. The open question is who builds&nbsp;it.</p>
@@ -800,10 +836,10 @@
     <div class="matrix__row"><div>A written reason per piece, and the margin disclosed</div><div data-l="What we found">Searched directly across the whole set. Nothing found. The nearest is a claim of being equipment independent</div><div class="open" data-l="Verdict">Open</div></div>
     <div class="matrix__row"><div>A real service contract on these rooms</div><div data-l="What we found">A national franchise already services gym equipment on contract, so the gym side is taken. Nothing found covers a sauna, a steam room or a plunge</div><div class="open" data-l="Verdict">Half open</div></div>
   </div>
-  <p class="cap" style="margin-top:var(--s-3)">Public sources, read 2026-09-15. Full working in the&nbsp;appendix.</p>
+  <p class="cap" style="margin-top:var(--s-3)">Public sources,&nbsp;<span style="white-space:nowrap">read 2026-09-15</span>. Full working in the&nbsp;appendix.</p>
   <p style="margin-top:var(--s-7);max-width:58ch">There is no national company in this category. A lot of small regional firms, mostly owner operated, plus manufacturer run design programs that can only sell one brand. The only public financial data point we could find is a three year old firm in Connecticut with $1.28M of revenue asking $795,000 for the whole&nbsp;business.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">Private equity has consolidated audio visual integration and pool service in the last two years and has not touched&nbsp;this.</p>
-  <p class="cap" style="margin-top:var(--s-3)">Snap One and Control4, and the pool service acquisition trackers, read&nbsp;2026-09-15</p>
+  <p class="cap" style="margin-top:var(--s-3)">Snap One and Control4, and the pool service acquisition trackers, <span style="white-space:nowrap">read 2026-09-15</span></p>
 </section>
 <section class="sec wrap">
   <div class="eyb">The gap</div>
@@ -834,7 +870,7 @@
   <p class="cap" style="margin-top:var(--s-3)">Sauna, plunge and red light off one corridor. Each is its own line on the technology&nbsp;sheet.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">So the electrical gets drawn before the framer arrives. Every room leaves the builder with a one page technology sheet: circuits and amperage, where the subpanel goes, floor boxes under the cardio, blocking in the wall for the display and the speakers, where the low voltage runs. Anything missed at that moment costs far more after the drywall. Dallas has been on the 2023 electrical code since May 2025, and the park cities are a separate check every&nbsp;time.</p>
   <div class="spec" style="margin-top:var(--s-7)"><span>Steam generator</span><span>38 to 125A</span><span>Sauna heater</span><span>30 to 50A</span><span>Plunge</span><span class="ox">GFCI, dedicated</span></div>
-  <p class="cap" style="margin-top:var(--s-3)">Manufacturer specifications, read&nbsp;2026-09-16</p>
+  <p class="cap" style="margin-top:var(--s-3)">Manufacturer specifications, <span style="white-space:nowrap">read 2026-09-16</span></p>
   <p style="margin-top:var(--s-7);max-width:58ch">That timing is why the audio visual companies matter to us. We draw the technology and one of their certified installers puts it in, because programming a house's control system is their trade. They are in these houses long before we would be, and nobody in this category is courting&nbsp;them.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">It gives the care plan a fifth thing to service. Firmware, network, speakers and scenes, on the same visit as the heater and the water&nbsp;chemistry.</p>
 </section>
@@ -882,15 +918,15 @@
   <h2 style="max-width:26ch">Nobody picked these colours. They are what the materials already&nbsp;are.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:52ch">Each colour is measured from the photograph above it. Dark to light, this is the whole range a room gets built from, with something green growing in the middle of&nbsp;it.</p>
   <div class="board">
-    <figure><img loading="lazy" decoding="async" src="assets/mat_iron.jpg" alt="Raw waxed iron"><figcaption><span class="board__chip" style="background:var(--m-iron)"></span>Raw waxed iron<span class="board__hex">#36251C</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_rubber.jpg" alt="Clay rubber"><figcaption><span class="board__chip" style="background:var(--m-rubber)"></span>Clay rubber<span class="board__hex">#5F1A0C</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_iron.jpg" alt="Raw&nbsp;waxed&nbsp;iron"><figcaption><span class="board__chip" style="background:var(--m-iron)"></span>Raw&nbsp;waxed&nbsp;iron<span class="board__hex">#36251C</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_rubber.jpg" alt="Clay&nbsp;rubber"><figcaption><span class="board__chip" style="background:var(--m-rubber)"></span>Clay&nbsp;rubber<span class="board__hex">#5F1A0C</span></figcaption></figure>
     <figure><img loading="lazy" decoding="async" src="assets/mat_planting.jpg" alt="Planting"><figcaption><span class="board__chip" style="background:var(--m-planting)"></span>Planting<span class="board__hex">#434824</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_leather.jpg" alt="Cognac leather"><figcaption><span class="board__chip" style="background:var(--m-leather)"></span>Cognac leather<span class="board__hex">#6B3823</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_leather.jpg" alt="Cognac&nbsp;leather"><figcaption><span class="board__chip" style="background:var(--m-leather)"></span>Cognac&nbsp;leather<span class="board__hex">#6B3823</span></figcaption></figure>
     <figure><img loading="lazy" decoding="async" src="assets/mat_cork.jpg" alt="Cork"><figcaption><span class="board__chip" style="background:var(--m-cork)"></span>Cork<span class="board__hex">#8C502C</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_oak.jpg" alt="White oak"><figcaption><span class="board__chip" style="background:var(--m-oak)"></span>White oak<span class="board__hex">#A06B47</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_oak.jpg" alt="White&nbsp;oak"><figcaption><span class="board__chip" style="background:var(--m-oak)"></span>White&nbsp;oak<span class="board__hex">#A06B47</span></figcaption></figure>
     <figure><img loading="lazy" decoding="async" src="assets/mat_cement.jpg" alt="Cement"><figcaption><span class="board__chip" style="background:var(--m-cement)"></span>Cement<span class="board__hex">#A98664</span></figcaption></figure>
     <figure><img loading="lazy" decoding="async" src="assets/mat_terrazzo.jpg" alt="Terrazzo"><figcaption><span class="board__chip" style="background:var(--m-terrazzo)"></span>Terrazzo<span class="board__hex">#B7A58D</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_plaster.jpg" alt="Lime plaster" style="object-position:100% 50%"><figcaption><span class="board__chip" style="background:var(--m-plaster)"></span>Lime plaster<span class="board__hex">#EBD3C1</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_plaster.jpg" alt="Lime&nbsp;plaster" style="object-position:100% 50%"><figcaption><span class="board__chip" style="background:var(--m-plaster)"></span>Lime&nbsp;plaster<span class="board__hex">#EBD3C1</span></figcaption></figure>
   </div>
 </section>
 
@@ -906,7 +942,7 @@
     <div class="matrix__row"><div>Family</div><div data-l="Who">Territory Wellness, in Dallas. Warm, homey, kids in the&nbsp;copy.</div><div data-l="What it gets them" class="taken">The whole household, sold direct</div></div>
     <div class="matrix__row"><div>Editorial craft</div><div data-l="Who">Home Gyms Design, Sportova, Iron House, and the makers&nbsp;themselves.</div><div data-l="What it gets them" class="open">Where we would sit by&nbsp;default</div></div>
   </div>
-  <p class="cap" style="margin-top:var(--s-3)">Company sites and social accounts, read&nbsp;2026-09-21</p>
+  <p class="cap" style="margin-top:var(--s-3)">Company sites and social accounts, <span style="white-space:nowrap">read 2026-09-21</span></p>
   <p style="margin-top:var(--s-7);max-width:58ch">Two of them are already close to what we want to say. Sportova writes that a fitness space should be <span class="cited">&ldquo;as considered and beautiful as every other part of your home&rdquo;</span>. Territory Wellness writes about fitting <span class="cited">&ldquo;your space, your family, and the way you actually move&rdquo;</span>. Nobody has proved either sentence in detail, which is the only way this idea belongs to&nbsp;anybody.</p>
   <ul class="rules">
     <li><strong>Show the room in&nbsp;use.</strong> The editorial firms photograph empty rooms and the retail firms photograph people mid set. Nobody shows the traces: the towel on the bench, the cup by the chair, the plunge lid open at six in the&nbsp;morning.</li>
@@ -934,7 +970,7 @@
     <h2 style="max-width:20ch">Four ways one room&nbsp;pays.</h2>
     <p class="lede" style="margin-top:var(--s-6);max-width:54ch">We are copying what the good audio visual companies did twenty years ago. Sell to the designers and builders, get written into the plans early, and look after the house for as long as the family owns&nbsp;it.</p>
     <table class="ledger">
-      <tr><th>Where the money comes from</th><th>On a $120,000 room</th></tr>
+      <tr><th>Where the money&nbsp;comes&nbsp;from</th><th>On a $120,000 room</th></tr>
       <tr><td><strong>Design fee.</strong> Paid up front and earned whether or not the room gets built. Seven and a half to thirty five thousand depending on&nbsp;scope.</td><td>$18,000</td></tr>
       <tr><td><strong>Supply.</strong> Several makers, at a dealer margin of 25 to 35 percent. Twenty eight percent on this one. This is the&nbsp;engine.</td><td>$84,000</td></tr>
       <tr><td><strong>Install and project&nbsp;management.</strong> Our own crew beside the builder, billed at fifteen percent of the room and carrying about thirty&nbsp;percent.</td><td>$18,000</td></tr>
@@ -958,7 +994,7 @@
     <tr><td><strong>Not by Year&nbsp;5.</strong> Recurring revenue above forty percent of the&nbsp;total</td><td>Adds 1.5 to&nbsp;2.5&times;</td></tr>
     <tr><td><strong>Not by Year&nbsp;5.</strong> EBITDA margin above fifteen&nbsp;percent</td><td>Below it counts&nbsp;against</td></tr>
   </table>
-  <p class="cap" style="margin-top:var(--s-3)">Multiples from CT Acquisitions, audio visual integration and home services guides, 2026, read 2026-09-15. The same guides price a project only integrator at 3 to 5 times, which is nearer what this is today, and they set a 25 percent EBITDA margin as the bar for the top of a range. Which rows we can reach is our judgement, not&nbsp;theirs.</p>
+  <p class="cap" style="margin-top:var(--s-3)">Multiples from CT Acquisitions, audio visual integration and home services guides, 2026,&nbsp;<span style="white-space:nowrap">read 2026-09-15</span>. The same guides price a project only integrator at 3 to 5 times, which is nearer what this is today, and they set a 25 percent EBITDA margin as the bar for the top of a range. Which rows we can reach is our judgement, not&nbsp;theirs.</p>
   <p style="margin-top:var(--s-7);max-width:58ch">The two we miss are the same problem twice. At Year 5 there are about a hundred and forty seven room years of care plans running, which is seven hundred and sixty four thousand dollars, or seven point four percent of revenue. Forty percent would take forty three thousand dollars a year per room, and nobody pays that to have a sauna looked after. The Year 5 EBITDA margin is thirteen point eight percent against a fifteen percent bar. Both are held down by the same thing: sixty one thousand dollars of equipment moves through every room at a twenty eight percent margin, which inflates the revenue line and deflates every ratio measured against&nbsp;it.</p>
   <div class="figs figs--two" style="margin-top:var(--s-8)">
     <div class="fig fig--lg">
@@ -1045,7 +1081,7 @@
 <!-- THE PLAN -->
 <section class="sec wrap" id="plan">
   <div class="eyb">The stages</div>
-  <h2 style="max-width:20ch">The first job is to make something worth photographing.</h2>
+  <h2 style="max-width:18ch">The first job is to make something worth photographing.</h2>
   <p class="lede" style="margin-top:var(--s-6)">A designer writes a specialist into a plan set eighteen months before anybody moves in, and she does it because she has seen the work. We have a point of view and nothing yet to point at, so year one exists to fix&nbsp;that.</p>
   <ol class="stages">
     <li><div>
@@ -1116,7 +1152,7 @@
         <p style="margin-top:var(--s-6)">We would rather take money from somebody who would actually want one of these. The first room being yours is the cheapest proof either of us will ever&nbsp;get.</p>
         <p style="margin-top:var(--s-4)">So come and see it, tell us what you really do in a week, and let us draw it for you. That conversation works whichever way you decide to come&nbsp;in.</p>
         <div style="margin-top:var(--s-7);display:flex;gap:var(--s-4);flex-wrap:wrap">
-          <a class="btn" href="#">Start a conversation</a>
+          <a class="btn" href="#contact">Start a conversation</a>
           <a class="btn btn--ghost" href="#money">The numbers again</a>
         </div>
       </div>
@@ -1180,6 +1216,9 @@
 
   function show(view, reset){
     site.dataset.view=view;
+    /* the wordmark has to point at the hero that is actually rendered */
+    var brand=document.getElementById('navbrand');
+    if(brand) brand.setAttribute('href', view==='investor' ? '#topi' : '#top');
     btns.forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.go===view)); });
     lists.forEach(function(l){ l.classList.toggle('is-on', l.dataset.for===view); });
     if(reset){ history.replaceState(null,'', view==='investor'?'#investors':'#rooms'); window.scrollTo(0,0); }
