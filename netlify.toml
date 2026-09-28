@@ -13,7 +13,17 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# These filenames are hand managed and get replaced in place, so they are not
+# content addressed and "immutable" is wrong for them. It is worse than wrong: Netlify applies
+# this header to a 404 as well, so any asset URL requested while the file was missing stayed
+# broken in that browser for a year and never revalidated. A day is long enough to be fast and
+# short enough to self heal. The build also appends ?v=N to every asset URL (build-live.py).
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
