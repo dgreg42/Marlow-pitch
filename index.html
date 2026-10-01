@@ -243,6 +243,10 @@
   .two{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s-8)}
   .btn{display:inline-flex;align-items:center;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
        padding:var(--s-4) var(--s-5);background:var(--ink);color:var(--offwhite);border:1px solid var(--ink)}
+  /* On the cover the left scrim is near black, so an ink filled button disappears into it and the
+     outlined secondary reads as the stronger of the two. The primary takes the light fill there. */
+  .hero__cta .btn{background:var(--offwhite);color:var(--ink);border-color:var(--offwhite)}
+  .hero__cta .btn--light{background:none;color:var(--offwhite);border-color:rgba(var(--offwhite-rgb),.65)}
   .pagefoot{border-top:var(--hairline);padding:var(--s-8) 0 var(--s-9)}
 
   @media(max-width:880px){
@@ -486,8 +490,8 @@
   <div class="nav__in">
     <a class="nav__brand" href="#top" id="navbrand"><span class="bn">Marlow</span></a>
     <ul class="nav__links" data-for="rooms">
-      <li><a href="#rooms2">The room</a></li>
-      <li><a href="#pieces">The pieces</a></li>
+      <li><a href="#morning">Where we start</a></li>
+      <li><a href="#rooms2">What belongs</a></li>
       <li><a href="#materials">Materials</a></li>
       <li><a href="#howitworks">How it works</a></li>
       <li><a href="#costs">What it costs</a></li>
@@ -495,12 +499,13 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <ul class="nav__links" data-for="investor">
+      <li><a href="#open">The idea</a></li>
+      <li><a href="#believe">What we believe</a></li>
       <li><a href="#why">The market</a></li>
-      <li><a href="#field">The field</a></li>
-      <li><a href="#brandread">The brand read</a></li>
+      <li><a href="#prove">What to prove</a></li>
       <li><a href="#money">The business</a></li>
       <li><a href="#raise">The raise</a></li>
-      <li><a href="#plan">The plan</a></li>
+      <li><a href="#appendix">Supporting</a></li>
     </ul>
     <div class="switch" role="tablist" aria-label="Which version of this page">
       <button class="switch__b" type="button" role="tab" id="tab-rooms" aria-controls="view-rooms" data-go="rooms" aria-selected="true">Customer</button>
@@ -518,114 +523,79 @@
   <div class="hero__foot">
     <div>
       <div class="hero__tag"><span class="bn">Marlow</span> Private gyms and wellness rooms &middot; North&nbsp;Texas</div>
-      <h1 class="h1--long">Somewhere you want to be at six in the&nbsp;morning.</h1>
-      <p class="hero__deck">Some mornings you train hard. Some evenings you sit in the heat until you stop planning the next hour. Forty minutes or ten, it is ready when you&nbsp;are.</p>
+      <h1 class="h1--long">A part of your home you'll make time&nbsp;for.</h1>
+      <p class="hero__deck">A good workout. A long stretch. A few quiet minutes in the&nbsp;sauna.</p>
       <div class="hero__cta">
-        <a class="btn" href="#contact">Speak to someone</a>
-        <a class="btn btn--light" href="#costs">What a room costs</a>
+        <a class="btn" href="#contact">Tell us what you have in mind</a>
+        <a class="btn btn--light" href="#costs">Explore the costs</a>
       </div>
     </div>
   </div>
 </header>
 
+<section class="sec--tight wrap" id="intro">
+  <p class="lede" style="max-width:62ch"><span class="bn">Marlow</span> designs private gyms and wellness rooms around what you enjoy doing and how you want to feel. We bring together the room, the equipment and the details that make you want to spend time&nbsp;there.</p>
+</section>
+
 <div class="bleed wide"><img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg?v=2" alt=""></div>
 
-<!-- 1. DESIRE -->
+<!-- IT STARTS WITH WHAT YOU LOVE DOING -->
 <section class="bleed morning" id="morning">
   <div class="morning__t">
-    <p class="story">The door is heavy. Behind it the house is quieter than it is anywhere&nbsp;else.</p>
-    <p class="story">Forty minutes with the bar. Then heat, then thirty seconds of cold water you will dread and do anyway. Then twenty minutes in a&nbsp;chair.</p>
-    <p class="story story--end">Then you go back up, and the rest of the house wakes&nbsp;up.</p>
-    <p class="story__note">That is one morning, in one room, for one person. We start with&nbsp;yours.</p>
+    <h2 style="max-width:16ch;color:var(--offwhite)">It starts with what you love&nbsp;doing.</h2>
+    <p class="story" style="margin-top:var(--s-7)">Maybe you've trained for years and know exactly what you want. Maybe you're making room for something you've been meaning to come back&nbsp;to.</p>
+    <p class="story story--end">We're interested in&nbsp;both.</p>
+    <p class="story__note">What do you look forward to? What would you do more often if it were easier? Who else will use the space? Those conversations tell us more than an equipment list. They help us make a room that feels like&nbsp;yours.</p>
   </div>
   <figure class="morning__i"><img loading="lazy" decoding="async" src="assets/render_pommel-bench-and-towels.jpg?v=2" alt=""></figure>
 </section>
 
 
-<!-- 1b. THE OTHER HOURS -->
+<!-- SOMEWHERE TO WORK HARD -->
 <section class="sec wrap" id="hours">
-  <div class="eyb">The other hours</div>
-  <div class="two" style="margin-top:var(--s-6)">
+  <div class="eyb">The room, in use</div>
+  <h2 style="max-width:20ch">Somewhere to work hard. Somewhere to let&nbsp;go.</h2>
+  <div class="split split--wide" style="margin-top:var(--s-6)">
     <div>
-      <figure style="aspect-ratio:1/1;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_sauna-and-steam-suite.jpg?v=2" alt=""></figure>
-      <p style="margin-top:var(--s-5);max-width:40ch">You have been available to somebody since seven this morning and there is still&nbsp;dinner.</p>
-      <p style="margin-top:var(--s-4);max-width:40ch">So you do not train. You sit in the heat until you stop rehearsing the conversation you had at four. Ten minutes, maybe twenty. Then cold water, and then&nbsp;a&nbsp;shower.</p>
-      <p style="margin-top:var(--s-4);max-width:40ch">At dinner you hear the whole story about the science project, twice, and you do not look&nbsp;at&nbsp;your&nbsp;phone.</p>
+      <p class="lede">There's a particular pleasure in having everything close by. Finish a session and walk into the sauna. Stretch while your partner trains. Sit for a while before heading back&nbsp;into&nbsp;the&nbsp;house.</p>
+      <p style="margin-top:var(--s-5)">We think about those moments together. How you move through the room. Where you put your towel. The light when you arrive. Where you'll want to sit&nbsp;afterward.</p>
+      <p style="margin-top:var(--s-5)">The room should feel good throughout the time you spend in&nbsp;it.</p>
     </div>
-    <div>
-      <figure style="aspect-ratio:1/1;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_pavilion-at-night.jpg?v=2" alt=""></figure>
-      <p style="margin-top:var(--s-5);max-width:40ch">One of you is on the mat at the far end. One of you is under the bar. Nobody has said anything in twenty minutes and nobody&nbsp;minds.</p>
-      <p style="margin-top:var(--s-4);max-width:40ch">Later one of you sits in the sauna and the other does not, with the door between the two halves&nbsp;shut.</p>
-    </div>
+    <div></div>
   </div>
 </section>
-
-
-<!-- 2. RECOGNITION -->
-<section class="sec wrap" id="who">
-  <div class="eyb">Who it is for</div>
-  <h2 style="max-width:22ch">Nobody wants the same thing every&nbsp;day.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:48ch">Whoever is disciplined about the kettlebells on Tuesday also wants to do absolutely nothing on Sunday. We&nbsp;ask&nbsp;about&nbsp;both.</p>
-  <div class="planks">
-    <div class="plank"><h3>The hard&nbsp;hour</h3>
-      <p>The bar is the point and everything else gets out of the way. What usually goes missing is anywhere to sit afterwards, so that goes in&nbsp;first.</p></div>
-    <div class="plank"><h3>The hour&nbsp;after</h3>
-      <p>You went out this morning and you want to go out again tomorrow. Heat and cold earn their place ahead of another machine, and the bench is mostly&nbsp;for&nbsp;sitting&nbsp;on.</p></div>
-    <div class="plank"><h3>The hour&nbsp;alone</h3>
-      <p>A chair, a window, a warm floor, and a door that closes properly. Some weeks that is the whole&nbsp;room.</p></div>
-    <div class="plank"><h3>The hour&nbsp;together</h3>
-      <p>Neither practice should feel like it is borrowing the room from the other, and neither of you should be waiting for the other to&nbsp;finish.</p></div>
-  </div>
-</section>
-
-
 
 <div class="bleed solo solo--light">
   <img loading="lazy" decoding="async" src="assets/render_rest-corner-by-the-sauna.jpg?v=2" alt="" style="object-position:50% 70%">
   <div class="lay"><div>
-    <h2>You pass the door twenty times a day. Some days you go in for ten&nbsp;minutes.</h2>
+    <h2>Where you'll want to sit&nbsp;afterward.</h2>
   </div></div>
 </div>
 
-<!-- 3. POSSIBILITY -->
+
+<!-- WHAT BELONGS IN YOUR ROOM -->
 <section class="sec wrap" id="rooms2">
-  <div class="eyb">The room</div>
-  <h2 style="max-width:20ch">One room, two rooms, or a&nbsp;floor.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:48ch">What the house will carry decides more than taste does, and we tell you which it is before anything is drawn. On the wet side, water and power are the whole&nbsp;conversation.</p>
-  <p style="margin-top:var(--s-5);max-width:48ch">Two people with different practices almost always means two zones and one door rather than two&nbsp;rooms.</p>
-  <div class="two" style="margin-top:var(--s-8)">
-    <div>
-      <figure style="aspect-ratio:1/1;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_the-long-room.jpg?v=2" alt="" style="object-position:38% 50%"></figure>
-      <h3 style="margin-top:var(--s-5)">Where the work&nbsp;happens</h3>
-      <p style="margin-top:var(--s-3);max-width:40ch">A platform that takes a dropped bar quietly, which matters most when everyone upstairs is asleep. Oak and blackened steel. Storage that does not look like&nbsp;storage.</p>
-    </div>
-    <div>
-      <figure style="aspect-ratio:1/1;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_sauna-cedar.jpg?v=2" alt=""></figure>
-      <h3 style="margin-top:var(--s-5)">Where the water is</h3>
-      <p style="margin-top:var(--s-3);max-width:40ch">Sauna, cold plunge and steam, in whatever combination the house will take. Honed limestone, linen, and somewhere to sit when you are&nbsp;done.</p>
-    </div>
+  <div class="eyb">What belongs</div>
+  <h2 style="max-width:18ch">What belongs in your&nbsp;room?</h2>
+  <div class="planks">
+    <div class="plank"><h3>Strength and&nbsp;movement</h3>
+      <p>Room to lift, stretch and move freely. Equipment chosen for the way you train, with the space around it given just as much&nbsp;thought.</p></div>
+    <div class="plank"><h3>Heat and&nbsp;water</h3>
+      <p>Sauna, cold plunge or steam, considered alongside the rest of the room. We work with your builder to establish what's possible before settling the&nbsp;design.</p></div>
+    <div class="plank"><h3>A place to&nbsp;pause</h3>
+      <p>A comfortable seat. Natural light where we can find it. Somewhere to have a drink of water and&nbsp;take&nbsp;your&nbsp;time.</p></div>
+    <div class="plank"><h3>Space for both of&nbsp;you</h3>
+      <p>Different routines can share a room comfortably. We consider what each person needs, including the moments when one of you wants a little&nbsp;privacy.</p></div>
   </div>
 </section>
 
-
-
-<!-- 4. INTELLIGENCE -->
-<section class="sec dark" id="pieces" style="padding-bottom:0">
+<section class="sec dark" id="pieces" style="padding-top:var(--s-9);padding-bottom:0">
   <div class="wrap">
-    <div class="eyb">The pieces</div>
-    <h2 style="max-width:18ch">Everything in here has a&nbsp;reason.</h2>
-    <p class="lede" style="margin-top:var(--s-6);max-width:48ch">The rack, the bench and the wall the equipment hangs on are drawn for your house. Everything else we buy from people who already make it&nbsp;well.</p>
-    <p style="margin-top:var(--s-5);max-width:48ch">On handover you get a page that says why each piece is the one we picked, and what we turned&nbsp;down.</p>
-  </div>
-  <!-- A square render in a full bleed letterbox lost the dumbbells entirely and left a blurred
-       plant. A centred plate at the source's own ratio shows the object whole, which is also the
-       right register: a catalogue plate with margins, not a cinematic band. -->
-  <div class="wrap" style="margin-top:var(--s-8)">
     <figure style="max-width:min(860px,72vw);margin:0 auto;aspect-ratio:1/1;overflow:hidden">
       <img loading="lazy" decoding="async" src="assets/render_leather-dumbbells.jpg?v=2" alt="">
     </figure>
   </div>
-  <div class="wrap" style="padding-top:var(--s-7);padding-bottom:var(--s-9)">
+  <div class="wrap" style="padding-top:var(--s-8);padding-bottom:var(--s-9)">
     <div class="tiles">
       <figure><img loading="lazy" decoding="async" src="assets/render_barbell-and-plates.jpg?v=2" alt=""><figcaption>Rack and plates<span>White oak, blackened steel</span></figcaption></figure>
       <figure><img loading="lazy" decoding="async" src="assets/render_kettlebells-on-oak-shelf.jpg?v=2" alt=""><figcaption>Kettlebells<span>Cast iron, leather handles</span></figcaption></figure>
@@ -638,20 +608,27 @@
 </section>
 
 
-<!-- 5. CRAFT -->
+<!-- IT SHOULD FEEL AT HOME HERE -->
 <section class="sec wrap" id="materials">
   <div class="eyb">Materials</div>
-  <h2 style="max-width:22ch">Every material in here ages&nbsp;well.</h2>
+  <h2 style="max-width:18ch">It should feel at home&nbsp;here.</h2>
   <div class="split split--wide" style="margin-top:var(--s-6)">
     <div>
-      <p class="lede">Limewash plaster, rift sawn white oak, honed limestone, western red cedar, wool, linen, leather, waxed&nbsp;iron.</p>
-      <p style="margin-top:var(--s-5)">Oak darkens. Leather takes the shape of the hand that uses it. Plaster holds the light differently in ten years than it does on the first day, and none of that is&nbsp;damage.</p>
-      <p style="margin-top:var(--s-5)">Filtered water in the room, and something green and alive in&nbsp;it.</p>
-      <p style="margin-top:var(--s-5)">A room has a smell whether anybody chose it or not, so we choose it. Cedar and leather come from the room itself. Eucalyptus in the steam and hinoki on the sauna bench, if that is what you want in&nbsp;there.</p>
+      <p class="lede">You've put thought into the rest of your house. This room deserves the same&nbsp;attention.</p>
+      <p style="margin-top:var(--s-5)">Oak, limestone, plaster, cedar and leather bring warmth and texture to spaces that are often treated as purely practical. We consider how they feel against your skin, how they hold the light, and how they'll look after years of&nbsp;use.</p>
+      <p style="margin-top:var(--s-5)">Some pieces will be made for your space. Others will come from makers whose work we believe in. Everything is chosen to&nbsp;work&nbsp;well&nbsp;together.</p>
     </div>
     <div></div>
   </div>
-<div class="details">
+</section>
+
+
+<!-- THE DETAILS YOU LIVE WITH -->
+<section class="sec wrap" id="details" style="padding-top:0">
+  <h2 style="max-width:16ch">The details you live&nbsp;with.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:52ch">A floor that feels good under bare feet. A bench with a comfortable edge. A handle you enjoy picking up. Storage that makes it easy to put things&nbsp;away.</p>
+  <p style="margin-top:var(--s-5);max-width:52ch">These are small decisions, but you meet them every time you use the room. We&nbsp;pay&nbsp;attention&nbsp;to&nbsp;them.</p>
+  <div class="details">
     <figure><img loading="lazy" decoding="async" src="assets/render_floor-brass-strip.jpg?v=2" alt=""><figcaption><b>Floor.</b> Where the rubber meets the oak, a brass strip set flush with both, so there is nothing to catch a bare foot on the&nbsp;way&nbsp;to&nbsp;the&nbsp;sauna.</figcaption></figure>
     <figure><img loading="lazy" decoding="async" src="assets/render_oak-joinery.jpg?v=2" alt=""><figcaption><b>Rack.</b> A through tenon, oak joined to oak the way a table gets made. Ten years of a bar going back on it and nothing works&nbsp;loose.</figcaption></figure>
     <figure><img loading="lazy" decoding="async" src="assets/render_bench-edge-stitched.jpg?v=2" alt=""><figcaption><b>Bench.</b> Leather over a rounded oak edge. You meet it sitting down after the heat, when nothing should press into the back of a&nbsp;leg.</figcaption></figure>
@@ -662,15 +639,15 @@
 </section>
 
 
-<!-- 6. TRUST -->
+<!-- FROM THE FIRST CONVERSATION -->
 <section class="sec wrap" id="howitworks">
   <div class="eyb">How it works</div>
-  <h2 style="max-width:20ch">Four steps, two of them&nbsp;yours.</h2>
+  <h2 style="max-width:20ch">From the first conversation to the finished&nbsp;room.</h2>
   <ol class="stages">
-    <li><div><h3>An hour with&nbsp;you</h3><p>What you do in a week, what you wish you did more often, and who else in the house will use the&nbsp;room.</p></div></li>
-    <li><div><h3>A drawing and one&nbsp;price</h3><p>Plans, elevations, a render, and a written reason for every&nbsp;piece.</p></div></li>
-    <li><div><h3>The page your builder&nbsp;needs</h3><p>Circuits, amperage, blocking and floor boxes, in with the rough&nbsp;in.</p></div></li>
-    <li><div><h3>Our crew, then a&nbsp;morning</h3><p>Installed into a finished house, walked through with you, finished inside forty eight&nbsp;hours.</p></div></li>
+    <li><div><h3>We get to know&nbsp;you</h3><p>We talk about your routines, your house and what you'd like to make possible. You can arrive with a clear idea or a handful of things you're drawn&nbsp;to.</p></div></li>
+    <li><div><h3>Then we design&nbsp;it</h3><p>You'll see the layout, materials and equipment together, with a clear proposal and price. We explain our recommendations and work through the choices with&nbsp;you.</p></div></li>
+    <li><div><h3>We work with the people building your&nbsp;home</h3><p>Your designer and builder are part of the process. We coordinate the requirements early so the room fits naturally into their&nbsp;plans.</p></div></li>
+    <li><div><h3>We bring it&nbsp;together</h3><p>We coordinate supply and installation, then walk you through the finished space so you feel comfortable using everything in&nbsp;it.</p></div></li>
   </ol>
 </section>
 
@@ -680,34 +657,29 @@
   <div class="split split--wide">
     <div>
       <div class="eyb">Care</div>
-      <h2 style="max-width:20ch">Somebody has to look after the&nbsp;water.</h2>
-      <p class="lede" style="margin-top:var(--s-6)">Sauna heater and stones, steam seals, plunge chemistry and filters, the equipment, and the technology. On a schedule, for as long as&nbsp;you&nbsp;own&nbsp;the&nbsp;room.</p>
-      <p style="margin-top:var(--s-5)">In five years it should still be the room you want to walk into. That does not happen on its&nbsp;own.</p>
-      <p style="margin-top:var(--s-5)">Second homes are opened and closed for the season. No owner is named, and nothing is published without your permission in&nbsp;writing.</p>
+      <h2 style="max-width:20ch">We'll help you keep it that&nbsp;way.</h2>
+      <p class="lede" style="margin-top:var(--s-6)">Once the room is yours, there are practical things to look after: equipment, heaters, filters and water&nbsp;systems.</p>
+      <p style="margin-top:var(--s-5)">Our care plans are designed around what's in your room. We'll agree on the schedule and scope with you, so you know who to call and what's being taken care&nbsp;of.</p>
     </div>
     <figure><img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg?v=2" alt=""></figure>
   </div>
 </section>
 
 
-<!-- 7. INVESTMENT -->
+<!-- WHAT A ROOM COSTS -->
 <section class="sec wrap" id="costs">
   <div class="eyb">What it costs</div>
-  <h2 style="max-width:20ch">Where the money&nbsp;goes.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:48ch">Ranges, because the house decides a lot of it. The number stops being a range once we have stood in the&nbsp;space.</p>
+  <h2 style="max-width:18ch">What a room&nbsp;costs.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:52ch">Every project starts with the space and what you want to do in it. These ranges give you a place to&nbsp;begin.</p>
   <table class="ledger" style="margin-top:var(--s-7)">
-    <tr><th>What you are paying for</th><th>Range</th></tr>
-    <tr><td><strong>The design.</strong> Paid first, earned whether or not the room gets&nbsp;built.</td><td>$7,500 to&nbsp;$35,000</td></tr>
-    <tr><td><strong>Where the work happens.</strong> Platform, rack, bench, the made pieces and the&nbsp;cardio.</td><td>$60,000 to&nbsp;$250,000</td></tr>
-    <tr><td><strong>Where the water is.</strong> Sauna, plunge and steam, where the house will carry&nbsp;them.</td><td>$40,000 to&nbsp;$200,000</td></tr>
-    <tr style="font-weight:400"><td><strong>The care plan.</strong> From handover, for as long as&nbsp;you&nbsp;own&nbsp;the&nbsp;room.</td><td>$2,000 to $8,000 a&nbsp;year</td></tr>
+    <tr><th>Part of the project</th><th>Typical range</th></tr>
+    <tr><td>Design</td><td>$7,500 to&nbsp;$35,000</td></tr>
+    <tr><td>Gym equipment and fitted&nbsp;pieces</td><td>$60,000 to&nbsp;$250,000</td></tr>
+    <tr><td>Sauna, plunge and&nbsp;steam</td><td>$40,000 to&nbsp;$200,000</td></tr>
+    <tr style="font-weight:400"><td>Annual&nbsp;care</td><td>$2,000 to&nbsp;$8,000</td></tr>
   </table>
-  <ul class="rules" style="margin-top:var(--s-7)">
-    <li><strong>What the house can&nbsp;carry.</strong> Water, drainage and power decide the wet side before taste&nbsp;does.</li>
-    <li><strong>How much is made rather than&nbsp;bought.</strong> The rack and the bench are drawn for the&nbsp;wall.</li>
-    <li><strong>Whether the house is finished&nbsp;already.</strong> Protection, smaller deliveries, and more days spent on&nbsp;site.</li>
-  </ul>
-  <p style="margin-top:var(--s-6);max-width:50ch">One number before anything is ordered, and it does not move unless you move&nbsp;something.</p>
+  <p style="margin-top:var(--s-7);max-width:52ch">Your proposal will set out what's included, how the price breaks down, and any building work that needs to be coordinated&nbsp;separately.</p>
+  <p style="margin-top:var(--s-5);max-width:52ch">You'll have an agreed price before we place orders. If the scope changes, we'll discuss the cost with you&nbsp;first.</p>
 </section>
 
 
@@ -715,10 +687,10 @@
 <section class="sec--tight wrap" id="trade">
   <div class="strip">
     <div>
-      <div class="eyb">Designers and builders</div>
-      <p style="margin-top:var(--s-3);max-width:48ch">Spec sheets, CAD blocks and renders in your format inside two days, and a one page rough in sheet your builder drops into the plan&nbsp;set.</p>
+      <div class="eyb">For designers and builders</div>
+      <p style="margin-top:var(--s-3);max-width:52ch">We want the room to feel like it belongs in the home you're creating. We work alongside your team, providing drawings, specifications and installation requirements in a format you can use. Bring us in early and we can help resolve the practical details while the plans are still taking&nbsp;shape.</p>
     </div>
-    <a class="btn btn--ghost" href="#contact">Ask for the trade pack</a>
+    <a class="btn btn--ghost" href="#contact">Talk to us about a project</a>
   </div>
 </section>
 
@@ -726,36 +698,37 @@
 <!-- QUESTIONS -->
 <section class="sec wrap" id="questions">
   <div class="eyb">Questions</div>
-  <h2 style="max-width:18ch">The ones we get&nbsp;asked.</h2>
+  <h2 style="max-width:22ch">A few things you might be&nbsp;wondering.</h2>
   <div class="qa">
-    <div class="q"><h3>I do not really know what I&nbsp;want.</h3>
-      <p>That is the normal place to start. We work from the week you already have rather than from a brief you had to&nbsp;write.</p></div>
-    <div class="q"><h3>Do you work with my builder and my&nbsp;designer?</h3>
-      <p>Yes, and it is the easier way to do it. We work to the builder's site rules and give the designer documents she can put in her own&nbsp;presentation.</p></div>
-    <div class="q"><h3>Can my house take a sauna and a&nbsp;plunge?</h3>
-      <p>Sometimes, and it is the first thing we check. A steam generator can want 125 amps on its own, so this is settled before anything is&nbsp;drawn.</p></div>
-    <div class="q"><h3>Do you make money on the&nbsp;equipment?</h3>
-      <p>Yes. The rack can come from one company and the sauna from another, and we make a margin on what we supply. Every piece comes with the reason we chose it over the&nbsp;others.</p></div>
-    <div class="q"><h3>Will anybody know it is my&nbsp;house?</h3>
-      <p>No. No owner is named, and nothing is photographed or published without your permission in&nbsp;writing.</p></div>
+    <div class="q"><h3>What if I'm not sure what I&nbsp;want?</h3>
+      <p>That's a good place to start. Tell us what you enjoy, what you miss doing, and what you're curious about. We'll help you work out what deserves a place&nbsp;in&nbsp;the&nbsp;room.</p></div>
+    <div class="q"><h3>Can you work with my designer and&nbsp;builder?</h3>
+      <p>Yes. We want them involved. They know your house, and the best result comes from planning the space&nbsp;together.</p></div>
+    <div class="q"><h3>Can we add a sauna or cold plunge to an existing&nbsp;home?</h3>
+      <p>Often, but it depends on the space and its services. We'll review the requirements with your building team before recommending a&nbsp;solution.</p></div>
+    <div class="q"><h3>Do you earn a margin on the&nbsp;equipment?</h3>
+      <p>Yes. We earn on the products we supply, alongside our design and installation fees. We'll explain what we recommend and&nbsp;why.</p></div>
+    <div class="q"><h3>Will you photograph my&nbsp;home?</h3>
+      <p>Only with your written permission. Your privacy is&nbsp;part&nbsp;of&nbsp;the&nbsp;brief.</p></div>
   </div>
 </section>
 
 
-<!-- 8. CONVERSATION -->
+<!-- CONTACT -->
 <section class="sec" id="contact" style="background:var(--offwhite)">
   <div class="wrap">
     <div class="split split--wide">
       <div>
         <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg?v=2" alt="Marlow">
-        <h2 style="max-width:16ch">Tell us what you actually do in a&nbsp;week.</h2>
-        <p style="margin-top:var(--s-6);max-width:46ch">Not equipment, not square footage. What you do in a week, what you wish you did more often, and what the house might be able to give it. Then we make a room you want&nbsp;to&nbsp;come&nbsp;back&nbsp;to.</p>
+        <h2 style="max-width:18ch">Tell us about the room you've been thinking&nbsp;about.</h2>
+        <p style="margin-top:var(--s-6);max-width:46ch">A corner you want to change. A room on the plans. A whole floor you're still&nbsp;imagining.</p>
+        <p style="margin-top:var(--s-4);max-width:46ch">We'd love to hear what you want to do with&nbsp;it.</p>
         <!-- FILL BEFORE THIS GOES OUT: the real addresses, and whether a phone number is published. -->
         <div class="contact">
           <div><div class="cap">Owners</div><a class="contact__l" href="mailto:hello@marlow.studio">hello@marlow.studio</a></div>
           <div><div class="cap">Designers and builders</div><a class="contact__l" href="mailto:trade@marlow.studio">trade@marlow.studio</a></div>
         </div>
-        <p class="cap" style="margin-top:var(--s-6)">Dallas &middot; First rooms 2027 &middot; Every picture here is a&nbsp;drawing</p>
+        <p class="cap" style="margin-top:var(--s-6)">Dallas &middot; First rooms planned for 2027 &middot; Images show design&nbsp;concepts</p>
       </div>
       <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_one-bell-close.jpg?v=2" alt=""></figure>
     </div>
@@ -764,41 +737,33 @@
 
 </div>
 <div class="view" data-v="investor" id="view-investor" role="tabpanel" aria-labelledby="tab-investor" tabindex="0">
-
 <header class="hero" id="topi">
   <img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg?v=2" alt="">
   <div class="veil"></div>
   <div class="hero__mk"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg?v=2" alt="Marlow"></div>
   <div class="hero__foot">
     <div>
-      <h1>Part of<br>the house.</h1>
-      <p class="hero__deck"><span class="bn">Marlow</span> designs the gym and the wellness room, supplies everything in them, installs them, and looks after&nbsp;them.</p>
-      <p class="hero__deck" style="margin-top:var(--s-4)">What the owner is buying is an hour a day in their own&nbsp;house.</p>
+      <div class="hero__tag"><span class="bn">Marlow</span> Investor overview &middot; 2026</div>
+      <h1 class="h1--long">A considered room. A business built around&nbsp;it.</h1>
+      <p class="hero__deck"><span class="bn">Marlow</span> is being developed to handle that work as one&nbsp;studio.</p>
     </div>
-    <div class="cap">Investor overview &middot; 2026</div>
   </div>
 </header>
 
+<section class="sec wrap" id="open">
+  <p class="lede" style="max-width:58ch">People investing in their homes are making space for training, recovery and time to themselves. Bringing those spaces together requires decisions across design, equipment, building services and ongoing&nbsp;care.</p>
+  <p style="margin-top:var(--s-6);max-width:58ch">We'll begin in North Texas, working with homeowners, designers and builders to create private gyms and wellness rooms. Revenue will come from design, product supply, installation and ongoing&nbsp;care.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">Our first job is to complete two rooms that demonstrate the idea: spaces people enjoy using, built to a standard designers will&nbsp;recommend.</p>
+</section>
 
-<!-- THE BUYER, BEFORE THE NUMBERS -->
-<section class="sec dark" id="buyer">
+<section class="sec dark" id="believe">
   <div class="wrap">
-    <p class="story" style="max-width:38ch">Somebody in Westlake is drawing a wellness floor this&nbsp;month.</p>
-    <p class="story" style="max-width:38ch">What they want out of it is forty minutes with the bar, then heat, then cold, then twenty minutes in a chair, in a room that looks like the rest of the&nbsp;house.</p>
-    <p class="story story--end" style="max-width:38ch">What they get quoted is&nbsp;equipment.</p>
-    <p class="story__note">Everything after this page is about who ends up selling them the&nbsp;room.</p>
+    <div class="eyb">What we believe</div>
+    <h2 style="max-width:24ch">A private gym can deserve the attention the rest of the house&nbsp;gets.</h2>
+    <p class="lede" style="margin-top:var(--s-6);max-width:46ch">The same thought that goes into the kitchen, the living room or the&nbsp;garden.</p>
+    <p class="lede" style="margin-top:var(--s-7);max-width:50ch">The opportunity is to bring that attention to the whole experience, from the first drawing to the way the room is looked after years&nbsp;later.</p>
   </div>
 </section>
-
-<section class="sec wrap" id="i1" style="padding-bottom:0">
-  <div class="chap">
-    <div class="chap__k"><span class="chap__n">01</span><span class="chap__of">of 4</span></div>
-    <h2>The market</h2>
-    <p>Who is building right now, and why nobody is lined up to do this part of&nbsp;it.</p>
-  </div>
-</section>
-
-<!-- WHY NOW -->
 <section class="sec wrap" id="why">
   <div class="eyb">Why now</div>
   <h2 style="max-width:18ch">The houses are being built right&nbsp;now.</h2>
@@ -828,15 +793,132 @@
 </div>
 
 
-<section class="sec wrap" id="i2" style="padding-bottom:0">
-  <div class="chap">
-    <div class="chap__k"><span class="chap__n">02</span><span class="chap__of">of 4</span></div>
-    <h2>The field</h2>
-    <p>Every firm we could find doing this, how they all sound, and what is left that we can&nbsp;own.</p>
+
+<section class="sec wrap" id="prove">
+  <div class="eyb">What we need to prove</div>
+  <h2 style="max-width:24ch">Three things the first projects have to&nbsp;establish.</h2>
+  <ul class="rules" style="margin-top:var(--s-7)">
+    <li><strong>That clients will pay for the complete&nbsp;offer.</strong> Design, supply, installation and care bought together rather than&nbsp;separately.</li>
+    <li><strong>That we can deliver it at the planned&nbsp;margin.</strong> Actual gross margin against estimate, on a room with a known&nbsp;price.</li>
+    <li><strong>That designers and builders will bring us into their next&nbsp;project.</strong> One trade partner who refers a second&nbsp;client.</li>
+  </ul>
+  <p style="margin-top:var(--s-7);max-width:56ch">The financial model sets out our assumptions. Supplier terms, installation capacity and care plan uptake will need to be tested through the first&nbsp;rooms.</p>
+</section>
+<section class="sec dark" id="money">
+  <div class="wrap">
+    <div class="eyb">Revenue</div>
+    <h2 style="max-width:20ch">Four ways one room&nbsp;pays.</h2>
+    <p class="lede" style="margin-top:var(--s-6);max-width:54ch">We are copying what the good audio visual companies did twenty years ago. Sell to the designers and builders, get written into the plans early, and look after the house for as long as the family owns&nbsp;it.</p>
+    <table class="ledger">
+      <tr><th>Where the money&nbsp;comes&nbsp;from</th><th>On a $120,000 room</th></tr>
+      <tr><td><strong>Design fee.</strong> Paid up front and earned whether or not the room gets built. Seven and a half to thirty five thousand depending on&nbsp;scope.</td><td>$18,000</td></tr>
+      <tr><td><strong>Supply.</strong> The rack can come from one company and the sauna from another. Dealer margin of 25 to 35 percent on what we bill, twenty eight on this one. This is the&nbsp;engine.</td><td>$84,000</td></tr>
+      <tr><td><strong>Install and project&nbsp;management.</strong> Our own crew beside the builder, billed at fifteen percent of the room and carrying about thirty&nbsp;percent.</td><td>$18,000</td></tr>
+      <tr><td><strong>Care plan.</strong> Two to eight thousand a year depending on what is in the room, attached at handover, running for the life of&nbsp;it.</td><td>$5,200 a&nbsp;year</td></tr>
+      <tr><td>Gross profit on the&nbsp;build</td><td>$46,920, or&nbsp;39%</td></tr>
+    </table>
+    <p style="margin-top:var(--s-6);max-width:54ch">That room runs above the 34 to 38 percent we hold the company to, and it should. A project with both rooms in it carries the design fee and the install better than a single gym, and the blended number has to live with all&nbsp;three.</p>
+  </div>
+</section>
+<!-- WHAT YOU ARE UNDERWRITING -->
+<section class="sec dark">
+  <div class="wrap">
+    <div class="eyb">Two models</div>
+    <h2 style="max-width:16ch">Two ways to run&nbsp;it.</h2>
+    <p class="lede" style="margin-top:var(--s-6);max-width:54ch">Texas first is slower and cheaper to prove. Both markets from the start is faster, needs a bigger raise, and needs a second install standard sooner than we would&nbsp;like.</p>
+    <div class="figs figs--two" style="border-top-color:var(--offwhite)">
+      <div class="fig fig--lg">
+        <div class="fig__k">Texas first &middot; Year 5</div>
+        <div class="fig__n">$10.27M</div>
+        <p>78 projects. EBITDA $1.42M. Raise of $500,000 to&nbsp;$600,000.</p>
+      </div>
+      <div class="fig fig--lg">
+        <div class="fig__k">Both markets &middot; Year 5</div>
+        <div class="fig__n">$15.10M</div>
+        <p>112 projects. EBITDA $2.04M. Raise of $900,000 to&nbsp;$1.1M.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- THE RAISE -->
+<section class="sec wrap" id="raise">
+  <div class="eyb">The raise</div>
+  <h2 style="max-width:22ch">Six hundred thousand for the two years before&nbsp;breakeven.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">The Year 5 line is the easy part. What is worth reading is the two years before the business stops losing money, because that is the only stretch the money is&nbsp;needed.</p>
+  <table class="bridge">
+    <tr><th>Texas first</th><th>Projects</th><th>Project revenue</th><th>Care plans</th><th>Total</th><th>EBITDA</th></tr>
+      <tr><td>Year 1</td><td data-l="Projects">6</td><td data-l="Project revenue">$0.64M</td><td data-l="Care plans">$0.02M</td><td data-l="Total">$0.66M</td><td data-l="EBITDA" class="neg">($0.36M)</td></tr>
+      <tr><td>Year 2</td><td data-l="Projects">16</td><td data-l="Project revenue">$1.95M</td><td data-l="Care plans">$0.07M</td><td data-l="Total">$2.02M</td><td data-l="EBITDA" class="neg">($0.15M)</td></tr>
+      <tr><td>Year 3</td><td data-l="Projects">32</td><td data-l="Project revenue">$3.90M</td><td data-l="Care plans">$0.20M</td><td data-l="Total">$4.10M</td><td data-l="EBITDA">$0.22M</td></tr>
+      <tr><td>Year 4</td><td data-l="Projects">54</td><td data-l="Project revenue">$6.58M</td><td data-l="Care plans">$0.42M</td><td data-l="Total">$7.00M</td><td data-l="EBITDA">$0.87M</td></tr>
+      <tr><td>Year 5</td><td data-l="Projects">78</td><td data-l="Project revenue">$9.50M</td><td data-l="Care plans">$0.76M</td><td data-l="Total">$10.26M</td><td data-l="EBITDA">$1.42M</td></tr>
+  </table>
+  <p class="cap" style="margin-top:var(--s-3)">Projects, total revenue and EBITDA at Year 5 are the plan's conservative table. Everything else is ours: the $121,800 average, 36 percent on the build and 60 percent on the care, the $5,200 care plan, and the cost base. Our Year 5 total lands $5,200 under the plan's $10.27M, which is one care plan. Year 1 bills the two flagship rooms at cost, so the $87,700 given up sits inside that line. The care column assumes every room attaches and none churns, which is the most optimistic assumption on this page: at eighty percent retention Year 5 care revenue is about $611,000 and EBITDA about&nbsp;$1.33M.</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">Losses run to five hundred and ten thousand dollars across the first two years and that is the deepest it gets. Year 3 stops burning. The hole is not paid back until about month&nbsp;forty. The raise covers twenty four months of loss, not forty months of payback, because from Year 3 the work funds the&nbsp;work.</p>
+  <table class="ledger" style="margin-top:var(--s-7)">
+    <tr><th>Use of funds</th><th>Amount</th></tr>
+    <tr><td><strong>Founder pay, partial, through year&nbsp;two.</strong> Both of us full time from the start, well under market until Year&nbsp;3.</td><td>$260,000</td></tr>
+    <tr><td><strong>The two flagship rooms, sold at&nbsp;cost.</strong> The margin given up to have something finished to stand in and to&nbsp;photograph.</td><td>$87,700</td></tr>
+    <tr><td><strong>The trade kit and the&nbsp;photography.</strong> Spec sheets, CAD blocks, renderings, and shooting the first two rooms to magazine&nbsp;standard.</td><td>$70,000</td></tr>
+    <tr><td><strong>Entity, insurance, legal, dealer&nbsp;agreements.</strong></td><td>$45,000</td></tr>
+    <tr><td><strong>Everything else across the two&nbsp;years.</strong> Tools, freight, travel, software, the rough in&nbsp;sheets.</td><td>$47,000</td></tr>
+    <tr><td><strong>Reserve, against a maker who will not open an&nbsp;account.</strong> Prepayment and freight on the first orders, which is the one thing that turns into cash on day&nbsp;one.</td><td>$60,000</td></tr>
+    <tr><td><strong>Contingency.</strong></td><td>$30,000</td></tr>
+    <tr><td>Twenty four months of loss, plus the balance sheet behind&nbsp;it</td><td>$600,000</td></tr>
+  </table>
+  <p style="margin-top:var(--s-5);max-width:58ch"><strong>One line in that table is not&nbsp;cash.</strong> The $87,700 is margin we choose not to earn on the first two rooms rather than money we spend, so the cash that actually leaves the account across the two years is&nbsp;$512,300.</p>
+  <p class="cap" style="margin-top:var(--s-5)">Ours, not the plan's, which gives a range of $500,000 to $600,000 and no breakdown. The first five lines come to the $510,000 loss above. They are what the cash goes out on rather than the whole cost base, because most of the two year overhead is carried by gross profit on the work. The last two lines are balance&nbsp;sheet.</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">Working capital comes down to one line in the contract. Equipment on an average project costs us sixty one thousand four hundred dollars, and a fifty percent deposit is five hundred short of the order. So the deposit is fifty five percent, and the equipment is paid for before it is ordered. That holds only if a maker will open an account. Several will not for a dealer with no history, and prepayment plus freight ahead of the second draw is the one real exposure in the model. It is what the sixty thousand reserve is&nbsp;for.</p>
+  <p style="margin-top:var(--s-5);max-width:58ch">Whether this needs a second round: on these numbers, no. Year 3 pays for itself and Year 4 pays the hole back. A second round would mean the Northeast moving earlier than Year 2 or a third crew sooner than the table carries, and both are decisions we would bring to&nbsp;you.</p>
+  <p class="open-q">The structure, the percentage and what a return looks like are still&nbsp;open. The amount and what it does are above. The terms are a&nbsp;conversation.</p>
+</section>
+<div class="bleed solo" style="margin-top:var(--s-2)">
+  <img loading="lazy" decoding="async" src="assets/render_pavilion-at-night.jpg?v=2" alt="">
+  <div class="mk-sm"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg?v=2" alt="Marlow"></div>
+  <div class="lay"><div>
+    <h2>It is still on at ten at&nbsp;night.</h2>
+  </div></div>
+</div>
+<!-- US -->
+
+<section class="sec wrap" id="us">
+  <div class="eyb">Who's behind it</div>
+  <h2 style="max-width:20ch">Dan and&nbsp;Dave.</h2>
+  <div class="split split--wide" style="margin-top:var(--s-6)">
+    <div>
+      <p class="lede">Dan and Dave came to this through a shared interest in training and the spaces people choose to spend time&nbsp;in.</p>
+      <p style="margin-top:var(--s-5)">Dan brings a background in creative direction and brand development. Dave brings experience in Texas law and wealth&nbsp;management.</p>
+      <p style="margin-top:var(--s-5)">Together, they're developing a business around a room they would want in their own homes, with the design, delivery and care considered from the&nbsp;beginning.</p>
+    </div>
+    <figure><img loading="lazy" decoding="async" src="assets/render_drawing-on-the-bench.jpg?v=2" alt="A pencil drawing of a gym wall with leather, oak and bronze samples beside it"></figure>
   </div>
 </section>
 
-<!-- THE FIELD -->
+<section class="sec" id="close" style="background:var(--offwhite)">
+  <div class="wrap">
+    <div class="two" style="align-items:center">
+      <div>
+        <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg?v=2" alt="Marlow">
+        <div class="eyb" style="margin-top:var(--s-6)">The first chapter</div>
+        <h2 style="max-width:20ch;margin-top:var(--s-3)">Help us build the first&nbsp;ones.</h2>
+        <p style="margin-top:var(--s-6);max-width:46ch">We're seeking capital to establish the supplier relationships, complete the first projects and build the team around&nbsp;them.</p>
+        <p style="margin-top:var(--s-4);max-width:46ch">We'd welcome a conversation with someone who understands the value of these spaces and wants to help us bring the first ones to&nbsp;life.</p>
+        <div style="margin-top:var(--s-7);display:flex;gap:var(--s-4);flex-wrap:wrap">
+          <a class="btn" href="#contact">Start a conversation</a>
+          <a class="btn btn--ghost" href="#appendix">Supporting material</a>
+        </div>
+      </div>
+      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_leather-collar-on-column.jpg?v=2" alt=""></figure>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec wrap" id="appendix" style="border-top:2px solid var(--ink)">
+  <div class="eyb">Supporting material</div>
+  <h2 style="max-width:24ch">The working behind the pages&nbsp;above.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:54ch">The competitive audit, the electrical requirements, the brand work, the valuation arithmetic and the stage plan. Kept here so the pages above stay on the business and the money, and so none of it has to be asked&nbsp;for.</p>
+</section>
 <section class="sec wrap" id="field">
   <div class="eyb">The field</div>
   <h2 style="max-width:26ch">Two of our assumptions were&nbsp;wrong.</h2>
@@ -893,7 +975,7 @@
   <div class="eyb">Where we stand</div>
   <h2 style="max-width:22ch">Five things we decided before we&nbsp;started.</h2>
   <ul class="rules" style="margin-top:var(--s-6)">
-    <li><strong>Several brands, not&nbsp;one.</strong> We hold dealer agreements with a number of manufacturers, so the rack can come from one and the sauna from another. Nobody has to take a&nbsp;package.</li>
+    <li><strong>More than one&nbsp;brand.</strong> We will hold agreements with several manufacturers rather than one, so the rack can come from one and the sauna from another. Nobody has to take a package. None of those agreements are signed&nbsp;yet.</li>
     <li><strong>We make money on the equipment we&nbsp;sell.</strong> That goes in writing beside every piece, with the reason it is in the room, so an owner can tell whether it is there for them or for&nbsp;us.</li>
     <li><strong>Both rooms, one&nbsp;studio.</strong> The gym and the wellness room, one crew, and one care plan covering&nbsp;both.</li>
     <li><strong>We sell through designers and&nbsp;builders.</strong> They are drawing the house a year before anybody thinks about equipment, and that is when this gets&nbsp;decided.</li>
@@ -968,32 +1050,6 @@
 </section>
 
 
-<section class="sec wrap" id="i3" style="padding-bottom:0">
-  <div class="chap">
-    <div class="chap__k"><span class="chap__n">03</span><span class="chap__of">of 4</span></div>
-    <h2>The business</h2>
-    <p>Where the money comes from, what it is worth at Year 5, and what we are asking&nbsp;for.</p>
-  </div>
-</section>
-
-<!-- THE BUSINESS -->
-<section class="sec dark" id="money">
-  <div class="wrap">
-    <div class="eyb">Revenue</div>
-    <h2 style="max-width:20ch">Four ways one room&nbsp;pays.</h2>
-    <p class="lede" style="margin-top:var(--s-6);max-width:54ch">We are copying what the good audio visual companies did twenty years ago. Sell to the designers and builders, get written into the plans early, and look after the house for as long as the family owns&nbsp;it.</p>
-    <table class="ledger">
-      <tr><th>Where the money&nbsp;comes&nbsp;from</th><th>On a $120,000 room</th></tr>
-      <tr><td><strong>Design fee.</strong> Paid up front and earned whether or not the room gets built. Seven and a half to thirty five thousand depending on&nbsp;scope.</td><td>$18,000</td></tr>
-      <tr><td><strong>Supply.</strong> The rack can come from one company and the sauna from another. Dealer margin of 25 to 35 percent on what we bill, twenty eight on this one. This is the&nbsp;engine.</td><td>$84,000</td></tr>
-      <tr><td><strong>Install and project&nbsp;management.</strong> Our own crew beside the builder, billed at fifteen percent of the room and carrying about thirty&nbsp;percent.</td><td>$18,000</td></tr>
-      <tr><td><strong>Care plan.</strong> Two to eight thousand a year depending on what is in the room, attached at handover, running for the life of&nbsp;it.</td><td>$5,200 a&nbsp;year</td></tr>
-      <tr><td>Gross profit on the&nbsp;build</td><td>$46,920, or&nbsp;39%</td></tr>
-    </table>
-    <p style="margin-top:var(--s-6);max-width:54ch">That room runs above the 34 to 38 percent we hold the company to, and it should. A project with both rooms in it carries the design fee and the install better than a single gym, and the blended number has to live with all&nbsp;three.</p>
-  </div>
-</section>
-<!-- WHAT YOU ARE UNDERWRITING -->
 <section class="sec wrap">
   <div class="eyb">Underwriting</div>
   <h2 style="max-width:24ch">The honest range is lower than the&nbsp;plan's.</h2>
@@ -1025,57 +1081,6 @@
   <p style="margin-top:var(--s-5);max-width:58ch">The open question is not demand. The houses are being drawn for the room whether or not we build it. It is whether this becomes a contract business or stays a project business, and every decision in the plan is aimed at&nbsp;that.</p>
 </section>
 <!-- THE NUMBERS -->
-<section class="sec dark">
-  <div class="wrap">
-    <div class="eyb">Two models</div>
-    <h2 style="max-width:16ch">Two ways to run&nbsp;it.</h2>
-    <p class="lede" style="margin-top:var(--s-6);max-width:54ch">Texas first is slower and cheaper to prove. Both markets from the start is faster, needs a bigger raise, and needs a second install standard sooner than we would&nbsp;like.</p>
-    <div class="figs figs--two" style="border-top-color:var(--offwhite)">
-      <div class="fig fig--lg">
-        <div class="fig__k">Texas first &middot; Year 5</div>
-        <div class="fig__n">$10.27M</div>
-        <p>78 projects. EBITDA $1.42M. Raise of $500,000 to&nbsp;$600,000.</p>
-      </div>
-      <div class="fig fig--lg">
-        <div class="fig__k">Both markets &middot; Year 5</div>
-        <div class="fig__n">$15.10M</div>
-        <p>112 projects. EBITDA $2.04M. Raise of $900,000 to&nbsp;$1.1M.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- THE RAISE -->
-<section class="sec wrap" id="raise">
-  <div class="eyb">The raise</div>
-  <h2 style="max-width:22ch">Six hundred thousand for the two years before&nbsp;breakeven.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:58ch">The Year 5 line is the easy part. What is worth reading is the two years before the business stops losing money, because that is the only stretch the money is&nbsp;needed.</p>
-  <table class="bridge">
-    <tr><th>Texas first</th><th>Projects</th><th>Project revenue</th><th>Care plans</th><th>Total</th><th>EBITDA</th></tr>
-      <tr><td>Year 1</td><td data-l="Projects">6</td><td data-l="Project revenue">$0.64M</td><td data-l="Care plans">$0.02M</td><td data-l="Total">$0.66M</td><td data-l="EBITDA" class="neg">($0.36M)</td></tr>
-      <tr><td>Year 2</td><td data-l="Projects">16</td><td data-l="Project revenue">$1.95M</td><td data-l="Care plans">$0.07M</td><td data-l="Total">$2.02M</td><td data-l="EBITDA" class="neg">($0.15M)</td></tr>
-      <tr><td>Year 3</td><td data-l="Projects">32</td><td data-l="Project revenue">$3.90M</td><td data-l="Care plans">$0.20M</td><td data-l="Total">$4.10M</td><td data-l="EBITDA">$0.22M</td></tr>
-      <tr><td>Year 4</td><td data-l="Projects">54</td><td data-l="Project revenue">$6.58M</td><td data-l="Care plans">$0.42M</td><td data-l="Total">$7.00M</td><td data-l="EBITDA">$0.87M</td></tr>
-      <tr><td>Year 5</td><td data-l="Projects">78</td><td data-l="Project revenue">$9.50M</td><td data-l="Care plans">$0.76M</td><td data-l="Total">$10.26M</td><td data-l="EBITDA">$1.42M</td></tr>
-  </table>
-  <p class="cap" style="margin-top:var(--s-3)">Projects, total revenue and EBITDA at Year 5 are the plan's conservative table. Everything else is ours: the $121,800 average, 36 percent on the build and 60 percent on the care, the $5,200 care plan, and the cost base. Our Year 5 total lands $5,200 under the plan's $10.27M, which is one care plan. Year 1 bills the two flagship rooms at cost, so the $87,700 given up sits inside that line. The care column assumes every room attaches and none churns, which is the most optimistic assumption on this page: at eighty percent retention Year 5 care revenue is about $611,000 and EBITDA about&nbsp;$1.33M.</p>
-  <p style="margin-top:var(--s-7);max-width:58ch">Losses run to five hundred and ten thousand dollars across the first two years and that is the deepest it gets. Year 3 stops burning. The hole is not paid back until about month forty, and we would rather put that on the page than have somebody find it. The raise covers twenty four months of loss, not forty months of payback, because from Year 3 the work funds the&nbsp;work.</p>
-  <table class="ledger" style="margin-top:var(--s-7)">
-    <tr><th>Use of funds</th><th>Amount</th></tr>
-    <tr><td><strong>Founder pay, partial, through year&nbsp;two.</strong> Both of us full time from the start, well under market until Year&nbsp;3.</td><td>$260,000</td></tr>
-    <tr><td><strong>The two flagship rooms, sold at&nbsp;cost.</strong> The margin given up to have something finished to stand in and to&nbsp;photograph.</td><td>$87,700</td></tr>
-    <tr><td><strong>The trade kit and the&nbsp;photography.</strong> Spec sheets, CAD blocks, renderings, and shooting the first two rooms to magazine&nbsp;standard.</td><td>$70,000</td></tr>
-    <tr><td><strong>Entity, insurance, legal, dealer&nbsp;agreements.</strong></td><td>$45,000</td></tr>
-    <tr><td><strong>Everything else across the two&nbsp;years.</strong> Tools, freight, travel, software, the rough in&nbsp;sheets.</td><td>$47,000</td></tr>
-    <tr><td><strong>Reserve, against a maker who will not open an&nbsp;account.</strong> Prepayment and freight on the first orders, which is the one thing that turns into cash on day&nbsp;one.</td><td>$60,000</td></tr>
-    <tr><td><strong>Contingency.</strong></td><td>$30,000</td></tr>
-    <tr><td>Twenty four months of loss, plus the balance sheet behind&nbsp;it</td><td>$600,000</td></tr>
-  </table>
-  <p style="margin-top:var(--s-5);max-width:58ch"><strong>One line in that table is not&nbsp;cash.</strong> The $87,700 is margin we choose not to earn on the first two rooms rather than money we spend, so the cash that actually leaves the account across the two years is&nbsp;$512,300.</p>
-  <p class="cap" style="margin-top:var(--s-5)">Ours, not the plan's, which gives a range of $500,000 to $600,000 and no breakdown. The first five lines come to the $510,000 loss above. They are what the cash goes out on rather than the whole cost base, because most of the two year overhead is carried by gross profit on the work. The last two lines are balance&nbsp;sheet.</p>
-  <p style="margin-top:var(--s-7);max-width:58ch">Working capital comes down to one line in the contract. Equipment on an average project costs us sixty one thousand four hundred dollars, and a fifty percent deposit is five hundred short of the order. So the deposit is fifty five percent, and the equipment is paid for before it is ordered. That holds only if a maker will open an account. Several will not for a dealer with no history, and prepayment plus freight ahead of the second draw is the one real exposure in the model. It is what the sixty thousand reserve is&nbsp;for.</p>
-  <p style="margin-top:var(--s-5);max-width:58ch">Whether this needs a second round: on these numbers, no. Year 3 pays for itself and Year 4 pays the hole back. A second round would mean the Northeast moving earlier than Year 2 or a third crew sooner than the table carries, and both are decisions we would bring to you rather than&nbsp;discover.</p>
-  <p class="open-q">Still ours to settle, and we would rather say so than put a number on a page we have not earned: the structure, the percentage, and what a return looks like. The amount and what it does are above. The terms are a&nbsp;conversation.</p>
-</section>
 <div class="bleed solo" style="margin-top:var(--s-2)">
   <img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg?v=2" alt="">
   <div class="lay"><div>
@@ -1084,15 +1089,6 @@
 </div>
 
 
-<section class="sec wrap" id="i4" style="padding-bottom:0">
-  <div class="chap">
-    <div class="chap__k"><span class="chap__n">04</span><span class="chap__of">of 4</span></div>
-    <h2>The plan</h2>
-    <p>What year one is for, what we would ask about it, and the two people doing&nbsp;it.</p>
-  </div>
-</section>
-
-<!-- THE PLAN -->
 <section class="sec wrap" id="plan">
   <div class="eyb">The stages</div>
   <h2 style="max-width:18ch">The first job is to make something worth photographing.</h2>
@@ -1134,61 +1130,6 @@
     <li><strong>Somebody assembles this before we&nbsp;do.</strong> The New York firm already has most of the gym side. If it added wellness and turned to the trade it would be in front of us, and it has four showrooms and we have&nbsp;none.</li>
   </ul>
 </section>
-<div class="bleed solo" style="margin-top:var(--s-2)">
-  <img loading="lazy" decoding="async" src="assets/render_pavilion-at-night.jpg?v=2" alt="">
-  <div class="mk-sm"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg?v=2" alt="Marlow"></div>
-  <div class="lay"><div>
-    <h2>It is still on at ten at&nbsp;night.</h2>
-  </div></div>
-</div>
-<!-- US -->
-<section class="sec wrap" id="us">
-  <div class="split">
-    <figure style="aspect-ratio:4/5"><img loading="lazy" decoding="async" src="assets/render_drawing-on-the-bench.jpg?v=2" alt="A pencil drawing of a gym wall with leather, oak and bronze samples beside it"></figure>
-    <div>
-      <div class="eyb">Us</div>
-      <h2 style="max-width:18ch">Dan draws it. Dave sells it and gets it&nbsp;built.</h2>
-      <!-- FILL BEFORE THIS GOES OUT: name two clients and the Emmy category. This is the credential
-           carrying the most weight in a pitch with no track record and the one a reader cannot check. -->
-      <p style="margin-top:var(--s-5)"><span class="bn">Marlow</span> is the two of&nbsp;them.</p>
-      <p style="margin-top:var(--s-5)">Dan has spent twenty years as a creative director on brands you would recognise, with an Emmy from one of them. He does the drawings, the materials, the light and everything you can see. What he cares about is why some rooms feel good to stand in and most do&nbsp;not.</p>
-      <p style="margin-top:var(--s-4)">Dave spent his in Texas law and wealth management, which means twenty years in rooms with the people who buy these houses. He does the makers, the trade, the crew and the&nbsp;money.</p>
-      <p style="margin-top:var(--s-4)">They both train and have for a long time. Dave rides. Dan does CrossFit and is a purple belt in jiu-jitsu. Between them they have used a lot of rooms and never one like the room they are describing, which is most of why they are doing&nbsp;it.</p>
-    </div>
-  </div>
-</section>
-<!-- CLOSE -->
-<section class="sec" style="background:var(--offwhite)">
-  <div class="wrap">
-    <div class="two" style="align-items:center">
-      <div>
-        <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg?v=2" alt="Marlow">
-        <h2 style="max-width:14ch">Let us build the first one for&nbsp;you.</h2>
-        <p style="margin-top:var(--s-6)">We would rather take money from somebody who would actually want one of these. The first room being yours is the cheapest proof either of us will ever&nbsp;get.</p>
-        <p style="margin-top:var(--s-4)">So come and see it, tell us what you really do in a week, and let us draw it for you. That conversation works whichever way you decide to come&nbsp;in.</p>
-        <div style="margin-top:var(--s-7);display:flex;gap:var(--s-4);flex-wrap:wrap">
-          <a class="btn" href="#contact">Start a conversation</a>
-          <a class="btn btn--ghost" href="#money">The numbers again</a>
-        </div>
-      </div>
-      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_one-bell-close.jpg?v=2" alt=""></figure>
-    </div>
-  </div>
-</section>
-
-</div>
-</div>
-<footer class="pagefoot wrap">
-  <div class="two" style="align-items:flex-end">
-    <div>
-      <div style="font-weight:800;letter-spacing:.3em;text-transform:uppercase;font-size:15px"><span class="bn">Marlow</span></div>
-      <p class="cap" style="margin-top:var(--s-4)">Dallas &middot; New&nbsp;York</p>
-      <p class="cap" style="margin-top:var(--s-1)">Investor overview &middot; 2026 &middot;&nbsp;Confidential</p>
-    </div>
-    <p class="cap" style="text-align:right">Name and figures are working drafts. No owner named. No room published without written&nbsp;permission.</p>
-  </div>
-</footer>
-
 
 <script>
 (function(){
