@@ -61,7 +61,7 @@
        down, so the thing Dan asked for, an evolution rather than one trick, is in the page itself:
        4% at the first plate, 9% by the last. Nothing fades in on scroll. */
     html.motion .plx{will-change:transform}
-    html.motion .hero__frames img{transition:opacity 1.6s var(--ease)}
+    html.motion .frames img{transition:opacity 1.6s var(--ease)}
     html.motion .hero__frames{animation:drift 44s ease-out both;transform-origin:58% 50%}
     @keyframes drift{from{transform:scale(1.0)}to{transform:scale(1.08)}}
     /* The cover type settles once, on load, and nothing else on the page does. It is the one
@@ -71,6 +71,21 @@
     html.motion .hero h1{animation-delay:.12s}
     html.motion .hero__deck{animation-delay:.24s}
     @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+    /* Four: the pictures themselves. Every framed image takes a slow push in under the pointer. */
+    @media (hover:hover){
+      html.motion .tiles figure img,html.motion .details figure img,html.motion .pieces figure img,
+      html.motion .mat figure img,html.motion .split figure img,html.motion .duo figure img,
+      html.motion .trio figure img,html.motion .pair figure img,html.motion .inset img,
+      html.motion .pinhead__fig img,html.motion #contact figure img{
+        transition:transform 1s var(--ease)}
+      html.motion .tiles figure:hover img,html.motion .details figure:hover img,
+      html.motion .pieces figure:hover img,html.motion .mat figure:hover img,
+      html.motion .split figure:hover img,html.motion .duo figure:hover img,
+      html.motion .trio figure:hover img,html.motion .pair figure:hover img,
+      html.motion .inset:hover img,html.motion .pinhead__fig:hover img,
+      html.motion #contact figure:hover img{transform:scale(1.045)}
+    }
   }
   .dark :focus-visible,.hero :focus-visible,.solo :focus-visible{outline-color:var(--offwhite)}
   .skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--ink);color:var(--offwhite);
@@ -137,9 +152,13 @@
       border-top:2px solid var(--ink);padding-top:var(--s-6)}
   .q h3{font-size:18px;font-weight:600;letter-spacing:0;max-width:30ch}
   .q p{margin-top:var(--s-3);font-size:15px;line-height:1.55;max-width:44ch;color:var(--text-quiet)}
-  .contact{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s-6);margin-top:var(--s-7);
-           border-top:1px solid var(--ink);padding-top:var(--s-6)}
-  .contact__l{display:block;margin-top:var(--s-2);font-size:19px;font-weight:600;border-bottom:1px solid var(--lead)}
+  /* One address, set at the size of the thing you are being asked to do. Two addresses and three
+     paragraphs of qualification made the close read as a form rather than as an invitation. */
+  .mailto{display:inline-block;margin-top:var(--s-8);font-size:clamp(23px,2.7vw,34px);line-height:1.1;
+          letter-spacing:-.014em;border-bottom:1px solid var(--lead);padding-bottom:var(--s-3);
+          transition:border-color .5s var(--ease),color .5s var(--ease)}
+  .mailto:hover{border-bottom-color:var(--ink)}
+  .smallprint{margin-top:var(--s-3);font-size:12px;line-height:1.5;max-width:42ch;color:var(--text-quiet)}
   .contact p{margin-top:var(--s-3);font-size:15px;color:var(--text-quiet);max-width:34ch}
 
   /* product, given the room it deserves: one piece at full width, then the rest as tiles. */
@@ -202,10 +221,12 @@
   .hero .veil{position:absolute;inset:0;background:
     linear-gradient(to right,rgba(var(--ink-rgb),.78) 0%,rgba(var(--ink-rgb),.72) 24%,rgba(var(--ink-rgb),.50) 44%,rgba(var(--ink-rgb),.16) 63%,rgba(var(--ink-rgb),0) 78%),
     linear-gradient(to top,rgba(var(--ink-rgb),.60) 0%,rgba(var(--ink-rgb),.36) 30%,rgba(var(--ink-rgb),.12) 56%,rgba(var(--ink-rgb),.02) 76%,rgba(var(--ink-rgb),.10) 100%)}
-  /* the stack of cross dissolving covers */
-  .hero__frames{position:absolute;inset:0}
-  .hero__frames img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
-  .hero__frames img.is-on{opacity:1}
+  /* A stack of cross dissolving frames. Used on the cover and on the opening story's picture.
+     The frame carrying is-on in the markup is the one that paints with no script at all. */
+  .frames{position:absolute;inset:0}
+  .frames img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+  .frames img.is-on{opacity:1}
+  .morning__i{position:relative}
   /* the mark sits top left, clear of the line. Type never sits on type (DESIGN_TOKENS 2.3). */
   .hero__mk{position:absolute;right:var(--w);bottom:var(--s-8);width:min(9vw,104px);opacity:.92}
   /* the investor cover already has a line in that corner, so the mark sits above it */
@@ -315,6 +336,14 @@
   .hero__cta .btn{background:var(--offwhite);color:var(--ink);border-color:var(--offwhite)}
   .hero__cta .btn--light{background:none;color:var(--offwhite);border-color:rgba(var(--offwhite-rgb),.65)}
   .pagefoot{border-top:var(--hairline);padding:var(--s-8) 0 var(--s-9)}
+
+  /* Movement on the imagery. Every framed picture takes a slow push in under the pointer, on the
+     one house curve. A full second is deliberate: at the usual 300ms this reads as a UI affordance,
+     at a second it reads as the photograph settling. Pointer only, so nothing happens on a phone,
+     and the whole block is inert under reduced motion because the transition is inside the
+     motion gate below. */
+  .tiles figure,.details figure,.pieces figure,.board figure,.mat figure,.split figure,
+  .duo figure,.trio figure,.pair figure,.inset,.pinhead__fig,#contact figure{overflow:hidden}
 
   @media(max-width:880px){
     .wrap{padding-left:18px;padding-right:18px} /* sides only: a shorthand here zeroed every .sec wrap on phones */
@@ -557,7 +586,7 @@
   /* the new image components, last so they win */
   @media(max-width:880px){
     .details,.pieces{grid-template-columns:repeat(2,1fr);gap:var(--s-6) var(--s-4)}
-    .cards,.qa,.contact{grid-template-columns:1fr;gap:var(--s-6)}
+    .cards,.qa{grid-template-columns:1fr;gap:var(--s-6)}
     .morning{grid-template-columns:1fr}
     .morning__i{aspect-ratio:4/3}
     .tiles{grid-template-columns:repeat(2,1fr);gap:var(--s-5) var(--s-4)}
@@ -604,7 +633,7 @@
   <!-- Two frames, cross dissolving. The reference tier opens on a photograph that changes
        slowly and says almost nothing; the first frame carries is-on in the markup so the page
        is correct with no JavaScript and under reduced motion. -->
-  <div class="hero__frames">
+  <div class="frames hero__frames">
     <img data-eager class="is-on" src="assets/render_gym-opens-to-the-garden.jpg?v=2" alt="">
     <img data-eager src="assets/render_the-long-room-morning.jpg?v=2" alt="">
   </div>
@@ -628,7 +657,12 @@
     <p class="story story--end">We're interested in&nbsp;both.</p>
     <p class="story__note">What do you look forward to? What would you do more often if it were easier? Who else will&nbsp;use&nbsp;the&nbsp;space?</p>
   </div>
-  <figure class="morning__i"><img loading="lazy" decoding="async" src="assets/render_pommel-bench-and-towels.jpg?v=2" alt=""></figure>
+  <figure class="morning__i">
+    <div class="frames">
+      <img loading="lazy" decoding="async" class="is-on" src="assets/render_pommel-bench-and-towels.jpg?v=2" alt="">
+      <img loading="lazy" decoding="async" src="assets/render_linen-niche-open.jpg?v=2" alt="">
+    </div>
+  </figure>
 </section>
 
 
@@ -783,7 +817,7 @@
       <div class="eyb">For designers and builders</div>
       <p style="margin-top:var(--s-3);max-width:52ch">We want the room to feel like it belongs in the home you're creating. We work alongside your team, providing drawings, specifications and installation requirements in a format you can use. Bring us in early and we can help resolve the practical details while the plans are still taking&nbsp;shape.</p>
     </div>
-    <a class="btn btn--ghost" href="#contact">Talk to us about a project</a>
+    <a class="btn btn--ghost" href="#contact">Talk to us about a&nbsp;project</a>
   </div>
 </section>
 
@@ -797,15 +831,11 @@
       <div>
         <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg?v=2" alt="Marlow">
         <h2 style="max-width:18ch">Tell us about the room you've been thinking&nbsp;about.</h2>
-        <p style="margin-top:var(--s-6);max-width:46ch">A corner you want to change. A room on the plans. A whole floor you're still&nbsp;imagining.</p>
-        <p style="margin-top:var(--s-4);max-width:46ch">We'd love to hear what you want to do with&nbsp;it.</p>
-        <p style="margin-top:var(--s-4);max-width:46ch">We only photograph a finished room with your written permission. Your privacy is&nbsp;part&nbsp;of&nbsp;the&nbsp;brief.</p>
-        <!-- FILL BEFORE THIS GOES OUT: the real addresses, and whether a phone number is published. -->
-        <div class="contact">
-          <div><div class="cap">Owners</div><a class="contact__l" href="mailto:hello@marlow.studio">hello@marlow.studio</a></div>
-          <div><div class="cap">Designers and builders</div><a class="contact__l" href="mailto:trade@marlow.studio">trade@marlow.studio</a></div>
-        </div>
-        <p class="cap" style="margin-top:var(--s-6)">Dallas &middot; First rooms planned for 2027 &middot; Images show design&nbsp;concepts</p>
+        <p class="lede" style="margin-top:var(--s-6);max-width:40ch">A corner you want to change. A room on the plans. A whole floor you're still&nbsp;imagining.</p>
+        <!-- FILL BEFORE THIS GOES OUT: the real address, and whether a phone number is published. -->
+        <a class="mailto" href="mailto:hello@marlow.studio">hello@marlow.studio</a>
+        <p class="cap" style="margin-top:var(--s-8)">Dallas &middot; First rooms planned for&nbsp;2027</p>
+        <p class="smallprint">Images show design concepts. We only photograph a finished room with your written&nbsp;permission.</p>
       </div>
       <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_one-bell-close.jpg?v=2" alt=""></figure>
     </div>
@@ -1286,24 +1316,25 @@
     if(!window.matchMedia || !matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
     document.documentElement.classList.add('motion');
 
-    (function(){
-      var stack=document.querySelector('.hero__frames');
-      if(!stack) return;
+    [].slice.call(document.querySelectorAll('.frames')).forEach(function(stack, ix){
       var frames=[].slice.call(stack.querySelectorAll('img'));
       if(frames.length<2) return;
-      var rest=frames.slice(1);
-      Promise.all(rest.map(function(f){
+      Promise.all(frames.slice(1).map(function(f){
         return (f.decode? f.decode().catch(function(){}) : Promise.resolve());
       })).then(function(){
         var i=0;
-        setInterval(function(){
-          if(document.hidden) return;
-          frames[i].classList.remove('is-on');
-          i=(i+1)%frames.length;
-          frames[i].classList.add('is-on');
-        }, 8000);
+        /* each stack holds for eight seconds, offset from the one before it, so two pictures on
+           screen together never turn over on the same beat */
+        setTimeout(function(){
+          setInterval(function(){
+            if(document.hidden) return;
+            frames[i].classList.remove('is-on');
+            i=(i+1)%frames.length;
+            frames[i].classList.add('is-on');
+          }, 8000);
+        }, ix*2600);
       });
-    })();
+    });
 
     var items=[].slice.call(document.querySelectorAll('.plx')).map(function(el){
       var img=el.tagName==='IMG'?el:el.querySelector('img');
@@ -1325,7 +1356,12 @@
         var mid=r.top+r.height/2;
         var frac=Math.min(1,Math.max(0,(r.top+window.pageYOffset)/dh));
         var off=(mid-vh/2)*(0.04+0.05*frac);
-        i.img.style.transform='translate3d(0,'+(-off).toFixed(2)+'px,0) scale(1.14)';
+        /* and a slow push in across the pass: t runs 0 to 1 as the plate crosses the screen, so
+           the picture is a little larger leaving than it was arriving. The scale also has to cover
+           the offset, which is why it starts at 1.14 rather than at 1. */
+        var t=Math.min(1,Math.max(0,(vh-r.top)/(vh+r.height)));
+        var sc=(1.14+0.05*t).toFixed(4);
+        i.img.style.transform='translate3d(0,'+(-off).toFixed(2)+'px,0) scale('+sc+')';
       });
       ticking=false;
     }
