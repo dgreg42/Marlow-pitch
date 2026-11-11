@@ -71,21 +71,6 @@
     html.motion .hero h1{animation-delay:.12s}
     html.motion .hero__deck{animation-delay:.24s}
     @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-
-    /* Four: the pictures themselves. Every framed image takes a slow push in under the pointer. */
-    @media (hover:hover){
-      html.motion .tiles figure img,html.motion .details figure img,html.motion .pieces figure img,
-      html.motion .mat figure img,html.motion .split figure img,html.motion .duo figure img,
-      html.motion .trio figure img,html.motion .pair figure img,html.motion .inset img,
-      html.motion .pinhead__fig img,html.motion #contact figure img{
-        transition:transform 1s var(--ease)}
-      html.motion .tiles figure:hover img,html.motion .details figure:hover img,
-      html.motion .pieces figure:hover img,html.motion .mat figure:hover img,
-      html.motion .split figure:hover img,html.motion .duo figure:hover img,
-      html.motion .trio figure:hover img,html.motion .pair figure:hover img,
-      html.motion .inset:hover img,html.motion .pinhead__fig:hover img,
-      html.motion #contact figure:hover img{transform:scale(1.045)}
-    }
   }
   .dark :focus-visible,.hero :focus-visible,.solo :focus-visible{outline-color:var(--offwhite)}
   .skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--ink);color:var(--offwhite);
@@ -161,17 +146,37 @@
   .smallprint{margin-top:var(--s-3);font-size:12px;line-height:1.5;max-width:42ch;color:var(--text-quiet)}
   .contact p{margin-top:var(--s-3);font-size:15px;color:var(--text-quiet);max-width:34ch}
 
+  /* What belongs: four pictures with no gutter between them, and the word over each. Flush is the
+     point. A gutter turns four photographs into four cards; butted together they read as one band
+     and the page gets quieter even though the pictures got bigger. */
+  .belongs{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .belongs figure{position:relative;margin:0;aspect-ratio:2/3;overflow:hidden}
+  .belongs figcaption{position:absolute;left:0;right:0;bottom:0;padding:var(--s-9) var(--s-5) var(--s-6);
+    color:var(--offwhite);
+    background:linear-gradient(to top,rgba(var(--ink-rgb),.92) 0%,rgba(var(--ink-rgb),.88) 46%,
+      rgba(var(--ink-rgb),.52) 70%,rgba(var(--ink-rgb),.12) 89%,rgba(var(--ink-rgb),0) 100%)}
+  .belongs b{display:block;font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+    color:rgba(var(--offwhite-rgb),.92)}
+  .belongs span{display:block;margin-top:var(--s-3);font-size:19px;line-height:1.3;letter-spacing:-.008em;
+    max-width:17ch;text-wrap:balance}
+  /* three nouns rather than a sentence. The four words are the spine of the page, and this is what
+     each of them is actually made of, which is the cheapest possible way to build the world out. */
+  .belongs em{display:block;margin-top:var(--s-4);font-style:normal;font-size:10px;font-weight:600;
+    letter-spacing:.2em;text-transform:uppercase;color:rgba(var(--offwhite-rgb),.66)}
+
   /* product, given the room it deserves: one piece at full width, then the rest as tiles. */
-  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-6) var(--s-5)}
-  .tiles figure{margin:0}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .tiles figure{margin:0;position:relative}
   /* Nearly every render is square, so a square cell was the only shape that never cropped. The
      one portrait source lost 33% top and bottom, which takes the base off an object standing on a
      floor. A 4:5 cell trims the sides of a square instead, and the position keeps the lower half,
      so what goes is headroom rather than the thing the object is sitting on. */
   .tiles img{aspect-ratio:4/5;height:auto;object-position:50% 60%}
-  .tiles figcaption{margin-top:var(--s-3);font-size:15px;font-weight:600;line-height:1.3}
-  .tiles figcaption span{display:block;margin-top:2px;font-size:13px;font-weight:400;
-                         color:rgba(var(--offwhite-rgb),.6)}
+  .tiles figcaption{position:absolute;left:0;right:0;bottom:0;padding:var(--s-8) var(--s-5) var(--s-5);
+    font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;line-height:1.3;
+    color:var(--offwhite);
+    background:linear-gradient(to top,rgba(var(--ink-rgb),.90) 0%,rgba(var(--ink-rgb),.84) 44%,
+      rgba(var(--ink-rgb),.40) 72%,rgba(var(--ink-rgb),0) 100%)}
   .strip{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s-6);
          border-top:1px solid var(--ink);padding-top:var(--s-6);flex-wrap:wrap}
 
@@ -238,11 +243,9 @@
   /* The cover used to carry the mark at the top and the message at the bottom, and the two never
      met. This line is the lockup: who we are and what we make, on the same optical group as the
      headline, so a first time reader is not left guessing at the business. */
-  .hero__tag{display:flex;align-items:center;gap:var(--s-4);margin-bottom:var(--s-6);
-             font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-             color:rgba(var(--offwhite-rgb),.92);text-shadow:0 1px 6px rgba(var(--ink-rgb),.55)}
-  .hero__tag::before{content:"";display:block;width:48px;height:2px;background:var(--lead);flex:none}
-  .hero__tag .bn{font-weight:800;letter-spacing:.24em;color:var(--offwhite)}
+  .hero__tag{margin-bottom:var(--s-6);
+             font-size:15px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+             color:var(--offwhite);text-shadow:0 1px 6px rgba(var(--ink-rgb),.55)}
   .hero .cap{color:rgba(var(--offwhite-rgb),.78)}
   .hero__deck{margin-top:var(--s-5);max-width:34ch;font-size:19px;line-height:1.45;
               color:rgba(var(--offwhite-rgb),.92);text-shadow:0 1px 4px rgba(var(--ink-rgb),.35)}
@@ -252,7 +255,7 @@
 
   .sec{padding:var(--s-9) 0}
   .sec--tight{padding:var(--s-8) 0}
-  .duo{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2)}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:0}
   .duo figure{aspect-ratio:3/4;overflow:hidden}
   .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-2)}
   .trio figure{aspect-ratio:2/3;overflow:hidden}
@@ -310,6 +313,24 @@
   }
   @media (prefers-reduced-motion: reduce){ .pinhead__h{position:static} }
 
+  /* The four, one at a time, on the grid measured off vitsoe.com: three tracks, the item indented
+     one whole track, its heading and its body stacked in the same column rather than split across
+     two. The empty leading track is the whole device. The previous version put the word in a narrow
+     left column with a small square under it and the text in a wide right one, which left a dead
+     quarter in every row and read as a list rather than as a section. */
+  .pillar{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-6);
+          border-top:1px solid var(--ink);padding-top:var(--s-6);margin-top:var(--s-9)}
+  .pillar__t{grid-column:2 / -1}
+  .pillar h3{font-size:clamp(26px,2.8vw,36px);font-weight:400;line-height:1.05;letter-spacing:-.014em}
+  .pillar p{font-size:17px;max-width:50ch;margin-top:var(--s-5);text-wrap:pretty}
+  .pillar p+p{margin-top:var(--s-4)}
+  .pillar__w{margin-top:var(--s-6);height:min(62vh,600px);overflow:hidden}
+  @media(max-width:880px){
+    .pillar{grid-template-columns:1fr;margin-top:var(--s-8);padding-top:var(--s-5)}
+    .pillar__t{grid-column:1}
+    .pillar__w{height:48vh;margin-top:var(--s-5)}
+  }
+
   .stages{list-style:none;counter-reset:st;margin-top:var(--s-7);border-top:1px solid var(--ink)}
   .stages li{counter-increment:st;display:grid;grid-template-columns:52px 1fr;gap:var(--s-5);
              padding:var(--s-5) 0;border-bottom:var(--hairline)}
@@ -337,13 +358,10 @@
   .hero__cta .btn--light{background:none;color:var(--offwhite);border-color:rgba(var(--offwhite-rgb),.65)}
   .pagefoot{border-top:var(--hairline);padding:var(--s-8) 0 var(--s-9)}
 
-  /* Movement on the imagery. Every framed picture takes a slow push in under the pointer, on the
-     one house curve. A full second is deliberate: at the usual 300ms this reads as a UI affordance,
-     at a second it reads as the photograph settling. Pointer only, so nothing happens on a phone,
-     and the whole block is inert under reduced motion because the transition is inside the
-     motion gate below. */
+  /* Frames clip. The hover push in that used to live here is gone: Dan kept the dissolve and cut
+     the scale, so the only movement on a picture now is the cross fade and the plate parallax. */
   .tiles figure,.details figure,.pieces figure,.board figure,.mat figure,.split figure,
-  .duo figure,.trio figure,.pair figure,.inset,.pinhead__fig,#contact figure{overflow:hidden}
+  .duo figure,.trio figure,.pair figure,.inset,#contact figure{overflow:hidden}
 
   @media(max-width:880px){
     .wrap{padding-left:18px;padding-right:18px} /* sides only: a shorthand here zeroed every .sec wrap on phones */
@@ -368,9 +386,7 @@
     .shelf{flex-direction:column;height:auto} .shelf figure{aspect-ratio:3/4;flex:none}
     .hero{height:92vh} .hero__mk{width:52px;right:18px;bottom:auto;top:calc(var(--s-9) + var(--s-4))}  .hero__foot{left:18px;right:18px}
     .hero .veil{background:linear-gradient(to top,rgba(var(--ink-rgb),.80) 0%,rgba(var(--ink-rgb),.76) 52%,rgba(var(--ink-rgb),.64) 74%,rgba(var(--ink-rgb),.36) 90%,rgba(var(--ink-rgb),.12) 100%)}
-    .hero__tag{flex-direction:column;align-items:flex-start;gap:var(--s-3);
-               font-size:10px;letter-spacing:.14em;line-height:1.5;max-width:30ch;margin-bottom:var(--s-5)}
-    .hero__tag::before{width:32px}
+    .hero__tag{font-size:12px;letter-spacing:.16em;line-height:1.5;max-width:26ch;margin-bottom:var(--s-5)}
     .solo{height:70vh} .solo .lay{padding:var(--s-6) 18px}
   }
 
@@ -479,30 +495,31 @@
      labels are the section names that were already in this file as HTML comments, which is the test
      of whether a label is information rather than decoration: it existed before the design did. No
      numbers here, because the chapter break already carries the count. */
-  /* Seven classes on this page were 11px, weight 600, uppercase, tracked: the section label, the
-     caption, the table head, the matrix key, the figure key, the chapter key and the nav. All one
-     tier, which is the same as having no tiers. The section label is the one that names a part of
-     the argument rather than a column of data, so it moves to the serif the page already loads and
-     tracks out wide. Everything else stays sans and now reads below it. Recipe measured on
-     normcph.com, where the project title is Caslon, uppercase, 13px, tracked 8px. */
+  /* The serif label was tried and cut: Caslon at 13px, uppercase and tracked, is handsome and Dan
+     could not read it. Back to the sans, but not back to where it started. It separates from the
+     table heads and data keys by tracking and by the hairline rule rather than by face, and it sits
+     a step quieter than they do. */
   .eyb{display:flex;align-items:center;gap:var(--s-4);margin-bottom:var(--s-5);
-       font-family:var(--accent);font-size:13px;font-weight:400;letter-spacing:.28em;
+       font-size:11px;font-weight:600;letter-spacing:.26em;
        text-transform:uppercase;color:var(--text-quiet)}
-  .eyb::before{content:"";width:26px;height:1px;background:currentColor;flex:none;opacity:.8}
+  .eyb::before{content:"";width:26px;height:1px;background:currentColor;flex:none;opacity:.7}
   .dark .eyb{color:rgba(var(--offwhite-rgb),.72)}
   /* The serif label is wider than the sans one it replaced, so below 420 it gives back some of
      the tracking rather than wrapping a two word label onto a second line. */
-  @media(max-width:420px){ .eyb{font-size:12px;letter-spacing:.18em;gap:var(--s-3)} .eyb::before{width:18px} }
+  @media(max-width:420px){ .eyb{letter-spacing:.18em;gap:var(--s-3)} .eyb::before{width:18px} }
 
   /* a single wide frame. The long room is the one landscape render, so it gets the full width once. */
   .wide{aspect-ratio:1376/768;max-height:88vh;overflow:hidden}
 
   /* craft details. Each close up says what the decision is, because a detail without a reason
      reads as styling. Square frames, one line of caption, the label in bold as the object named. */
-  .details{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-7) var(--s-5);margin-top:var(--s-8)}
+  .details{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  /* The close carries no picture. It is the one place on the page that is only an invitation, and a
+     photograph beside it turned it back into another section. */
+  .closeblock{max-width:46ch}
   .details figure{margin:0}
   .details img{aspect-ratio:1/1;height:auto}
-  .details figcaption{margin-top:var(--s-3);font-size:15px;line-height:1.45;max-width:36ch}
+  .details figcaption{margin-top:var(--s-5);padding:0 var(--s-5);font-size:15px;line-height:1.45;max-width:38ch}
   .details b{font-weight:600}
 
   /* the material board. One row, dark to light, the measured chip under each crop. It replaces the
@@ -585,11 +602,13 @@
 
   /* the new image components, last so they win */
   @media(max-width:880px){
-    .details,.pieces{grid-template-columns:repeat(2,1fr);gap:var(--s-6) var(--s-4)}
+    .details{grid-template-columns:repeat(2,1fr);gap:0}
+    .pieces{grid-template-columns:repeat(2,1fr);gap:var(--s-6) var(--s-4)}
     .cards,.qa{grid-template-columns:1fr;gap:var(--s-6)}
     .morning{grid-template-columns:1fr}
     .morning__i{aspect-ratio:4/3}
-    .tiles{grid-template-columns:repeat(2,1fr);gap:var(--s-5) var(--s-4)}
+    .tiles{grid-template-columns:repeat(2,1fr);gap:0}
+    .belongs{grid-template-columns:repeat(2,1fr)}
     .board{grid-template-columns:repeat(3,1fr);gap:var(--s-4) var(--s-2)}
     .board img{aspect-ratio:3/5}
     .wide{aspect-ratio:4/3}
@@ -599,6 +618,16 @@
   @media(max-width:420px){
     .details figcaption,.pieces p{font-size:14px}
   }
+  @media(max-width:520px){
+    .belongs{grid-template-columns:1fr}
+    .belongs figure{aspect-ratio:4/3}
+    /* A phone frame is 300px tall against 480 on a desktop, so the same ramp reaches the words far
+       weaker: measured 3.44:1 before this. The box gets taller and the ramp holds through it. */
+    .belongs figcaption{padding:var(--s-8) 18px var(--s-5);
+      background:linear-gradient(to top,rgba(var(--ink-rgb),.94) 0%,rgba(var(--ink-rgb),.90) 58%,
+        rgba(var(--ink-rgb),.56) 80%,rgba(var(--ink-rgb),0) 100%)}
+    .tiles figcaption{padding:var(--s-7) var(--s-4) var(--s-4)}
+  }
 </style>
 
 <a class="skip" href="#site">Skip to the page</a>
@@ -606,7 +635,7 @@
   <div class="nav__in">
     <a class="nav__brand" href="#top" id="navbrand"><span class="bn">Marlow</span></a>
     <ul class="nav__links" data-for="rooms">
-      <li><a href="#rooms2">What belongs</a></li>
+      <li><a href="#rooms2">Principles</a></li>
       <li><a href="#howitworks">How it works</a></li>
       <li><a href="#costs">What it costs</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -634,14 +663,14 @@
        slowly and says almost nothing; the first frame carries is-on in the markup so the page
        is correct with no JavaScript and under reduced motion. -->
   <div class="frames hero__frames">
-    <img data-eager class="is-on" src="assets/render_gym-opens-to-the-garden.jpg?v=2" alt="">
-    <img data-eager src="assets/render_the-long-room-morning.jpg?v=2" alt="">
+    <img data-eager class="is-on" src="assets/render_gym-opens-to-the-garden.jpg?v=6" alt="">
+    <img data-eager src="assets/render_pavilion-at-night.jpg?v=6" alt="">
   </div>
   <div class="veil"></div>
-  <div class="hero__mk"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg?v=2" alt="Marlow"></div>
+  <div class="hero__mk"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg?v=6" alt="Marlow"></div>
   <div class="hero__foot">
     <div>
-      <div class="hero__tag"><span class="bn">Marlow</span> Bespoke private gyms and wellness rooms &middot; North&nbsp;Texas</div>
+      <div class="hero__tag">Bespoke private gyms and wellness&nbsp;rooms</div>
       <h1 class="h1--long">A part of your home you'll make time&nbsp;for.</h1>
       <p class="hero__deck">A good workout. A long stretch. A few quiet minutes in the&nbsp;sauna.</p>
     </div>
@@ -657,10 +686,13 @@
     <p class="story story--end">We're interested in&nbsp;both.</p>
     <p class="story__note">What do you look forward to? What would you do more often if it were easier? Who else will&nbsp;use&nbsp;the&nbsp;space?</p>
   </div>
+  <!-- It starts with doing what you love, so it starts with people doing it. Three frames on the
+       dissolve rather than a still life of a bench. These three came out of photography/_off-brief,
+       which is the only place in the kit with anybody moving in it. -->
   <figure class="morning__i">
     <div class="frames">
-      <img loading="lazy" decoding="async" class="is-on" src="assets/render_pommel-bench-and-towels.jpg?v=2" alt="">
-      <img loading="lazy" decoding="async" src="assets/render_linen-niche-open.jpg?v=2" alt="">
+      <img loading="lazy" decoding="async" class="is-on" src="assets/offbrief_person-riding-in-a-set-room.jpg?v=6" alt="A woman riding an air bike in a plaster room" style="object-position:50% 40%">
+      <img loading="lazy" decoding="async" src="assets/offbrief_blurred-figure-stretching.jpg?v=6" alt="A figure stretching, caught mid movement in low sun" style="object-position:50% 40%">
     </div>
   </figure>
 </section>
@@ -679,89 +711,128 @@
   </div>
 </section>
 
-<div class="bleed solo solo--light plx">
-  <img loading="lazy" decoding="async" src="assets/render_rest-corner-by-the-sauna.jpg?v=2" alt="" style="object-position:50% 70%">
-  <div class="lay"><div>
-    <h2>It should feel good the whole time you are in&nbsp;it.</h2>
-  </div></div>
+<!-- WHAT BELONGS IN YOUR ROOM
+     Five headings and five paragraphs for an answer that is four nouns. The pictures do it now:
+     four frames, flush, one word and one short line over each. The rest corner that used to be a
+     captioned plate just above this is the fourth frame, so the page lost a screen as well. -->
+<section class="sec--tight wrap" id="rooms2" style="padding-bottom:var(--s-7)">
+  <div class="eyb">Our principles</div>
+  <h2 style="max-width:20ch">We think a body needs four&nbsp;things.</h2>
+  <p class="lede" style="margin-top:var(--s-6);max-width:46ch">Strength, heat, cold and rest. We build all four into every room, and we size the room so you can keep them up without leaving&nbsp;the&nbsp;house.</p>
+</section>
+<div class="bleed belongs">
+  <figure>
+    <img loading="lazy" decoding="async" src="assets/materials_stacked-plates-oxide.jpg?v=6" alt="Cast iron plates stacked, close">
+    <figcaption><b>Strength</b><span>Enough floor to move&nbsp;on.</span><em>Oak &middot; Iron &middot; Rubber</em></figcaption>
+  </figure>
+  <figure>
+    <img loading="lazy" decoding="async" src="assets/water_ladle-on-sauna-stones.jpg?v=6" alt="Water poured from a ladle onto hot sauna stones" style="object-position:55% 50%">
+    <figcaption><b>Heat</b><span>A sauna you'll actually sit&nbsp;in.</span><em>Cedar &middot; Glass &middot; Stone</em></figcaption>
+  </figure>
+  <figure>
+    <img loading="lazy" decoding="async" src="assets/water_cedar-cold-plunge.jpg?v=6" alt="Legs stepping into a cedar cold plunge, water running in" style="object-position:50% 45%">
+    <figcaption><b>Cold</b><span>Cold water that stays&nbsp;cold.</span><em>Limestone &middot; Brass &middot; Glass</em></figcaption>
+  </figure>
+  <figure>
+    <img loading="lazy" decoding="async" src="assets/offbrief_skin-close.jpg?v=6" alt="Low warm light across a shoulder and back">
+    <figcaption><b>Rest</b><span>Somewhere to sit when you're&nbsp;done.</span><em>Leather &middot; Linen &middot; Plaster</em></figcaption>
+  </figure>
 </div>
 
+<!-- WHY THESE FOUR
+     The band names them, this breaks them down. The word longevity is deliberately absent: the
+     competitive audit has it on the list every firm in the category already uses, alongside luxury,
+     bespoke, sanctuary and curated. The idea is delivered and the word is left to them. -->
+<!-- WHY THESE FOUR
+     Structure measured off vitsoe.com/us/about/good-design at 1440, which is the same job: a list of
+     principles under one section heading. Their grid is four 329px tracks in a 1046px container, the
+     section heading sits in the first column and every item is indented one full column, with the
+     item's heading and its body stacked in the same column rather than split across two. The indent
+     is what makes the items read as items. Marlow's version is three tracks, the eyebrow in the
+     first, the text indented to the second, and then the wide underneath. Small first, up in the
+     band, then wide here: the band introduces each of the four as a material and this articulates it
+     as a room. -->
+<section class="sec" id="why4">
+  <div class="wrap"><div class="eyb">Why these four</div></div>
 
-<!-- WHAT BELONGS IN YOUR ROOM -->
-<section class="sec wrap" id="rooms2">
- <div class="pinhead">
-  <div class="pinhead__h">
-    <div class="eyb">What belongs</div>
-    <h2 style="max-width:14ch">What belongs in your&nbsp;room?</h2>
-  </div>
-  <div class="pinhead__col">
-    <figure class="pinhead__fig" style="margin-top:0"><img loading="lazy" decoding="async" src="assets/render_sauna-cedar.jpg?v=2" alt=""></figure>
-    <div class="planks">
-    <div class="plank"><h3>Strength and&nbsp;movement</h3>
-      <p>Room to lift, stretch and move freely. Equipment chosen for the way you train, with the space around it given just as much&nbsp;thought.</p></div>
-    <div class="plank"><h3>Heat</h3>
-      <p>A sauna or a steam room, sized for the way you'll actually use it. We work with your builder to establish what's possible before settling the&nbsp;design.</p></div>
-    <div class="plank"><h3>Cold</h3>
-      <p>A plunge you'll get into more than once. The temperature you want, held there, and a floor and a drain that forgive the&nbsp;water.</p></div>
-    <div class="plank"><h3>A place to&nbsp;pause</h3>
-      <p>A comfortable seat. Natural light where we can find it. Somewhere to have a drink of water and&nbsp;take&nbsp;your&nbsp;time.</p></div>
-    <div class="plank"><h3>Space for both of&nbsp;you</h3>
-      <p>Different routines can share a room comfortably. We consider what each person needs, including the moments when one of you wants a little&nbsp;privacy.</p></div>
+  <div class="wrap pillar">
+    <div class="pillar__t">
+      <h3>Strength</h3>
+      <p>Muscle goes quietly. You do not notice until a flight of stairs with a bag in each hand is harder than it was a&nbsp;year&nbsp;ago.</p>
+      <p>Lifting is the most reliable way to hold on to it, and two or three sessions a week is enough. What decides whether they happen is how far you have to go to&nbsp;start.</p>
     </div>
   </div>
- </div>
+  <div class="bleed pillar__w plx"><img loading="lazy" decoding="async" src="assets/render_the-long-room.jpg?v=6" alt="A long training room with daylight down one side" style="object-position:42% 50%"></div>
+
+  <div class="wrap pillar">
+    <div class="pillar__t">
+      <h3>Heat</h3>
+      <p>Sauna is the oldest of the four and the best studied. Finnish researchers have followed regular users for decades, and the ones who go most often keep turning up in better cardiovascular health than the ones who go&nbsp;rarely.</p>
+      <p>It is also pleasant, which is the part that matters for something you want to still be doing in thirty&nbsp;years.</p>
+    </div>
+  </div>
+  <div class="bleed pillar__w plx"><img loading="lazy" decoding="async" src="assets/render_sauna-cedar.jpg?v=6" alt="A cedar sauna, lit along the benches" style="object-position:50% 56%"></div>
+
+  <div class="wrap pillar">
+    <div class="pillar__t">
+      <h3>Cold</h3>
+      <p>Cold is the least settled of the four. The long term research is thin and we are not going to pretend&nbsp;otherwise.</p>
+      <p>What is not in question is the immediate effect. Two or three minutes in cold water and the noise drops for the rest of the morning. People go back for that rather than for a&nbsp;result.</p>
+    </div>
+  </div>
+  <div class="bleed pillar__w plx"><img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg?v=6" alt="A cold plunge set into a dark wet room" style="object-position:62% 50%"></div>
+
+  <div class="wrap pillar">
+    <div class="pillar__t">
+      <h3>Rest</h3>
+      <p>Rest is the one that gets cut first, and the one most home gyms make no room for&nbsp;at&nbsp;all.</p>
+      <p>Sitting down in the room afterward, for ten minutes, without reaching for a phone, is where the session lands. It needs a seat worth sitting in, daylight if the room has any, and somewhere to put a glass of&nbsp;water.</p>
+    </div>
+  </div>
+  <div class="bleed pillar__w plx"><img loading="lazy" decoding="async" src="assets/render_rest-corner-by-the-sauna.jpg?v=6" alt="A daybed and a low table beside the sauna" style="object-position:50% 64%"></div>
 </section>
 
-<!-- The room at the end of the day. Changes the light before the dark section rather than
-     showing the same long room a second time. -->
-<div class="bleed solo plx" style="height:min(74vh,720px)">
-  <img loading="lazy" decoding="async" src="assets/render_pavilion-at-night.jpg?v=2" alt="" style="object-position:50% 56%">
-</div>
-
+<!-- THE PIECES
+     The page used to go from the four words straight to an outdoor night shot and then to a
+     dumbbell, with nothing said in between about what the equipment is or where it comes from.
+     The night plate is gone and this section now opens by saying it, so the reader is led into the
+     objects rather than dropped among them. -->
 <section class="sec dark" id="pieces" style="padding-top:var(--s-9);padding-bottom:0">
-  <div class="wrap">
-    <figure style="max-width:min(860px,72vw);margin:0 auto;aspect-ratio:1/1;overflow:hidden">
-      <img loading="lazy" decoding="async" src="assets/render_leather-dumbbells.jpg?v=2" alt="">
-    </figure>
+  <div class="wrap" style="padding-bottom:var(--s-8)">
+    <div class="eyb">The equipment</div>
+    <h2 style="max-width:20ch">Some of it is made for your room. The rest we go and&nbsp;find.</h2>
+    <p class="lede" style="margin-top:var(--s-6);max-width:54ch">The dumbbell handles are turned white oak with a machined bronze collar, because oak warms to your hand the way steel never will and the bronze takes the wear at the end. The pads are cognac saddle leather over a rounded oak edge, hand stitched with waxed linen, because a stitched edge can be repaired and a glued one cannot. The rack is quarter sawn oak and blackened steel, built to the wall it is going on. The rope is braided leather on turned handles. Everything here is the material it looks&nbsp;like.</p>
   </div>
-  <div class="wrap" style="padding-top:var(--s-8);padding-bottom:var(--s-9)">
-    <div class="tiles">
-      <figure><img loading="lazy" decoding="async" src="assets/render_barbell-and-plates.jpg?v=2" alt=""><figcaption>Rack and plates<span>White oak, blackened steel</span></figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="assets/render_kettlebells-on-oak-shelf.jpg?v=2" alt=""><figcaption>Kettlebells<span>Cast iron, leather handles</span></figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="assets/render_leather-medicine-balls.jpg?v=2" alt=""><figcaption>Medicine balls<span>Stitched leather</span></figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="assets/render_bench-and-wood-dumbbells.jpg?v=2" alt=""><figcaption>Bench<span>Cognac leather on oak</span></figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="assets/render_jump-rope-on-travertine.jpg?v=2" alt=""><figcaption>Rope<span>Braided leather, turned oak</span></figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg?v=2" alt=""><figcaption>Rings<span>Ash, leather, blackened steel</span></figcaption></figure>
-    </div>
+  <div class="bleed plx" style="height:min(84vh,820px);overflow:hidden">
+    <img loading="lazy" decoding="async" src="assets/render_leather-dumbbells.jpg?v=6" alt="" style="object-position:50% 46%">
   </div>
-</section>
+  <div class="bleed tiles">
+    <figure><img loading="lazy" decoding="async" src="assets/render_barbell-and-plates.jpg?v=6" alt=""><figcaption>Rack and&nbsp;plates</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_kettlebells-on-oak-shelf.jpg?v=6" alt=""><figcaption>Kettlebells</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_leather-medicine-balls.jpg?v=6" alt=""><figcaption>Medicine&nbsp;balls</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_bench-and-wood-dumbbells.jpg?v=6" alt=""><figcaption>Bench</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_jump-rope-on-travertine.jpg?v=6" alt=""><figcaption>Rope</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg?v=6" alt=""><figcaption>Rings</figcaption></figure>
+  </div>
 
 
-<!-- IT SHOULD FEEL AT HOME HERE -->
-<section class="sec wrap" id="materials">
-  <div class="eyb">Materials</div>
-  <h2 style="max-width:18ch">It should feel at home&nbsp;here.</h2>
-  <div class="split split--wide" style="margin-top:var(--s-6)">
-    <div>
-      <p class="lede">You've put thought into the rest of your house. This room deserves the same&nbsp;attention.</p>
-      <p style="margin-top:var(--s-5)">Oak, limestone, plaster, cedar and leather bring warmth and texture to spaces that are often treated as purely practical. We consider how they feel against your skin, how they hold the light, and how they'll look after years of&nbsp;use.</p>
-      <p style="margin-top:var(--s-5)">Some pieces will be made for your space. Others will come from makers whose work we believe in. Everything is chosen to&nbsp;work&nbsp;well&nbsp;together.</p>
-    </div>
-    <div></div>
+<!-- ATTENTION TO DETAIL
+     This used to be two sections away from the objects, on paper, under the title "The details you
+     live with", which Dan read as something you put up with. It now runs on from the product grid
+     without a change of ground: the same dark, the same flush frames, the objects and then the
+     three places the work actually shows. -->
+  <div class="wrap" style="padding-top:var(--s-9);padding-bottom:var(--s-7)">
+    <div class="eyb">Attention to detail</div>
+    <h2 style="max-width:16ch">Where we spend the&nbsp;time.</h2>
+    <p class="lede" style="margin-top:var(--s-6);max-width:54ch">A brushed brass strip set dead level where the rubber field meets the oak floor, so nothing catches a bare foot on the way to the sauna. Leather over a rounded oak edge on the bench, because you meet it sitting down after the heat, when nothing should press into the back of a leg. A turned oak handle with a bronze ring and a leather inlay, because it is the part you look at between sets. A stitched leather collar around the oak column, because it sits at shoulder height and people lean on it. You meet these decisions every time you use the room, which is why they get the&nbsp;hours.</p>
   </div>
-</section>
-
-
-<!-- THE DETAILS YOU LIVE WITH -->
-<section class="sec wrap" id="details" style="padding-top:0">
-  <h2 style="max-width:16ch">The details you live&nbsp;with.</h2>
-  <p class="lede" style="margin-top:var(--s-6);max-width:52ch">A floor that feels good under bare feet. A bench with a comfortable edge. A handle you enjoy picking up. Storage that makes it easy to put things&nbsp;away.</p>
-  <p style="margin-top:var(--s-5);max-width:52ch">These are small decisions, but you meet them every time&nbsp;you&nbsp;use&nbsp;the&nbsp;room.</p>
-  <div class="details">
-    <figure><img loading="lazy" decoding="async" src="assets/render_floor-brass-strip.jpg?v=2" alt=""><figcaption><b>Floor.</b> Where the rubber meets the oak, a brass strip set flush with both, so there is nothing to catch a bare foot on the&nbsp;way&nbsp;to&nbsp;the&nbsp;sauna.</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_bench-edge-stitched.jpg?v=2" alt=""><figcaption><b>Bench.</b> Leather over a rounded oak edge. You meet it sitting down after the heat, when nothing should press into the back of a&nbsp;leg.</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_turned-oak-dumbbell-end.jpg?v=2" alt=""><figcaption><b>Handle.</b> Turned oak, a bronze ring, a leather inlay. It is the part you look at between&nbsp;sets.</figcaption></figure>
+  <div class="bleed details" id="details">
+    <figure><img loading="lazy" decoding="async" src="assets/render_floor-brass-strip.jpg?v=6" alt="A brass strip set level where a rubber training field meets an oak floor"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_bench-edge-stitched.jpg?v=6" alt="A stitched leather bench pad over a rounded oak edge"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_turned-oak-dumbbell-end.jpg?v=6" alt="The turned oak end of a dumbbell handle with a bronze ring and a leather inlay"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_leather-collar-on-column.jpg?v=6" alt="A stitched leather collar wrapped around an oak column"></figure>
   </div>
+  <div style="height:var(--s-9)"></div>
 </section>
 
 
@@ -776,6 +847,15 @@
     <li><div><h3>We bring it&nbsp;together</h3><p>We coordinate supply and installation, then walk you through the finished space so you feel comfortable using everything in&nbsp;it.</p></div></li>
   </ol>
 </section>
+<!-- The only person on this page used to be the woman on the bike, and she was on it twice, because
+     the two long room renders are the same framing of the same room. Two frames with people in them
+     were sitting unused in the investor view: the drawing being made, and the floor going in. They
+     belong here, beside the four stages, which is the part of the page that is about people doing
+     work. -->
+<div class="bleed duo">
+  <figure><img loading="lazy" decoding="async" src="assets/render_drawing-on-the-bench.jpg?v=6" alt="A hand drawing the room on a workbench, with leather and brass samples beside it" style="object-position:50% 45%"></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_floor-going-in.jpg?v=6" alt="A fitter laying the oak floor" style="object-position:50% 50%"></figure>
+</div>
 
 
 <!-- CARE -->
@@ -787,7 +867,7 @@
       <p class="lede" style="margin-top:var(--s-6)">Once the room is yours, there are practical things to look after: equipment, heaters, filters and water&nbsp;systems.</p>
       <p style="margin-top:var(--s-5)">Our care plans are designed around what's in your room. We'll agree on the schedule and scope with you, so you know who to call and what's being taken care&nbsp;of.</p>
     </div>
-    <figure><img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg?v=2" alt=""></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_plunge-and-sauna.jpg?v=6" alt=""></figure>
   </div>
 </section>
 
@@ -827,17 +907,14 @@
 <!-- CONTACT -->
 <section class="sec" id="contact" style="background:var(--offwhite)">
   <div class="wrap">
-    <div class="split split--wide">
+    <div class="closeblock">
       <div>
-        <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg?v=2" alt="Marlow">
+        <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg?v=6" alt="Marlow">
         <h2 style="max-width:18ch">Tell us about the room you've been thinking&nbsp;about.</h2>
         <p class="lede" style="margin-top:var(--s-6);max-width:40ch">A corner you want to change. A room on the plans. A whole floor you're still&nbsp;imagining.</p>
         <!-- FILL BEFORE THIS GOES OUT: the real address, and whether a phone number is published. -->
         <a class="mailto" href="mailto:hello@marlow.studio">hello@marlow.studio</a>
-        <p class="cap" style="margin-top:var(--s-8)">Dallas &middot; First rooms planned for&nbsp;2027</p>
-        <p class="smallprint">Images show design concepts. We only photograph a finished room with your written&nbsp;permission.</p>
       </div>
-      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_one-bell-close.jpg?v=2" alt=""></figure>
     </div>
   </div>
 </section>
@@ -845,9 +922,9 @@
 </div>
 <div class="view" data-v="investor" id="view-investor" role="tabpanel" aria-labelledby="tab-investor" tabindex="0">
 <header class="hero" id="topi">
-  <img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg?v=2" alt="">
+  <img loading="lazy" decoding="async" src="assets/render_the-long-room-morning.jpg?v=6" alt="">
   <div class="veil"></div>
-  <div class="hero__mk"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg?v=2" alt="Marlow"></div>
+  <div class="hero__mk"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg?v=6" alt="Marlow"></div>
   <div class="hero__foot">
     <div>
       <div class="hero__tag"><span class="bn">Marlow</span> Investor overview &middot; 2026</div>
@@ -895,8 +972,8 @@
   <p style="margin-top:var(--s-8);max-width:58ch">Nobody has to be convinced the room belongs in the house. The open question is who builds&nbsp;it.</p>
 </section>
 <div class="bleed duo">
-  <figure><img loading="lazy" decoding="async" src="assets/render_floor-going-in.jpg?v=2" alt=""></figure>
-  <figure><img loading="lazy" decoding="async" src="assets/render_rubber-field-going-in.jpg?v=2" alt="A rubber training field being set flush into an oak floor"></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_floor-going-in.jpg?v=6" alt=""></figure>
+  <figure><img loading="lazy" decoding="async" src="assets/render_rubber-field-going-in.jpg?v=6" alt="A rubber training field being set flush into an oak floor"></figure>
 </div>
 
 
@@ -980,8 +1057,8 @@
   <p class="open-q">The structure, the percentage and what a return looks like are still&nbsp;open. The amount and what it does are above. The terms are a&nbsp;conversation.</p>
 </section>
 <div class="bleed solo plx" style="margin-top:var(--s-2)">
-  <img loading="lazy" decoding="async" src="assets/render_pavilion-at-night.jpg?v=2" alt="">
-  <div class="mk-sm"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg?v=2" alt="Marlow"></div>
+  <img loading="lazy" decoding="async" src="assets/render_pavilion-at-night.jpg?v=6" alt="">
+  <div class="mk-sm"><img loading="lazy" decoding="async" src="assets/marlow-m-rev.svg?v=6" alt="Marlow"></div>
   <div class="lay"><div>
     <h2>It is still on at ten at&nbsp;night.</h2>
   </div></div>
@@ -997,7 +1074,7 @@
       <p style="margin-top:var(--s-5)">Dan brings a background in creative direction and brand development. Dave brings experience in Texas law and wealth&nbsp;management.</p>
       <p style="margin-top:var(--s-5)">Together, they're developing a business around a room they would want in their own homes, with the design, delivery and care considered from the&nbsp;beginning.</p>
     </div>
-    <figure><img loading="lazy" decoding="async" src="assets/render_drawing-on-the-bench.jpg?v=2" alt="A pencil drawing of a gym wall with leather, oak and bronze samples beside it"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_drawing-on-the-bench.jpg?v=6" alt="A pencil drawing of a gym wall with leather, oak and bronze samples beside it"></figure>
   </div>
 </section>
 
@@ -1005,7 +1082,7 @@
   <div class="wrap">
     <div class="two" style="align-items:center">
       <div>
-        <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg?v=2" alt="Marlow">
+        <img loading="lazy" decoding="async" class="close__mk" src="assets/marlow-plate-name.svg?v=6" alt="Marlow">
         <div class="eyb" style="margin-top:var(--s-6)">The first chapter</div>
         <h2 style="max-width:20ch;margin-top:var(--s-3)">Help us build the first&nbsp;ones.</h2>
         <p style="margin-top:var(--s-6);max-width:46ch">We're seeking capital to establish the supplier relationships, complete the first projects and build the team around&nbsp;them.</p>
@@ -1015,7 +1092,7 @@
           <a class="btn btn--ghost" href="#appendix">Supporting material</a>
         </div>
       </div>
-      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_leather-collar-on-column.jpg?v=2" alt=""></figure>
+      <figure style="aspect-ratio:4/5;overflow:hidden"><img loading="lazy" decoding="async" src="assets/render_leather-collar-on-column.jpg?v=6" alt=""></figure>
     </div>
   </div>
 </section>
@@ -1055,7 +1132,7 @@
   </ul>
 </section>
 <div class="bleed solo plx" style="margin-top:var(--s-2)">
-  <img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg?v=2" alt="">
+  <img loading="lazy" decoding="async" src="assets/render_wet-corridor.jpg?v=6" alt="">
   <div class="lay"><div>
     <h2>The systems that need looking after are the ones nobody else will&nbsp;service.</h2>
   </div></div>
@@ -1068,7 +1145,7 @@
   <div class="eyb">Electrical</div>
   <h2 style="max-width:26ch">A steam room requires 125 amps on its&nbsp;own.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:58ch">That is the big generator. The small one still wants 38. A traditional sauna heater wants 30 to 50 on a circuit of its own. A commercial treadmill needs one it does not share with anything, including its neutral. The plunge needs a GFCI line and no extension cord, ever. Our read is that a full suite adds up to its own subpanel, though no code sets that threshold and we would have the electrician confirm it on the&nbsp;house.</p>
-  <figure class="inset"><img loading="lazy" decoding="async" src="assets/render_sauna-and-steam-suite.jpg?v=2" alt="A sauna, a cold plunge and a red light room off one stone corridor"></figure>
+  <figure class="inset"><img loading="lazy" decoding="async" src="assets/render_sauna-and-steam-suite.jpg?v=6" alt="A sauna, a cold plunge and a red light room off one stone corridor"></figure>
   <p class="cap" style="margin-top:var(--s-3)">Sauna, plunge and red light off one corridor. Each is its own line on the technology&nbsp;sheet.</p>
   <p style="margin-top:var(--s-5);max-width:58ch">So the electrical gets drawn before the framer arrives. Every room leaves the builder with a one page technology sheet: circuits and amperage, where the subpanel goes, floor boxes under the cardio, blocking in the wall for the display and the speakers, where the low voltage runs. Anything missed at that moment costs far more after the drywall. Dallas has been on the 2023 electrical code since May 2025, and the park cities are a separate check every&nbsp;time.</p>
   <div class="spec" style="margin-top:var(--s-7)"><span>Steam generator</span><span>38 to 125A</span><span>Sauna heater</span><span>30 to 50A</span><span>Plunge</span><span class="ox">GFCI, dedicated</span></div>
@@ -1102,15 +1179,15 @@
       <p style="margin-top:var(--s-5)">Most of the drawing time goes on transitions. Every detail below is one, and you are not supposed to notice any of&nbsp;them.</p>
       <p style="margin-top:var(--s-4)">Anything we can buy well, we buy. The pieces that decide how the room feels, the rack, the bench, the wall the equipment hangs on, get drawn for the house and made for&nbsp;it.</p>
     </div>
-    <figure><img loading="lazy" decoding="async" src="assets/render_leather-collar-on-column.jpg?v=2" alt="A leather collar going onto a turned column"></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_leather-collar-on-column.jpg?v=6" alt="A leather collar going onto a turned column"></figure>
   </div>
   <div class="details">
-    <figure><img loading="lazy" decoding="async" src="assets/render_floor-brass-strip.jpg?v=2" alt=""><figcaption><b>Floor.</b> Where the rubber meets the oak, a brass strip set flush with both, so there is nothing to catch a toe&nbsp;on.</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_oak-joinery.jpg?v=2" alt=""><figcaption><b>Rack.</b> A through tenon. Oak joined to oak, the way a table gets&nbsp;made.</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_bench-edge-stitched.jpg?v=2" alt=""><figcaption><b>Bench.</b> Leather over a rounded oak edge, so nothing presses into the back of a&nbsp;leg.</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_turned-oak-dumbbell-end.jpg?v=2" alt=""><figcaption><b>Handle.</b> Turned oak, a bronze ring, a leather inlay. It is the part you look at between&nbsp;sets.</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_leather-strap-and-ring.jpg?v=2" alt=""><figcaption><b>Rings.</b> A blackened steel ring on a riveted leather strap. Both wear in, and neither&nbsp;chips.</figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/render_oak-meets-plaster.jpg?v=2" alt=""><figcaption><b>Wall.</b> Where the oak frame meets the plaster, a shadow gap in place of a trim&nbsp;piece.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_floor-brass-strip.jpg?v=6" alt=""><figcaption><b>Floor.</b> Where the rubber meets the oak, a brass strip set flush with both, so there is nothing to catch a toe&nbsp;on.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_oak-joinery.jpg?v=6" alt=""><figcaption><b>Rack.</b> A through tenon. Oak joined to oak, the way a table gets&nbsp;made.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_bench-edge-stitched.jpg?v=6" alt=""><figcaption><b>Bench.</b> Leather over a rounded oak edge, so nothing presses into the back of a&nbsp;leg.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_turned-oak-dumbbell-end.jpg?v=6" alt=""><figcaption><b>Handle.</b> Turned oak, a bronze ring, a leather inlay. It is the part you look at between&nbsp;sets.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_leather-strap-and-ring.jpg?v=6" alt=""><figcaption><b>Rings.</b> A blackened steel ring on a riveted leather strap. Both wear in, and neither&nbsp;chips.</figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/render_oak-meets-plaster.jpg?v=6" alt=""><figcaption><b>Wall.</b> Where the oak frame meets the plaster, a shadow gap in place of a trim&nbsp;piece.</figcaption></figure>
   </div>
 </section>
 
@@ -1120,15 +1197,15 @@
   <h2 style="max-width:26ch">Nobody picked these colours. They are what the materials already&nbsp;are.</h2>
   <p class="lede" style="margin-top:var(--s-6);max-width:52ch">Each colour is measured from the photograph above it. Dark to light, this is the whole range a room gets built from, with something green growing in the middle of&nbsp;it.</p>
   <div class="board">
-    <figure><img loading="lazy" decoding="async" src="assets/mat_iron.jpg?v=2" alt="Raw&nbsp;waxed&nbsp;iron"><figcaption><span class="board__chip" style="background:var(--m-iron)"></span>Raw&nbsp;waxed&nbsp;iron<span class="board__hex">#36251C</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_rubber.jpg?v=2" alt="Clay&nbsp;rubber"><figcaption><span class="board__chip" style="background:var(--m-rubber)"></span>Clay&nbsp;rubber<span class="board__hex">#5F1A0C</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_planting.jpg?v=2" alt="Planting"><figcaption><span class="board__chip" style="background:var(--m-planting)"></span>Planting<span class="board__hex">#434824</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_leather.jpg?v=2" alt="Cognac&nbsp;leather"><figcaption><span class="board__chip" style="background:var(--m-leather)"></span>Cognac&nbsp;leather<span class="board__hex">#6B3823</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_cork.jpg?v=2" alt="Cork"><figcaption><span class="board__chip" style="background:var(--m-cork)"></span>Cork<span class="board__hex">#8C502C</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_oak.jpg?v=2" alt="White&nbsp;oak"><figcaption><span class="board__chip" style="background:var(--m-oak)"></span>White&nbsp;oak<span class="board__hex">#A06B47</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_cement.jpg?v=2" alt="Cement"><figcaption><span class="board__chip" style="background:var(--m-cement)"></span>Cement<span class="board__hex">#A98664</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_terrazzo.jpg?v=2" alt="Terrazzo"><figcaption><span class="board__chip" style="background:var(--m-terrazzo)"></span>Terrazzo<span class="board__hex">#B7A58D</span></figcaption></figure>
-    <figure><img loading="lazy" decoding="async" src="assets/mat_plaster.jpg?v=2" alt="Lime&nbsp;plaster" style="object-position:100% 50%"><figcaption><span class="board__chip" style="background:var(--m-plaster)"></span>Lime&nbsp;plaster<span class="board__hex">#EBD3C1</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_iron.jpg?v=6" alt="Raw&nbsp;waxed&nbsp;iron"><figcaption><span class="board__chip" style="background:var(--m-iron)"></span>Raw&nbsp;waxed&nbsp;iron<span class="board__hex">#36251C</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_rubber.jpg?v=6" alt="Clay&nbsp;rubber"><figcaption><span class="board__chip" style="background:var(--m-rubber)"></span>Clay&nbsp;rubber<span class="board__hex">#5F1A0C</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_planting.jpg?v=6" alt="Planting"><figcaption><span class="board__chip" style="background:var(--m-planting)"></span>Planting<span class="board__hex">#434824</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_leather.jpg?v=6" alt="Cognac&nbsp;leather"><figcaption><span class="board__chip" style="background:var(--m-leather)"></span>Cognac&nbsp;leather<span class="board__hex">#6B3823</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_cork.jpg?v=6" alt="Cork"><figcaption><span class="board__chip" style="background:var(--m-cork)"></span>Cork<span class="board__hex">#8C502C</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_oak.jpg?v=6" alt="White&nbsp;oak"><figcaption><span class="board__chip" style="background:var(--m-oak)"></span>White&nbsp;oak<span class="board__hex">#A06B47</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_cement.jpg?v=6" alt="Cement"><figcaption><span class="board__chip" style="background:var(--m-cement)"></span>Cement<span class="board__hex">#A98664</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_terrazzo.jpg?v=6" alt="Terrazzo"><figcaption><span class="board__chip" style="background:var(--m-terrazzo)"></span>Terrazzo<span class="board__hex">#B7A58D</span></figcaption></figure>
+    <figure><img loading="lazy" decoding="async" src="assets/mat_plaster.jpg?v=6" alt="Lime&nbsp;plaster" style="object-position:100% 50%"><figcaption><span class="board__chip" style="background:var(--m-plaster)"></span>Lime&nbsp;plaster<span class="board__hex">#EBD3C1</span></figcaption></figure>
   </div>
 </section>
 
@@ -1171,7 +1248,7 @@
     <tr><td><strong>Not by Year&nbsp;5.</strong> EBITDA margin above fifteen&nbsp;percent</td><td>Below it counts&nbsp;against</td></tr>
   </table>
   <p class="cap" style="margin-top:var(--s-3)">Multiples from CT Acquisitions, audio visual integration and home services guides, 2026,&nbsp;<span style="white-space:nowrap">read 2026-09-15</span>. The same guides price a project only integrator at 3 to 5 times, which is nearer what this is today, and they set a 25 percent EBITDA margin as the bar for the top of a range. Which rows we can reach is our judgement, not&nbsp;theirs.</p>
-  <p style="margin-top:var(--s-7);max-width:58ch">The two we miss are the same problem twice. At Year 5 there are about a hundred and forty seven room years of care plans running, which is seven hundred and sixty four thousand dollars, or seven point four percent of revenue. Forty percent would take forty three thousand dollars a year per room, and nobody pays that to have a sauna looked after. The Year 5 EBITDA margin is thirteen point eight percent against a fifteen percent bar. Both are held down by the same thing: sixty one thousand dollars of equipment moves through every room at a twenty eight percent margin, which inflates the revenue line and deflates every ratio measured against&nbsp;it.</p>
+  <p style="margin-top:var(--s-7);max-width:58ch">The two we miss are the same problem twice. At Year 5 there are about a hundred and forty seven room years of care plans running, which is seven hundred and sixty four thousand dollars, or seven point four percent of revenue. Forty percent would take forty three thousand dollars a year per room, and nobody pays that to have a sauna looked after. The Year 5 EBITDA margin is thirteen point eight percent against a fifteen percent bar. The same thing pulls both of them down: sixty one thousand dollars of equipment moves through every room at a twenty eight percent margin, which inflates the revenue line and deflates every ratio measured against&nbsp;it.</p>
   <div class="figs figs--two" style="margin-top:var(--s-8)">
     <div class="fig fig--lg">
       <div class="fig__k">What the arithmetic supports</div>
@@ -1189,7 +1266,7 @@
 </section>
 <!-- THE NUMBERS -->
 <div class="bleed solo plx" style="margin-top:var(--s-2)">
-  <img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg?v=2" alt="">
+  <img loading="lazy" decoding="async" src="assets/render_rings-on-slat-screen.jpg?v=6" alt="">
   <div class="lay"><div>
     <h2>We would rather be the ones who put it all in one&nbsp;place.</h2>
   </div></div>
@@ -1356,12 +1433,9 @@
         var mid=r.top+r.height/2;
         var frac=Math.min(1,Math.max(0,(r.top+window.pageYOffset)/dh));
         var off=(mid-vh/2)*(0.04+0.05*frac);
-        /* and a slow push in across the pass: t runs 0 to 1 as the plate crosses the screen, so
-           the picture is a little larger leaving than it was arriving. The scale also has to cover
-           the offset, which is why it starts at 1.14 rather than at 1. */
-        var t=Math.min(1,Math.max(0,(vh-r.top)/(vh+r.height)));
-        var sc=(1.14+0.05*t).toFixed(4);
-        i.img.style.transform='translate3d(0,'+(-off).toFixed(2)+'px,0) scale('+sc+')';
+        /* Fixed scale. A scale that grew across the pass read as a punch in and was cut; the
+           1.14 is only there to cover the offset so no edge ever shows. */
+        i.img.style.transform='translate3d(0,'+(-off).toFixed(2)+'px,0) scale(1.14)';
       });
       ticking=false;
     }
