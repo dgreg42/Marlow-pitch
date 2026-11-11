@@ -38,7 +38,7 @@ Double click it, or pass a commit message: `push.cmd "fixed the ledger"`. It pus
 By hand, if you would rather:
 
 ```bash
-cd "D:/00_WORK/00_Projects/00_Developer/Brand Kit/Marlow Athletic Brand Kit/web/_live"
+cd "D:/00_WORK/00_Projects/00_Developer/Theoriste/projects/Brand Kit/Marlow Athletic Brand Kit/web/_live"
 git init
 git add -A
 git commit -m "marlow investor overview, first pass"
